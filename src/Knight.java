@@ -6,6 +6,14 @@ class Knight extends Creep
 {
 	private static final int poisonDegree=2;
 	private boolean isPoisoned;
+	private Timer cancelEffect=new Timer(5000, new ActionListener()
+	{
+		@Override
+		public void actionPerformed(ActionEvent e)
+		{
+			isPoisoned=false;
+		}
+	});
 	
 	static int getPoisonDegree()
 	{
@@ -26,15 +34,7 @@ class Knight extends Creep
 	void setPoisoned()
 	{
 		isPoisoned=true;
-		Timer cancelEffect=new Timer(5000, new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				isPoisoned=false;
-			}
-		});
 		cancelEffect.setRepeats(false);
-		cancelEffect.start();
+		cancelEffect.restart();
 	}
 }

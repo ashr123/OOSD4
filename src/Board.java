@@ -1,10 +1,12 @@
 import javax.swing.*;
+import java.awt.*;
 
 public class Board extends JPanel
 {
-	private int[][] gameBoard;
+	Point[][] boardPath=new Point[32][32];
 	
-	private Board(){
-		this.gameBoard = new int[32][32];
+	private Board()
+	{
+	
 	}
 }

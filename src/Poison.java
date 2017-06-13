@@ -1,26 +1,25 @@
 public class Poison extends Tower
 {
 	@Override
-	public void visit(Knight knight)
+	void visit(Knight knight)
 	{
-		
+		knight.setPoisoned();
 	}
 	
 	@Override
-	public void visit(Naji naji)
+	void visit(Naji naji)
 	{
-	
+		naji.setPoisoned();
 	}
 	
 	@Override
-	public void visit(Skully skully)
+	void visit(Skully skully)
 	{
-	
+		skully.setHP(skully.getHP()-20);
 	}
 	
 	@Override
-	public void visit(Mike mike)
+	void visit(Mike mike)
 	{
-	
 	}
 }

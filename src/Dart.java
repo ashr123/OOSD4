@@ -3,23 +3,22 @@ public class Dart extends Tower
 	@Override
 	public void visit(Knight knight)
 	{
-	
 	}
 	
 	@Override
-	public void visit(Naji naji)
+	void visit(Naji naji)
 	{
-		naji.setHP(naji.getHP()-30);
+		naji.setHP((int)(naji.getHP()-(naji.isPoisoned() ? 30*Naji.getPoisonDegree() : 30)));
 	}
 	
 	@Override
-	public void visit(Skully skully)
+	void visit(Skully skully)
 	{
 		skully.setHP(skully.getHP()-15);
 	}
 	
 	@Override
-	public void visit(Mike mike)
+	void visit(Mike mike)
 	{
 		mike.setHP(mike.getHP()-30);
 	}

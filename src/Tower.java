@@ -6,11 +6,11 @@ public abstract class Tower implements Tickable
 	
 	}
 	
-	public abstract void visit(Knight knight);
+	abstract void visit(Knight knight);
 	
-	public abstract void visit(Naji naji);
+	abstract void visit(Naji naji);
 	
-	public abstract void visit(Skully skully);
+	abstract void visit(Skully skully);
 	
-	public abstract void visit(Mike mike);
+	abstract void visit(Mike mike);
 }

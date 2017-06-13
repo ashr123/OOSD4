@@ -5,8 +5,8 @@ import java.io.IOException;
 public class Game extends JFrame
 {
 	private static final LevelLoader loader=new LevelLoader();
-	private int numberOfCreeps = 20;
-	private int HP = 20;
+	private int numberOfCreeps=20;
+	private int HP=20;
 	
 	private Game() throws IOException
 	{
@@ -14,7 +14,7 @@ public class Game extends JFrame
 		loader.load();
 		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setPreferredSize(new Dimension(800,800));
+		setPreferredSize(new Dimension(800, 800));
 		setResizable(false);
 		setVisible(true);
 	}

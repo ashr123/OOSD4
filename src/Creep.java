@@ -10,12 +10,12 @@ public abstract class Creep implements Tickable
 	
 	abstract void impact(Tower tower);
 	
-	public int getHP()
+	int getHP()
 	{
 		return HP;
 	}
 	
-	public void setHP(int HP)
+	void setHP(int HP)
 	{
 		this.HP=HP;
 	}

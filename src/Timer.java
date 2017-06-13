@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 public class Timer
 {
+	private LinkedList<Tickable> tickables=new LinkedList<>();
 	private javax.swing.Timer timer=new javax.swing.Timer(1000, new ActionListener()
 	{
 		@Override
@@ -12,7 +13,6 @@ public class Timer
 			notifyEveryone();
 		}
 	});
-	private LinkedList<Tickable> tickables=new LinkedList<>();
 	
 	private void notifyEveryone()
 	{

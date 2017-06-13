@@ -33,13 +33,13 @@ public class LevelLoader
 			case CHAR_GRASS:
 				return new Point();
 			case CHAR_RIGHT:
-				return new Point(1,0);
+				return new Point(1, 0);
 			case CHAR_LEFT:
-				return new Point(-1,0);
+				return new Point(-1, 0);
 			case CHAR_UP:
-				return new Point(0,-1);
+				return new Point(0, -1);
 			case CHAR_DOWN:
-				return new Point(0,1);
+				return new Point(0, 1);
 			default:
 				return null;
 		}

@@ -12,21 +12,26 @@ public class Timer
 			notifyEveryone();
 		}
 	});
-	private LinkedList<Enemy> enemies=new LinkedList<>();
-	private LinkedList<Tower> towers=new LinkedList<>();
+	private LinkedList<Tickable> tickables=new LinkedList<>();
 	
 	private void notifyEveryone()
 	{
-	
+		for (Tickable tickable : tickables)
+			tickable.tickHappend();
 	}
 	
 	void register(Tickable tickable)
 	{
-	
+		tickables.add(tickable);
 	}
 	
 	void unRegister(Tickable tickable)
 	{
+		tickables.remove(tickable);
+	}
 	
+	void start()
+	{
+		timer.start();
 	}
 }

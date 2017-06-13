@@ -7,8 +7,26 @@ public class Tower implements Tickable, Visitor
 	}
 	
 	@Override
-	public void visit(Enemy enemy)
+	public void visit(Dart dart)
 	{
-		enemy.impact(this);
+	
+	}
+	
+	@Override
+	public void visit(Lava lava)
+	{
+	
+	}
+	
+	@Override
+	public void visit(Poison poison)
+	{
+	
+	}
+	
+	@Override
+	public void visit(Magician magician)
+	{
+	
 	}
 }

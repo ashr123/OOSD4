@@ -1,8 +1,8 @@
 public class Knight extends Creep
 {
 	@Override
-	void impact(Visitor visitor)
+	void impact(Tower tower)
 	{
-		visitor.visit(visitor);
+		tower.visit(this);
 	}
 }

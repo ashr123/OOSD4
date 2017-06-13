@@ -1,4 +1,4 @@
-public class Tower implements Tickable, Visitor
+public abstract class Tower implements Tickable
 {
 	@Override
 	public void tickHappend()
@@ -6,27 +6,11 @@ public class Tower implements Tickable, Visitor
 	
 	}
 	
-	@Override
-	public void visit(Dart dart)
-	{
+	public abstract void visit(Knight knight);
 	
-	}
+	public abstract void visit(Naji naji);
 	
-	@Override
-	public void visit(Lava lava)
-	{
+	public abstract void visit(Skully skully);
 	
-	}
-	
-	@Override
-	public void visit(Poison poison)
-	{
-	
-	}
-	
-	@Override
-	public void visit(Magician magician)
-	{
-	
-	}
+	public abstract void visit(Mike mike);
 }

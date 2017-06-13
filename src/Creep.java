@@ -1,4 +1,4 @@
-public class Creep implements Tickable
+public abstract class Creep implements Tickable
 {
 	@Override
 	public void tickHappend()
@@ -6,8 +6,5 @@ public class Creep implements Tickable
 	
 	}
 	
-	void impact(Visitor visitor)
-	{
-		visitor.visit(this);
-	}
+	abstract void impact(Visitor visitor);
 }

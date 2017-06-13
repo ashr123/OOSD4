@@ -1,4 +1,4 @@
-public class Naji extends Enemy
+public class Naji extends Creep
 {
 
 }

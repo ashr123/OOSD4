@@ -1,4 +1,8 @@
-public class Knight extends Enemy
+public class Knight extends Creep
 {
-
+	@Override
+	void impact(Visitor visitor)
+	{
+		visitor.visit(visitor);
+	}
 }

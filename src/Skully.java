@@ -1,5 +1,11 @@
-public class Skully extends Creep
+class Skully extends Creep
 {
+	@Override
+	public void tickHappend()
+	{
+	
+	}
+	
 	@Override
 	void impact(Tower tower)
 	{

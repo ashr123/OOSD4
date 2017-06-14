@@ -1,5 +1,11 @@
-public class Lava extends Tower
+class Lava extends Tower
 {
+	@Override
+	public void tickHappend()
+	{
+	
+	}
+	
 	@Override
 	void visit(Knight knight)
 	{

@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-public class Game extends JFrame
+class Game extends JFrame
 {
 	private static final LevelLoader loader=new LevelLoader();
 	private int numberOfCreeps=20;

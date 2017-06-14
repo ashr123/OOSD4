@@ -6,7 +6,7 @@ class Naji extends Creep
 {
 	private static final double poisonDegree=1.5;
 	private boolean isPoisoned;
-	private Timer cancelEffect=new Timer(5000, new ActionListener()
+	private final Timer cancelEffect=new Timer(5000, new ActionListener()
 	{
 		@Override
 		public void actionPerformed(ActionEvent e)
@@ -18,6 +18,12 @@ class Naji extends Creep
 	static double getPoisonDegree()
 	{
 		return poisonDegree;
+	}
+	
+	@Override
+	public void tickHappend()
+	{
+	
 	}
 	
 	@Override

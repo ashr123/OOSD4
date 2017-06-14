@@ -1,5 +1,11 @@
-public class Poison extends Tower
+class Poison extends Tower
 {
+	@Override
+	public void tickHappend()
+	{
+	
+	}
+	
 	@Override
 	void visit(Knight knight)
 	{

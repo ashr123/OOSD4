@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
-public class LevelLoader
+class LevelLoader
 {
 	private static final char CHAR_RIGHT='>';
 	private static final char CHAR_LEFT='<';
@@ -17,7 +17,7 @@ public class LevelLoader
 	 */
 	private Vector<Point[][]> _levels;
 	
-	public LevelLoader()
+	LevelLoader()
 	{
 		_levels=new Vector<>();
 	}
@@ -49,7 +49,7 @@ public class LevelLoader
 	 * Loads all the levels to the internal levels buffer
 	 * @throws IOException if there is any error with the file
 	 */
-	public void load() throws IOException
+	void load() throws IOException
 	{
 		_levels.clear();
 		
@@ -117,7 +117,7 @@ public class LevelLoader
 	/**
 	 * @return the number of levels available
 	 */
-	public int getLevelsCount()
+	int getLevelsCount()
 	{
 		return _levels.size();
 	}
@@ -126,7 +126,7 @@ public class LevelLoader
 	 * @param index the level number
 	 * @return a deep copy of the initial state of level number {@code index}
 	 */
-	public Point[][] get(int index)
+	Point[][] get(int index)
 	{
 		Point[][] output=new Point[_levels.get(index)[0].length][_levels.get(index).length];
 		for (int i=0; i<_levels.get(index)[0].length; i++)

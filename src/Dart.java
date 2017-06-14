@@ -1,5 +1,11 @@
-public class Dart extends Tower
+class Dart extends Tower
 {
+	@Override
+	public void tickHappend()
+	{
+	
+	}
+	
 	@Override
 	public void visit(Knight knight)
 	{

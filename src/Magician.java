@@ -1,5 +1,11 @@
-public class Magician extends Tower
+class Magician extends Tower
 {
+	@Override
+	public void tickHappend()
+	{
+	
+	}
+	
 	@Override
 	void visit(Knight knight)
 	{

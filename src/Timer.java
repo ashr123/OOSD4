@@ -2,23 +2,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
-public class Timer
+class Timer
 {
-	private LinkedList<Tickable> tickables=new LinkedList<>();
-	private javax.swing.Timer timer=new javax.swing.Timer(1000, new ActionListener()
+	private int ticks;
+	private final LinkedList<Tickable> tickables=new LinkedList<>();
+	private final javax.swing.Timer timer=new javax.swing.Timer(500, new ActionListener()
 	{
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			notifyEveryone();
+			for (Tickable tickable : tickables)
+				tickable.tickHappend();
+			ticks++;
 		}
 	});
-	
-	private void notifyEveryone()
-	{
-		for (Tickable tickable : tickables)
-			tickable.tickHappend();
-	}
 	
 	void register(Tickable tickable)
 	{
@@ -33,5 +30,10 @@ public class Timer
 	void start()
 	{
 		timer.start();
+	}
+	
+	int getTicks()
+	{
+		return ticks;
 	}
 }

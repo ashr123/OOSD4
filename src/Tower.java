@@ -1,10 +1,7 @@
-public abstract class Tower implements Tickable
+abstract class Tower implements Tickable//Represents also the Visitor
 {
 	@Override
-	public void tickHappend()
-	{
-	
-	}
+	public abstract void tickHappend();
 	
 	abstract void visit(Knight knight);
 	

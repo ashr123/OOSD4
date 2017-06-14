@@ -1,12 +1,9 @@
-public abstract class Creep implements Tickable
+abstract class Creep implements Tickable
 {
 	private int HP=100;
 	
 	@Override
-	public void tickHappend()
-	{
-	
-	}
+	public abstract void tickHappend();
 	
 	abstract void impact(Tower tower);
 	

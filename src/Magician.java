@@ -1,5 +1,12 @@
+import java.awt.*;
+
 class Magician extends Tower
 {
+	Magician(Point location)
+	{
+		super(location);
+	}
+	
 	@Override
 	public void tickHappend()
 	{

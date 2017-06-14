@@ -4,8 +4,8 @@ import java.util.LinkedList;
 
 class Timer
 {
-	private int ticks;
 	private final LinkedList<Tickable> tickables=new LinkedList<>();
+	private int ticks;
 	private final javax.swing.Timer timer=new javax.swing.Timer(500, new ActionListener()
 	{
 		@Override

@@ -1,5 +1,12 @@
+import java.awt.*;
+
 class Poison extends Tower
 {
+	Poison(Point location)
+	{
+		super(location);
+	}
+	
 	@Override
 	public void tickHappend()
 	{

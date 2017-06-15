@@ -27,7 +27,7 @@ class Knight extends Creep
 	@Override
 	public void tickHappend()
 	{
-	
+		getLocation().translate(Game.getLoader().get(Board));
 	}
 	
 	@Override

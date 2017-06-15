@@ -23,7 +23,7 @@ class Game extends JFrame
 		new Game();
 	}
 	
-	public static LevelLoader getLoader()
+	static LevelLoader getLoader()
 	{
 		return loader;
 	}

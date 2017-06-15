@@ -1,4 +1,3 @@
-import javax.swing.Timer;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -6,12 +5,17 @@ class Knight extends Creep
 {
 	private static final int poisonDegree=2;
 	private boolean isPoisoned;
-	private final Timer cancelEffect=new Timer(5000, new ActionListener()
+	private int ticks;
+	private final javax.swing.Timer cancelEffect=new javax.swing.Timer(2500, new ActionListener()
 	{
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			isPoisoned=false;
+			if (Timer.isFastFoword())//Every 2.5 seconds
+				isPoisoned=false;
+			if (!Timer.isFastFoword() && ticks%2==0)//Every 5 seconds
+				isPoisoned=false;
+			ticks++;
 		}
 	});
 	

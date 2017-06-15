@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,6 +19,11 @@ class Knight extends Creep
 			ticks++;
 		}
 	});
+	
+	Knight(Point location)
+	{
+		super(location);
+	}
 	
 	static int getPoisonDegree()
 	{
@@ -46,6 +52,7 @@ class Knight extends Creep
 	
 	void setPoisoned()
 	{
+		ticks=0;
 		isPoisoned=true;
 		cancelEffect.setRepeats(false);
 		cancelEffect.restart();

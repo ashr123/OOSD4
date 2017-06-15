@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,6 +19,11 @@ class Naji extends Creep
 			ticks++;
 		}
 	});
+	
+	Naji(Point location)
+	{
+		super(location);
+	}
 	
 	static double getPoisonDegree()
 	{
@@ -46,6 +52,7 @@ class Naji extends Creep
 	
 	void setPoisoned()
 	{
+		ticks=0;
 		isPoisoned=true;
 		cancelEffect.setRepeats(false);
 		cancelEffect.restart();

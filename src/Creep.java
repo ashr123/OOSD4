@@ -5,6 +5,11 @@ abstract class Creep implements Tickable
 	private int HP=100;
 	private Point location;
 	
+	Creep(Point location)
+	{
+		this.location=location;
+	}
+	
 	/**
 	 * Moves the {@code Creep} to a new location
 	 */
@@ -30,6 +35,6 @@ abstract class Creep implements Tickable
 	
 	protected void moveCreep()
 	{
-		getLocation().translate((int)Game.getLoader().get(Board.getLevel())[(int)getLocation().getX()][(int)getLocation().getY()].getX(), (int)Game.getLoader().get(Board.getLevel())[(int)getLocation().getX()][(int)getLocation().getY()] .getY());
+		getLocation().translate((int)Game.getLoader().get(Board.getLevel())[(int)getLocation().getX()][(int)getLocation().getY()].getX(), (int)Game.getLoader().get(Board.getLevel())[(int)getLocation().getX()][(int)getLocation().getY()].getY());
 	}
 }

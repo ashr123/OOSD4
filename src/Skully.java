@@ -1,5 +1,12 @@
+import java.awt.*;
+
 class Skully extends Creep
 {
+	Skully(Point location)
+	{
+		super(location);
+	}
+	
 	@Override
 	public void tickHappend()
 	{

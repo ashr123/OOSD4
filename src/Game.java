@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.Point;
 import java.io.IOException;
 
 class Game extends JFrame

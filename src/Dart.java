@@ -1,4 +1,4 @@
-import java.awt.Point;
+import java.awt.*;
 
 class Dart extends Tower
 {

@@ -1,4 +1,4 @@
-import java.awt.Point;
+import java.awt.*;
 
 abstract class Creep implements Tickable
 {

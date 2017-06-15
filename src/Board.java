@@ -1,5 +1,5 @@
 import javax.swing.*;
-import java.awt.Point;
+import java.awt.*;
 
 class Board extends JPanel
 {

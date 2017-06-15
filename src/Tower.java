@@ -1,5 +1,4 @@
-import java.awt.Point;
-import java.util.LinkedList;
+import java.awt.*;
 
 abstract class Tower implements Tickable//Represents also the Visitor
 {

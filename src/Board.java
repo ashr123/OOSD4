@@ -5,7 +5,7 @@ class Board extends JPanel
 {
 	private final Point[][] boardPath=new Point[32][32];
 	private final JButton[][] boardButtuns=new JButton[32][32];
-	private int level;
+	private static int level;
 	private JLabel[][] jLabels;
 	
 	private static final ImageIcon IMAGE_TOWER_LAVA=

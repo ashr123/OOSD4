@@ -3,10 +3,9 @@ import java.awt.*;
 
 class Board extends JPanel
 {
-	private final Point[][] boardPath=new Point[32][32];
-	private final JButton[][] boardButtuns=new JButton[32][32];
+	private final Point[][] boardPath;
+	private final JButton[][] boardButtuns;
 	private static int level;
-	private JLabel[][] jLabels;
 	
 	private static final ImageIcon IMAGE_TOWER_LAVA=
 			new ImageIcon(Board.class.getResource("Media/towers/Lava.png"));
@@ -24,16 +23,43 @@ class Board extends JPanel
 			new ImageIcon(Board.class.getResource("Media/creeps/naji-1.png"));
 	private static final ImageIcon IMAGE_CREEP_SKULLY=
 			new ImageIcon(Board.class.getResource("Media/creeps/guli-1.png"));
+	private static final ImageIcon IMAGE_GRASS=
+			new ImageIcon(Board.class.getResource("Media/environment/grass.png"));
+	private static final ImageIcon IMAGE_PATH=
+			new ImageIcon(Board.class.getResource("Media/environment/path.png"));
 	
 	
-	private Board(int level)
+	public Board(int level)
 	{
-		this.level = level;
+		boardPath = Game.getLoader().get(0);
+		boardButtuns = new JButton[32][32];
+		buildBoard();
+		
 		
 	}
 	
 	static int getLevel()
 	{
 		return level;
+	}
+	
+	private void buildBoard()
+	{
+		for (int i=0 ; i<boardPath.length ; i++){
+			for (int j=0 ; j<boardPath[i].length ; j++){
+				if (boardPath[i][j].getX()==0 && boardPath[i][j].getY()==0){
+					boardButtuns[i][j] = new JButton(IMAGE_PATH);
+					
+				}
+				else
+					boardButtuns[i][j] = new JButton(IMAGE_GRASS);
+			}
+		}
+	}
+	
+	@Override
+	public void paint(Graphics g)
+	{
+		super.paint(g);
 	}
 }

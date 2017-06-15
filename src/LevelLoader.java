@@ -128,10 +128,6 @@ class LevelLoader
 	 */
 	Point[][] get(int index)
 	{
-		Point[][] output=new Point[_levels.get(index)[0].length][_levels.get(index).length];
-		for (int i=0; i<_levels.get(index)[0].length; i++)
-			for (int j=0; j<_levels.get(index).length; j++)
-				output[i][j]=new Point(_levels.get(index)[j][i]);
-		return output;
+		return _levels.get(index);
 	}
 }

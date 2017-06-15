@@ -3,8 +3,11 @@ import java.awt.*;
 
 class Board extends JPanel
 {
-	Point[][] boardPath=new Point[32][32];
-	Button[][] boardButtuns=new Button[32][32];
+	private final Point[][] boardPath=new Point[32][32];
+	private final JButton[][] boardButtuns=new JButton[32][32];
+	private int level;
+	private JLabel[][] jLabels;
+	
 	private static final ImageIcon IMAGE_TOWER_LAVA=
 			new ImageIcon(Board.class.getResource("Media/towers/Lava.png"));
 	private static final ImageIcon IMAGE_TOWER_DART=
@@ -22,12 +25,15 @@ class Board extends JPanel
 	private static final ImageIcon IMAGE_CREEP_SKULLY=
 			new ImageIcon(Board.class.getResource("Media/creeps/guli-1.png"));
 	
-	private int level;
-	private JLabel[][] jLabels;
-	
 	
 	private Board(int level)
 	{
+		this.level = level;
 		
+	}
+	
+	public int getLevel()
+	{
+		return level;
 	}
 }

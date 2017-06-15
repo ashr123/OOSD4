@@ -5,9 +5,29 @@ class Board extends JPanel
 {
 	Point[][] boardPath=new Point[32][32];
 	Button[][] boardButtuns=new Button[32][32];
+	private static final ImageIcon IMAGE_TOWER_LAVA=
+			new ImageIcon(Board.class.getResource("Media/towers/Lava.png"));
+	private static final ImageIcon IMAGE_TOWER_DART=
+			new ImageIcon(Board.class.getResource("Media/towers/Dart.png"));
+	private static final ImageIcon IMAGE_TOWER_POISON=
+			new ImageIcon(Board.class.getResource("Media/towers/Poison.png"));
+	private static final ImageIcon IMAGE_TOWER_MAGICIAN=
+			new ImageIcon(Board.class.getResource("Media/towers/Magician.png"));
+	private static final ImageIcon IMAGE_CREEP_KNIGHT=
+			new ImageIcon(Board.class.getResource("Media/creeps/abir-1.png"));
+	private static final ImageIcon IMAGE_CREEP_MIKE=
+			new ImageIcon(Board.class.getResource("Media/creeps/mike-1.png"));
+	private static final ImageIcon IMAGE_CREEP_NAJI=
+			new ImageIcon(Board.class.getResource("Media/creeps/naji-1.png"));
+	private static final ImageIcon IMAGE_CREEP_SKULLY=
+			new ImageIcon(Board.class.getResource("Media/creeps/guli-1.png"));
 	
-	private Board()
+	private int level;
+	private JLabel[][] jLabels;
+	
+	
+	private Board(int level)
 	{
-	
+		
 	}
 }

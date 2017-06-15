@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 class Game extends JFrame
@@ -11,7 +12,6 @@ class Game extends JFrame
 	{
 		super("Tower Defence");
 		loader.load();
-		
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setPreferredSize(new Dimension(800, 800));
 		setResizable(false);
@@ -21,5 +21,10 @@ class Game extends JFrame
 	public static void main(String[] args) throws IOException
 	{
 		new Game();
+	}
+	
+	public static LevelLoader getLoader()
+	{
+		return loader;
 	}
 }

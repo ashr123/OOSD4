@@ -1,4 +1,4 @@
-import java.awt.*;
+import java.awt.Point;
 
 class Lava extends Tower
 {
@@ -10,7 +10,10 @@ class Lava extends Tower
 	@Override
 	public void tickHappend()
 	{
-	
+		if (!Timer.isFastFoword() && Timer.getTicks()%4==0)//Every second
+			hitCreep(1);
+		if (Timer.isFastFoword() && Timer.getTicks()%2==0)//Every half a second
+			hitCreep(1);
 	}
 	
 	@Override

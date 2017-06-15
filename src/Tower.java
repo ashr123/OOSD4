@@ -1,4 +1,5 @@
-import java.awt.*;
+import java.awt.Point;
+import java.util.LinkedList;
 
 abstract class Tower implements Tickable//Represents also the Visitor
 {
@@ -23,5 +24,13 @@ abstract class Tower implements Tickable//Represents also the Visitor
 	Point getLocation()
 	{
 		return location;
+	}
+	
+	void hitCreep(int range)
+	{
+		for (Tickable tickable : Timer.getTickables())
+			if (tickable instanceof Creep && ((Creep)tickable).getLocation().distance(getLocation())
+			                                 <=range*Math.sqrt(2))
+				((Creep)tickable).impact(this);
 	}
 }

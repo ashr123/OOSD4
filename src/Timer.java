@@ -4,9 +4,10 @@ import java.util.LinkedList;
 
 class Timer
 {
-	private final LinkedList<Tickable> tickables=new LinkedList<>();
-	private int ticks;
-	private final javax.swing.Timer timer=new javax.swing.Timer(500, new ActionListener()
+	private static boolean fastFoword;
+	private static final LinkedList<Tickable> tickables=new LinkedList<>();
+	private static int ticks;
+	private final javax.swing.Timer timer=new javax.swing.Timer(250, new ActionListener()
 	{
 		@Override
 		public void actionPerformed(ActionEvent e)
@@ -32,8 +33,23 @@ class Timer
 		timer.start();
 	}
 	
-	int getTicks()
+	static int getTicks()
 	{
 		return ticks;
+	}
+	
+	static boolean isFastFoword()
+	{
+		return fastFoword;
+	}
+	
+	static void setFastFoword(boolean fastFoword)
+	{
+		Timer.fastFoword=fastFoword;
+	}
+	
+	static LinkedList<Tickable> getTickables()
+	{
+		return tickables;
 	}
 }

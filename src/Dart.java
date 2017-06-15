@@ -1,4 +1,4 @@
-import java.awt.*;
+import java.awt.Point;
 
 class Dart extends Tower
 {
@@ -10,7 +10,10 @@ class Dart extends Tower
 	@Override
 	public void tickHappend()
 	{
-	
+		if (!Timer.isFastFoword() && Timer.getTicks()%2==0)//Every half a second
+			hitCreep(2);
+		if (Timer.isFastFoword())//Every quarter of a second
+			hitCreep(2);
 	}
 	
 	@Override

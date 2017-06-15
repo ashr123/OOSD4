@@ -27,7 +27,10 @@ class Naji extends Creep
 	@Override
 	public void tickHappend()
 	{
-	
+		if (!Timer.isFastFoword() && Timer.getTicks()%2==0)//Moves every half a second
+			moveCreep();
+		if (Timer.isFastFoword())//Moves every quarter of a second
+			moveCreep();
 	}
 	
 	@Override

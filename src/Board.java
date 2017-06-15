@@ -32,7 +32,7 @@ class Board extends JPanel
 		
 	}
 	
-	public int getLevel()
+	static int getLevel()
 	{
 		return level;
 	}

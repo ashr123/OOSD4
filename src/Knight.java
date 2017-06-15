@@ -27,7 +27,10 @@ class Knight extends Creep
 	@Override
 	public void tickHappend()
 	{
-		getLocation().translate(Game.getLoader().get(Board));
+		if (!Timer.isFastFoword() && Timer.getTicks()%4==0)//Moves every second
+			moveCreep();
+		if (Timer.isFastFoword() && Timer.getTicks()%2==0)//Moves every half a second
+			moveCreep();
 	}
 	
 	@Override

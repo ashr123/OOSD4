@@ -91,9 +91,4 @@ class Game extends JFrame
 		return map;
 	}
 	
-	@Override
-	public void paint(Graphics g)
-	{
-		super.paint(g);
-	}
 }

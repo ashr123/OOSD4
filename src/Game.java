@@ -4,8 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-class Game extends JFrame
+class Game extends JPanel
 {
+	private JFrame frame;
 	private static final LevelLoader loader=new LevelLoader();
 	private Board board;
 	private int map;
@@ -21,10 +22,9 @@ class Game extends JFrame
 	
 	private Game() throws IOException
 	{
-		super("Tower Defence");
+		fireUpScreen();
 		loader.load();
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		Container contentPane = getContentPane();
+		Container contentPane = frame.getContentPane();
 		JToolBar toolBar = new JToolBar();
 		toolBar.add(new JLabel("HP: "+ HP + "    "));
 		toolBar.add(new JLabel("Wave: "+ waveNumber + "    "));
@@ -41,8 +41,6 @@ class Game extends JFrame
 		panel.add(map1);
 		panel.add(map2);
 		add(panel,BorderLayout.CENTER);
-		setSize(800, 800);
-		setResizable(false);
 		setVisible(true);
 		map0.addActionListener(new ActionListener()
 		{
@@ -51,7 +49,7 @@ class Game extends JFrame
 			{
 				map = 0;
 				board = new Board(map);
-				getContentPane().add(board);
+				frame.getContentPane().add(board);
 			}
 		});
 		map1.addActionListener(new ActionListener()
@@ -61,7 +59,7 @@ class Game extends JFrame
 			{
 				map = 1;
 				board = new Board(map);
-				getContentPane().add(board);
+				frame.getContentPane().add(board);
 			}
 		});
 		map2.addActionListener(new ActionListener()
@@ -71,7 +69,7 @@ class Game extends JFrame
 			{
 				map = 2;
 				board = new Board(map);
-				getContentPane().add(board);
+				frame.getContentPane().add(board);
 			}
 		});
 	}
@@ -91,4 +89,13 @@ class Game extends JFrame
 		return map;
 	}
 	
+	public void fireUpScreen(){
+		frame =  new JFrame("Tower Defence");
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.setResizable(false);
+		frame.setSize(800, 800);
+		frame.setVisible(true);
+		frame.add(this);
+	}
+
 }

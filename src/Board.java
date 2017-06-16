@@ -33,7 +33,8 @@ class Board extends JPanel
 	{
 		boardPath = Game.getLoader().get(0);
 		boardButtuns = new JButton[32][32];
-		buildBoard();
+		repaint();
+		
 		
 		
 	}
@@ -42,24 +43,25 @@ class Board extends JPanel
 	{
 		return level;
 	}
-	
-	private void buildBoard()
-	{
-		for (int i=0 ; i<boardPath.length ; i++){
-			for (int j=0 ; j<boardPath[i].length ; j++){
-				if (boardPath[i][j].getX()==0 && boardPath[i][j].getY()==0){
-					boardButtuns[i][j] = new JButton(IMAGE_PATH);
-					
-				}
-				else
-					boardButtuns[i][j] = new JButton(IMAGE_GRASS);
-			}
-		}
-	}
+
 	
 	@Override
 	public void paint(Graphics g)
 	{
 		super.paint(g);
+		for (int i=0 ; i<boardPath.length ; i++){
+			for (int j=0 ; j<boardPath[i].length ; j++){
+				if (boardPath[i][j].getX()==0 && boardPath[i][j].getY()==0){
+					boardButtuns[i][j] = new JButton(IMAGE_PATH);
+					boardButtuns[i][j].repaint(i*25,j*25,25,25);
+					
+				}
+				else
+				{
+					boardButtuns[i][j]=new JButton(IMAGE_GRASS);
+					boardButtuns[i][j].repaint(i*25, j*25, 25, 25);
+				}
+			}
+		}
 	}
 }

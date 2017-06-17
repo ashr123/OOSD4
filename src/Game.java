@@ -35,14 +35,39 @@ class Game
 		Container contentPane = frame.getContentPane();
 		contentPane.setBackground(Color.orange);
 		JToolBar toolBar = new JToolBar();
+		final JButton goButton = new JButton("Go!");
+		JButton fastForwardButton = new JButton("Fast Forward");
 		toolBar.add(new JLabel("HP: "+ HP + "    "));
 		toolBar.add(new JLabel("Wave: "+ waveNumber + "    "));
 		toolBar.add(new JLabel("Time: "+ time + "    " ));
-		toolBar.add(new JButton("Fast Forward"));
+		toolBar.add(fastForwardButton);
 		toolBar.add(new JLabel("     "));
-		toolBar.add(new JButton("Go!"));
+		toolBar.add(goButton);
 		contentPane.add(toolBar, BorderLayout.NORTH);
 		frame.setVisible(true);
+		
+		goButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				Board.getTimer().start();
+				goButton.setEnabled(false);
+			}
+		});
+		
+		fastForwardButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				if (Board.getTimer().isFastFoword())
+				{
+					Board.getTimer().setFastFoword(false);
+				}
+				Board.getTimer().setFastFoword(true);
+			}
+		});
 		/*panel = new JPanel();
 		//JLabel maps = new JLabel("Please Choose a Map:");
 		map0 = new JButton(IMAGE_MAP_1);

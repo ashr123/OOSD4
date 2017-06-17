@@ -10,43 +10,46 @@ import java.io.IOException;
 
 class Game
 {
-	private JFrame frame;
 	private static final LevelLoader loader=new LevelLoader();
+	private static final ImageIcon IMAGE_MAP_1=
+			new ImageIcon(new ImageIcon(Board.class.getResource("Media/toolbar/level0.png")).getImage()
+			                                                                                .getScaledInstance(200, 200,
+			                                                                                                   Image.SCALE_SMOOTH));
+	private static final ImageIcon IMAGE_MAP_2=
+			new ImageIcon(new ImageIcon(Board.class.getResource("Media/toolbar/level1.png")).getImage()
+			                                                                                .getScaledInstance(200, 200,
+			                                                                                                   Image.SCALE_SMOOTH));
+	private static final ImageIcon IMAGE_MAP_3=
+			new ImageIcon(new ImageIcon(Board.class.getResource("Media/toolbar/level2.png")).getImage()
+			                                                                                .getScaledInstance(200, 200,
+			                                                                                                   Image.SCALE_SMOOTH));
+	private static int HP=20;
+	private static final JLabel HPLBL=new JLabel("HP: "+HP+"    ");
+	private static final JLabel WaveLBL=new JLabel("Wave: 1    ");
+	private static final JLabel TimeLBL=new JLabel("Time: 0    ");
+	private JFrame frame;
 	private Board board;
 	private int map;
-	private static int HP;
-	private int waveNumber;
 	private JButton map0;
 	private JButton map1;
 	private JButton map2;
 	private JPanel panel;
 	private JToolBar toolBar;
-	private int time;
-	private static final ImageIcon IMAGE_MAP_1=
-			new ImageIcon(new ImageIcon(Board.class.getResource("Media/toolbar/level0.png")).getImage()
-					              .getScaledInstance(200,200,Image.SCALE_SMOOTH));
-	private static final ImageIcon IMAGE_MAP_2=
-			new ImageIcon(new ImageIcon(Board.class.getResource("Media/toolbar/level1.png")).getImage()
-					              .getScaledInstance(200,200,Image.SCALE_SMOOTH));
-	private static final ImageIcon IMAGE_MAP_3=
-			new ImageIcon(new ImageIcon(Board.class.getResource("Media/toolbar/level2.png")).getImage()
-					              .getScaledInstance(200,200,Image.SCALE_SMOOTH));
 	
 	private Game() throws IOException
 	{
-		HP = 20;
 		loader.load();
 		fireUpScreen();
-		panel = new JPanel(new BorderLayout());
-		JLabel maps = new JLabel("Please Choose a Map:");
+		panel=new JPanel(new BorderLayout());
+		JLabel maps=new JLabel("Please Choose a Map:");
 		maps.setFont(new Font("Courier", Font.BOLD, 20));
-		map0 = new JButton(IMAGE_MAP_1);
-		map1 = new JButton(IMAGE_MAP_2);
-		map2 = new JButton(IMAGE_MAP_3);
-		panel.add(maps,BorderLayout.NORTH);
-		panel.add(map0,BorderLayout.WEST);
-		panel.add(map1,BorderLayout.CENTER);
-		panel.add(map2,BorderLayout.EAST);
+		map0=new JButton(IMAGE_MAP_1);
+		map1=new JButton(IMAGE_MAP_2);
+		map2=new JButton(IMAGE_MAP_3);
+		panel.add(maps, BorderLayout.NORTH);
+		panel.add(map0, BorderLayout.WEST);
+		panel.add(map1, BorderLayout.CENTER);
+		panel.add(map2, BorderLayout.EAST);
 		frame.add(panel);
 		panel.setBackground(Color.orange);
 		map0.addActionListener(new ActionListener()
@@ -54,7 +57,7 @@ class Game
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				board = new Board(0);
+				board=new Board(0);
 				frame.add(board);
 				frame.setVisible(true);
 				panel.setVisible(false);
@@ -66,7 +69,7 @@ class Game
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				board = new Board(1);
+				board=new Board(1);
 				frame.add(board);
 				frame.setVisible(true);
 				panel.setVisible(false);
@@ -78,7 +81,7 @@ class Game
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				board = new Board(2);
+				board=new Board(2);
 				frame.add(board);
 				frame.setVisible(true);
 				panel.setVisible(false);
@@ -99,21 +102,56 @@ class Game
 		return loader;
 	}
 	
-	public void fireUpScreen(){
-		frame =  new JFrame("Tower Defence");
+	private static void playBackgroundMusic() throws LineUnavailableException, IOException,
+	                                                 UnsupportedAudioFileException
+	{
+		Clip clip=AudioSystem.getClip();
+		clip.open(AudioSystem.getAudioInputStream(Game.class.getResource("Sounds/backgroundMusic.wav")));
+		clip.loop(Integer.MAX_VALUE);
+	}
+	
+	public static void decreaseHP()
+	{
+		HP--;
+	}
+	
+	public static int getHP()
+	{
+		return HP;
+	}
+	
+	public static JLabel getHPLBL()
+	{
+		return HPLBL;
+	}
+	
+	public static JLabel getWaveLBL()
+	{
+		return WaveLBL;
+	}
+	
+	public static JLabel getTimeLBL()
+	{
+		return TimeLBL;
+	}
+	
+	public void fireUpScreen()
+	{
+		frame=new JFrame("Tower Defence");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setSize(800, 800);
 		//frame.add(new Board(map));
 	}
 	
-	private void createToolBar(){
-		JToolBar toolBar = new JToolBar();
-		final JButton goButton = new JButton("Go!");
-		JButton fastForwardButton = new JButton("Fast Forward");
-		toolBar.add(new JLabel("HP: "+ HP + "    "));
-		toolBar.add(new JLabel("Wave: "+ waveNumber + "    "));
-		toolBar.add(new JLabel("Time: "+ time + "    " ));
+	private void createToolBar()
+	{
+		JToolBar toolBar=new JToolBar();
+		final JButton goButton=new JButton("Go!");
+		JButton fastForwardButton=new JButton("Fast Forward");
+		toolBar.add(HPLBL);
+		toolBar.add(WaveLBL);
+		toolBar.add(TimeLBL);
 		toolBar.add(fastForwardButton);
 		toolBar.add(new JLabel("     "));
 		toolBar.add(goButton);
@@ -136,19 +174,5 @@ class Game
 				Board.getTimer().setFastFoword(!Board.getTimer().isFastFoword());
 			}
 		});
-	}
-	private static void playBackgroundMusic() throws LineUnavailableException, IOException,
-	                                                 UnsupportedAudioFileException
-	{
-		Clip clip=AudioSystem.getClip();
-		clip.open(AudioSystem.getAudioInputStream(Game.class.getResource("Sounds/backgroundMusic.wav")));
-		clip.loop(Integer.MAX_VALUE);
-	}
-	
-	public static void decreaseHP(){
-		HP--;
-	}
-	public static int getHP(){
-		return HP;
 	}
 }

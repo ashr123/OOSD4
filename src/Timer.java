@@ -43,7 +43,7 @@ class Timer
 		tickables.add(tickable);
 	}
 	
-	void unRegister(Tickable tickable)
+	static void unRegister(Tickable tickable)
 	{
 		tickables.remove(tickable);
 	}

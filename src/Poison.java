@@ -11,9 +11,9 @@ class Poison extends Tower
 	public void tickHappend()
 	{
 		if (!Timer.isFastFoword() && Timer.getTicks()%4==0)//Every second
-			hitCreep(1);
+			hitCreep(1, false);
 		if (Timer.isFastFoword() && Timer.getTicks()%2==0)//Every half a second
-			hitCreep(1);
+			hitCreep(1, false);
 	}
 	
 	@Override
@@ -32,6 +32,8 @@ class Poison extends Tower
 	void visit(Skully skully)
 	{
 		skully.setHP(skully.getHP()-20);
+		if (skully.getHP()<=0)
+			Timer.unRegister(skully);
 	}
 	
 	@Override

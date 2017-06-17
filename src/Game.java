@@ -68,7 +68,7 @@ class Game
 				Board.getTimer().setFastFoword(true);
 			}
 		});
-		panel = new JPanel();
+		/*panel = new JPanel();
 		JLabel maps = new JLabel("Please Choose a Map:");
 		map0 = new JButton(IMAGE_MAP_1);
 		map1 = new JButton(IMAGE_MAP_2);
@@ -104,7 +104,7 @@ class Game
 				board = new Board(2);
 				frame.add(board);
 			}
-		});
+		});*/
 	}
 	
 	public static void main(String[] args) throws IOException

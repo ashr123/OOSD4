@@ -16,6 +16,7 @@ class Timer
 	private boolean fastFoword;
 	private Point startingPoint=getStartLocation();
 	private Board board;
+	private double time;
 	private final javax.swing.Timer timer=new javax.swing.Timer(250, new ActionListener()
 	{
 		@Override
@@ -81,6 +82,10 @@ class Timer
 					}
 			}
 			ticks++;
+			if (!isFastFoword() && getTicks()%2==0)
+				time+=.5;
+			if (isFastFoword())
+				time+=.5;
 			if (deadCreeps+passedCreeps==wave*4)
 				increaseWave();
 			board.repaint();
@@ -133,7 +138,7 @@ class Timer
 	void increaseWave()
 	{
 		timer.stop();
-		numberOfKnights=numberOfMikes=numberOfNagis=numberOfSkullies=0;
+		numberOfKnights=numberOfMikes=numberOfNagis=numberOfSkullies=deadCreeps=passedCreeps=0;
 		wave*=2;
 		getTickables().clear();
 	}
@@ -146,5 +151,10 @@ class Timer
 	boolean isRunning()
 	{
 		return timer.isRunning();
+	}
+	
+	public double getTime()
+	{
+		return time;
 	}
 }

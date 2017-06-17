@@ -50,9 +50,7 @@ class Board extends JPanel
 			public void mouseClicked(MouseEvent e)
 			{
 				if (timer.isRunning())
-				{
 					return;
-				}
 				xPosition=e.getX();
 				yPosition=e.getY();
 				for (Tickable t : timer.getTickables())
@@ -237,29 +235,19 @@ class Board extends JPanel
 	public void paint(Graphics g)
 	{
 		Game.getHPLBL().setText("HP: "+Game.getHP()+"    ");
-		Game.getTimeLBL().setText("Time: "+(!timer.isFastFoword() && timer.getTicks()%4==0 ? timer.getTicks()*.25 : timer.getTicks()*.25)+"    ");
+		Game.getTimeLBL().setText("Time: "+timer.getTime()+"    ");
 		Game.getWaveLBL().setText("Wave: "+timer.getWave()+"    ");
 		for (int i=0; i<boardPath.length; i++)
-		{
 			for (int j=0; j<boardPath[i].length; j++)
-			{
 				if (boardPath[i][j].getX()==0 && boardPath[i][j].getY()==0)
-				{
 					g.drawImage(IMAGE_ICON_GRASS.getImage(), i*25, j*25, 25, 25, this);
-					
-				}
 				else
-				{
 					g.drawImage(IMAGE_ICON_PATH.getImage(), i*25, j*25, 25, 25, this);
-				}
-			}
-		}
 		
 		
 		for (Tickable t : timer.getTickables())
 		{//Draws all Tickables.
-			g.drawImage(t.getImageIcon().getImage(), (int)t.getLocation().getX()*25, (int)t.getLocation().getY()*25, 25,
-			            25, this);
+			g.drawImage(t.getImageIcon().getImage(), (int)t.getLocation().getX()*25, (int)t.getLocation().getY()*25, 25, 25, this);
 			
 			if (t instanceof Creep && ((Creep)t).isInjured())
 			{//Marks square of injured creep

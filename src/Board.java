@@ -1,11 +1,18 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 class Board extends JPanel
 {
 	private final Point[][] boardPath;
 	private final JLabel[][] boardLabels;
 	private static int level;
+	private int numOfDart;
+	private int numOfLava;
+	private int numOfPoison;
+	private int numOfMagician;
+	
 	
 	Image IMAGE_TOWER_LAVA = Toolkit.getDefaultToolkit().getImage("Media/towers/Lava.png");
 	Image IMAGE_TOWER_DART = Toolkit.getDefaultToolkit().getImage("Media/towers/Dart.png");
@@ -45,6 +52,49 @@ class Board extends JPanel
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		boardPath = Game.getLoader().get(0);
 		boardLabels = new JLabel[32][32];
+		numOfDart=numOfLava=numOfPoison=numOfMagician=3;
+		
+		addMouseListener(new MouseListener()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				if(boardPath[e.getX()*32/800][e.getY()*32/800].equals(new Point())){
+					JPanel towerWindow = new JPanel();
+					towerWindow.setSize(150,150);
+					towerWindow.add(new JButton(IMAGE_ICON_TOWER_DART));
+					towerWindow.add(new JButton(IMAGE_ICON_TOWER_POISON));
+					towerWindow.add(new JButton(IMAGE_ICON_TOWER_LAVA));
+					towerWindow.add(new JButton(IMAGE_ICON_TOWER_MAGICIAN));
+					towerWindow.setVisible(true);
+					
+				}
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e)
+			{
+			
+			}
+			
+			@Override
+			public void mouseReleased(MouseEvent e)
+			{
+			
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e)
+			{
+			
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e)
+			{
+			
+			}
+		});
 		
 	}
 	
@@ -64,16 +114,19 @@ class Board extends JPanel
 				if (boardPath[i][j].getX()==0 && boardPath[i][j].getY()==0){
 					//g.drawString("This is my custom Panel!",10,20);
 					//boardLabels[i][j] = new JLabel(IMAGE_ICON_PATH);
-					//g.drawImage(IMAGE_PATH,25,25,25,25,this);
-					g.fillRect(i*25,j*25,25,25);
-					g.setColor(Color.GREEN);
+					g.drawImage(IMAGE_ICON_GRASS.getImage(),i*25,j*25,25,25,this);
+					//g.setColor(Color.GREEN);
+					//g.fillRect(i*25,j*25,25,25);
+					//g.setColor(Color.GREEN);
 				}
 				else
 				{
-					boardLabels[i][j]=new JLabel(IMAGE_ICON_GRASS);
+					//boardLabels[i][j]=new JLabel(IMAGE_ICON_GRASS);
 					//g.drawImage(IMAGE_GRASS,i*25,j*25,25,25,this);
-					g.fillRect(i*25,j*25,25,25);
-					g.setColor(Color.pink);
+					//g.setColor(Color.pink);
+					//g.fillRect(i*25,j*25,25,25);
+					//g.setColor(Color.pink);
+					g.drawImage(IMAGE_ICON_PATH.getImage(),i*25,j*25,25,25,this);
 				}
 			}
 		}

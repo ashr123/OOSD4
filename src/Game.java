@@ -108,5 +108,5 @@ class Game
 		frame.add(new Board(0));
 		frame.setVisible(true);
 	}
-
+	
 }

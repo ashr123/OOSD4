@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 
 abstract class Tower implements Tickable//Represents also the Visitor
@@ -37,4 +38,6 @@ abstract class Tower implements Tickable//Represents also the Visitor
 					return;
 			}
 	}
+	
+	public abstract ImageIcon getImageIcon();
 }

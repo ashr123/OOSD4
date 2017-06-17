@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 
 abstract class Creep implements Tickable
@@ -38,4 +39,6 @@ abstract class Creep implements Tickable
 	{
 		getLocation().translate((int)Game.getLoader().get(Board.getLevel())[(int)getLocation().getX()][(int)getLocation().getY()].getX(), (int)Game.getLoader().get(Board.getLevel())[(int)getLocation().getX()][(int)getLocation().getY()].getY());
 	}
+	
+	public abstract ImageIcon getImageIcon();
 }

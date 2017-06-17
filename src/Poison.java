@@ -1,7 +1,10 @@
+import javax.swing.*;
 import java.awt.*;
 
 class Poison extends Tower
 {
+	private static final ImageIcon IMAGE_ICON=new ImageIcon(
+			Tickable.class.getResource("Media/towers/Poison.png"));
 	Poison(Point location)
 	{
 		super(location);
@@ -39,5 +42,11 @@ class Poison extends Tower
 	@Override
 	void visit(Mike mike)
 	{
+	}
+	
+	@Override
+	public ImageIcon getImageIcon()
+	{
+		return IMAGE_ICON;
 	}
 }

@@ -1,7 +1,10 @@
+import javax.swing.*;
 import java.awt.*;
 
 class Dart extends Tower
 {
+	private static final ImageIcon IMAGE_ICON=new ImageIcon(
+			Tickable.class.getResource("Media/towers/Dart.png"));
 	Dart(Point location)
 	{
 		super(location);
@@ -43,5 +46,11 @@ class Dart extends Tower
 		mike.setHP(mike.getHP()-30);
 		if (mike.getHP()<=0)
 			Board.getTimer().unRegister(mike);
+	}
+	
+	@Override
+	public ImageIcon getImageIcon()
+	{
+		return IMAGE_ICON;
 	}
 }

@@ -1,7 +1,10 @@
+import javax.swing.*;
 import java.awt.*;
 
 class Mike extends Creep
 {
+	private static final ImageIcon IMAGE_ICON=new ImageIcon(
+			Tickable.class.getResource("Media/creeps/mike-1.png"));
 	Mike(Point location)
 	{
 		super(location);
@@ -20,5 +23,11 @@ class Mike extends Creep
 	void impact(Tower tower)
 	{
 		tower.visit(this);
+	}
+	
+	@Override
+	public ImageIcon getImageIcon()
+	{
+		return IMAGE_ICON;
 	}
 }

@@ -1,7 +1,10 @@
+import javax.swing.*;
 import java.awt.*;
 
 class Magician extends Tower
 {
+	private static final ImageIcon IMAGE_ICON=new ImageIcon(
+			Tickable.class.getResource("Media/towers/Magician.png"));
 	Magician(Point location)
 	{
 		super(location);
@@ -46,5 +49,11 @@ class Magician extends Tower
 		mike.setHP(mike.getHP()-10);
 		if (mike.getHP()<=0)
 			Board.getTimer().unRegister(mike);
+	}
+	
+	@Override
+	public ImageIcon getImageIcon()
+	{
+		return IMAGE_ICON;
 	}
 }

@@ -1,7 +1,10 @@
+import javax.swing.*;
 import java.awt.*;
 
 class Skully extends Creep
 {
+	private static final ImageIcon IMAGE_ICON=new ImageIcon(
+			Tickable.class.getResource("Media/creeps/guli-1.png"));
 	Skully(Point location)
 	{
 		super(location);
@@ -20,5 +23,11 @@ class Skully extends Creep
 	void impact(Tower tower)
 	{
 		tower.visit(this);
+	}
+	
+	@Override
+	public ImageIcon getImageIcon()
+	{
+		return IMAGE_ICON;
 	}
 }

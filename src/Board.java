@@ -43,14 +43,6 @@ class Board extends JPanel
 	private static final ImageIcon IMAGE_ICON_TOWER_MAGICIAN=
 			new ImageIcon(new ImageIcon(Board.class.getResource("Media/towers/Magician.png")).getImage()
 					.getScaledInstance(100,145,Image.SCALE_SMOOTH));
-	private static final ImageIcon IMAGE_ICON_CREEP_KNIGHT=
-			new ImageIcon(Board.class.getResource("Media/creeps/abir-1.png"));
-	private static final ImageIcon IMAGE_ICON_CREEP_MIKE=
-			new ImageIcon(Board.class.getResource("Media/creeps/mike-1.png"));
-	private static final ImageIcon IMAGE_ICON_CREEP_NAJI=
-			new ImageIcon(Board.class.getResource("Media/creeps/naji-1.png"));
-	private static final ImageIcon IMAGE_ICON_CREEP_SKULLY=
-			new ImageIcon(Board.class.getResource("Media/creeps/guli-1.png"));
 	private static final ImageIcon IMAGE_ICON_GRASS=
 			new ImageIcon(Board.class.getResource("Media/environment/grass.png"));
 	private static final ImageIcon IMAGE_ICON_PATH=

@@ -1,7 +1,10 @@
+import javax.swing.*;
 import java.awt.*;
 
 class Lava extends Tower
 {
+	private static final ImageIcon IMAGE_ICON=new ImageIcon(
+			Tickable.class.getResource("Media/towers/Lava.png"));
 	Lava(Point location)
 	{
 		super(location);
@@ -46,5 +49,11 @@ class Lava extends Tower
 		mike.setHP(mike.getHP()-15);
 		if (mike.getHP()<=0)
 			Board.getTimer().unRegister(mike);
+	}
+	
+	@Override
+	public ImageIcon getImageIcon()
+	{
+		return IMAGE_ICON;
 	}
 }

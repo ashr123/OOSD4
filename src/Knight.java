@@ -1,9 +1,12 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class Knight extends Creep
 {
+	private static final ImageIcon IMAGE_ICON=new ImageIcon(
+			Tickable.class.getResource("Media/creeps/abir-1.png"));
 	private static final int poisonDegree=2;
 	private boolean isPoisoned;
 	private int ticks;
@@ -43,6 +46,12 @@ class Knight extends Creep
 	void impact(Tower tower)
 	{
 		tower.visit(this);
+	}
+	
+	@Override
+	public ImageIcon getImageIcon()
+	{
+		return IMAGE_ICON;
 	}
 	
 	boolean isPoisoned()

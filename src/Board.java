@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -12,6 +14,9 @@ class Board extends JPanel
 	private int numOfLava;
 	private int numOfPoison;
 	private int numOfMagician;
+	private int xPosition;
+	private int yPosition;
+	private static final Timer timer = new Timer();
 	
 	/*
 	Image IMAGE_TOWER_LAVA = Toolkit.getDefaultToolkit().getImage("Media/towers/Lava.png");
@@ -27,13 +32,17 @@ class Board extends JPanel
 	*/
 	
 	private static final ImageIcon IMAGE_ICON_TOWER_LAVA=
-			new ImageIcon(Board.class.getResource("Media/towers/Lava.png"));
+			new ImageIcon(new ImageIcon(Board.class.getResource("Media/towers/Lava.png")).getImage()
+					              .getScaledInstance(100,162,Image.SCALE_SMOOTH));
 	private static final ImageIcon IMAGE_ICON_TOWER_DART=
-			new ImageIcon(Board.class.getResource("Media/towers/Dart.png"));
+			new ImageIcon(new ImageIcon(Board.class.getResource("Media/towers/Dart.png")).getImage()
+					.getScaledInstance(100,135,Image.SCALE_SMOOTH));
 	private static final ImageIcon IMAGE_ICON_TOWER_POISON=
-			new ImageIcon(Board.class.getResource("Media/towers/Poison.png"));
+			new ImageIcon(new ImageIcon(Board.class.getResource("Media/towers/Poison.png")).getImage()
+					.getScaledInstance(100,131,Image.SCALE_SMOOTH));
 	private static final ImageIcon IMAGE_ICON_TOWER_MAGICIAN=
-			new ImageIcon(Board.class.getResource("Media/towers/Magician.png"));
+			new ImageIcon(new ImageIcon(Board.class.getResource("Media/towers/Magician.png")).getImage()
+					.getScaledInstance(100,145,Image.SCALE_SMOOTH));
 	private static final ImageIcon IMAGE_ICON_CREEP_KNIGHT=
 			new ImageIcon(Board.class.getResource("Media/creeps/abir-1.png"));
 	private static final ImageIcon IMAGE_ICON_CREEP_MIKE=
@@ -61,21 +70,30 @@ class Board extends JPanel
 			public void mouseClicked(MouseEvent e)
 			{
 				if(boardPath[e.getX()*32/800][e.getY()*32/800].equals(new Point())){
+					xPosition = e.getX();
+					yPosition = e.getY();
 					JFrame towerWindow = new JFrame();
+					towerWindow.setLayout(new GridLayout(2,2));
 					JButton dartButton = new JButton(IMAGE_ICON_TOWER_DART);
 					JButton poisonButton = new JButton(IMAGE_ICON_TOWER_POISON);
 					JButton lavaButton = new JButton(IMAGE_ICON_TOWER_LAVA);
 					JButton magicianButton = new JButton(IMAGE_ICON_TOWER_MAGICIAN);
-					magicianButton.setPreferredSize(new Dimension(25,25));
-					lavaButton.setPreferredSize(new Dimension(25,25));
-					dartButton.setPreferredSize(new Dimension(25,25));
-					poisonButton.setPreferredSize(new Dimension(25,25));
+					dartButton.addActionListener(new ActionListener()
+					{
+						@Override
+						public void actionPerformed(ActionEvent e)
+						{
+						
+						}
+					});
 					towerWindow.add(dartButton);
 					towerWindow.add(poisonButton);
 					towerWindow.add(lavaButton);
 					towerWindow.add(magicianButton);
 					towerWindow.setVisible(true);
 					towerWindow.setSize(150,150);
+					towerWindow.setResizable(false);
+					towerWindow.pack();
 					
 				}
 			}

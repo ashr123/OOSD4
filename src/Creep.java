@@ -5,6 +5,7 @@ abstract class Creep implements Tickable
 {
 	private int HP=100;
 	private Point location;
+	private boolean injured;
 	
 	Creep(Point location)
 	{
@@ -41,4 +42,14 @@ abstract class Creep implements Tickable
 	}
 	
 	public abstract ImageIcon getImageIcon();
+	
+	boolean isInjured()
+	{
+		return injured;
+	}
+	
+	void setInjured(boolean injured)
+	{
+		this.injured=injured;
+	}
 }

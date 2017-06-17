@@ -123,7 +123,7 @@ class Timer
 	
 	private Point getStartLocation()
 	{
-		for (int i=0; i<Game.getLoader().get(Board.getLevel()).length; i++)
+		for (int i=0; i<Game.getLoader().get(Board.getLevel())[0].length; i++)
 			if (!Game.getLoader().get(Board.getLevel())[0][i].equals(new Point()))
 				return new Point(0, i);
 		return null;
@@ -134,5 +134,10 @@ class Timer
 		numberOfKnights=numberOfMikes=numberOfNagis=numberOfSkullies=0;
 		wave*=2;
 		getTickables().clear();
+	}
+	
+	int getWave()
+	{
+		return wave/2==0 ? 1 : wave/2;
 	}
 }

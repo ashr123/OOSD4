@@ -28,7 +28,8 @@ abstract class Creep implements Tickable
 		this.HP=HP;
 	}
 	
-	Point getLocation()
+	@Override
+	public Point getLocation()
 	{
 		return location;
 	}

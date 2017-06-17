@@ -20,7 +20,8 @@ abstract class Tower implements Tickable//Represents also the Visitor
 	
 	abstract void visit(Mike mike);
 	
-	Point getLocation()
+	@Override
+	public Point getLocation()
 	{
 		return location;
 	}

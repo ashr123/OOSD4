@@ -234,27 +234,6 @@ class Board extends JPanel
 	@Override
 	public void paint(Graphics g)
 	{
-		if(getLevel()>5||Game.getHP()==0){//Player Won
-			JPanel winPanel = new JPanel();
-			JLabel mes = new JLabel("You Won!");
-			JButton continueButton = new JButton("Continue");
-			mes.setFont(new Font("Serif", Font.PLAIN, 26));
-			winPanel.add(mes);
-			winPanel.add(continueButton);
-			Game.getFrame().add(winPanel);
-			continueButton.addActionListener(new ActionListener()
-			{
-				@Override
-				public void actionPerformed(ActionEvent e)
-				{
-					Game.getFrame().setContentPane(Game.getPanel());
-				}
-			});
-			
-			//Game.getPanel().setVisible(true);
-			//Game.getPanel().setEnabled(true);
-			
-		}
 		Game.getHPLBL().setText("HP: "+Game.getHP()+"    ");
 		Game.getTimeLBL().setText("Time: "+timer.getTime()+"    ");
 		Game.getWaveLBL().setText("Wave: "+timer.getWave()+"    ");

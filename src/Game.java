@@ -34,6 +34,27 @@ class Game
 	
 	private Game() throws IOException
 	{
+		if(Board.getLevel()>5||getHP()==0){//Player Won
+			JPanel winPanel = new JPanel();
+			JLabel mes = new JLabel("You Won!");
+			JButton continueButton = new JButton("Continue");
+			mes.setFont(new Font("Serif", Font.PLAIN, 26));
+			winPanel.add(mes);
+			winPanel.add(continueButton);
+			Game.getFrame().add(winPanel);
+			continueButton.addActionListener(new ActionListener()
+			{
+				@Override
+				public void actionPerformed(ActionEvent e)
+				{
+					getFrame().setContentPane(Game.getPanel());
+				}
+			});
+			
+			//Game.getPanel().setVisible(true);
+			//Game.getPanel().setEnabled(true);
+			
+		}
 		loader.load();
 		fireUpScreen();
 		JLabel maps=new JLabel("Please Choose a Map:");

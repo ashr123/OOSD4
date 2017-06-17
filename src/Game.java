@@ -32,48 +32,18 @@ class Game
 	{
 		loader.load();
 		fireUpScreen();
-		Container contentPane = frame.getContentPane();
-		contentPane.setBackground(Color.orange);
-		JToolBar toolBar = new JToolBar();
-		final JButton goButton = new JButton("Go!");
-		JButton fastForwardButton = new JButton("Fast Forward");
-		toolBar.add(new JLabel("HP: "+ HP + "    "));
-		toolBar.add(new JLabel("Wave: "+ waveNumber + "    "));
-		toolBar.add(new JLabel("Time: "+ time + "    " ));
-		toolBar.add(fastForwardButton);
-		toolBar.add(new JLabel("     "));
-		toolBar.add(goButton);
-		contentPane.add(toolBar, BorderLayout.NORTH);
-		frame.setVisible(true);
-		
-		goButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				Board.getTimer().start();
-				goButton.setEnabled(false);
-			}
-		});
-		
-		fastForwardButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				Board.getTimer().setFastFoword(!Board.getTimer().isFastFoword());
-			}
-		});
-		/*panel = new JPanel();
+		panel = new JPanel(new BorderLayout());
 		JLabel maps = new JLabel("Please Choose a Map:");
+		maps.setFont(new Font("Courier", Font.BOLD, 20));
 		map0 = new JButton(IMAGE_MAP_1);
 		map1 = new JButton(IMAGE_MAP_2);
 		map2 = new JButton(IMAGE_MAP_3);
-		panel.add(maps,BorderLayout.PAGE_START);
-		panel.add(map0,BorderLayout.LINE_START);
+		panel.add(maps,BorderLayout.NORTH);
+		panel.add(map0,BorderLayout.WEST);
 		panel.add(map1,BorderLayout.CENTER);
-		panel.add(map2,BorderLayout.LINE_END);
-		frame.add(panel,BorderLayout.NORTH);
+		panel.add(map2,BorderLayout.EAST);
+		frame.add(panel);
+		panel.setBackground(Color.orange);
 		map0.addActionListener(new ActionListener()
 		{
 			@Override
@@ -81,6 +51,9 @@ class Game
 			{
 				board = new Board(0);
 				frame.add(board);
+				frame.setVisible(true);
+				panel.setVisible(false);
+				createToolBar();
 			}
 		});
 		map1.addActionListener(new ActionListener()
@@ -90,6 +63,9 @@ class Game
 			{
 				board = new Board(1);
 				frame.add(board);
+				frame.setVisible(true);
+				panel.setVisible(false);
+				createToolBar();
 			}
 		});
 		map2.addActionListener(new ActionListener()
@@ -99,8 +75,12 @@ class Game
 			{
 				board = new Board(2);
 				frame.add(board);
+				frame.setVisible(true);
+				panel.setVisible(false);
+				createToolBar();
 			}
-		});*/
+		});
+		frame.setVisible(true);
 	}
 	
 	public static void main(String[] args) throws IOException
@@ -123,7 +103,41 @@ class Game
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setSize(800, 800);
-		frame.add(new Board(map));
+		//frame.add(new Board(map));
 	}
 	
+	private void createToolBar(){
+		JToolBar toolBar = new JToolBar();
+		final JButton goButton = new JButton("Go!");
+		JButton fastForwardButton = new JButton("Fast Forward");
+		toolBar.add(new JLabel("HP: "+ HP + "    "));
+		toolBar.add(new JLabel("Wave: "+ waveNumber + "    "));
+		toolBar.add(new JLabel("Time: "+ time + "    " ));
+		toolBar.add(fastForwardButton);
+		toolBar.add(new JLabel("     "));
+		toolBar.add(goButton);
+		frame.add(toolBar, BorderLayout.NORTH);
+		goButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				Board.getTimer().start();
+				goButton.setEnabled(false);
+			}
+		});
+		
+		fastForwardButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				if (Board.getTimer().isFastFoword())
+				{
+					Board.getTimer().setFastFoword(false);
+				}
+				Board.getTimer().setFastFoword(true);
+			}
+		});
+	}
 }

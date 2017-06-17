@@ -28,24 +28,18 @@ class Dart extends Tower
 	void visit(Naji naji)
 	{
 		naji.setHP((int)(naji.getHP()-(naji.isPoisoned() ? 30*Naji.getPoisonDegree() : 30)));
-		if (naji.getHP()<=0)
-			Board.getTimer().unRegister(naji);
 	}
 	
 	@Override
 	void visit(Skully skully)
 	{
 		skully.setHP(skully.getHP()-15);
-		if (skully.getHP()<=0)
-			Board.getTimer().unRegister(skully);
 	}
 	
 	@Override
 	void visit(Mike mike)
 	{
 		mike.setHP(mike.getHP()-30);
-		if (mike.getHP()<=0)
-			Board.getTimer().unRegister(mike);
 	}
 	
 	@Override

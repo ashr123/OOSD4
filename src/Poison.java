@@ -35,8 +35,6 @@ class Poison extends Tower
 	void visit(Skully skully)
 	{
 		skully.setHP(skully.getHP()-20);
-		if (skully.getHP()<=0)
-			Board.getTimer().unRegister(skully);
 	}
 	
 	@Override

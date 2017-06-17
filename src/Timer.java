@@ -30,22 +30,30 @@ class Timer
 					switch (enumConstants[new Random().nextInt(enumConstants.length)])
 					{
 						case MIKE:
-							register(new Mike(startingPoint));
+							if (numberOfMikes==wave)
+								break;
+							register(new Mike(new Point(startingPoint)));
 							numberOfMikes++;
 							isRegistered=true;
 							break;
 						case NAGI:
-							register(new Naji(startingPoint));
+							if (numberOfNagis==wave)
+								break;
+							register(new Naji(new Point(startingPoint)));
 							numberOfNagis++;
 							isRegistered=true;
 							break;
 						case KNIGHT:
-							register(new Knight(startingPoint));
+							if (numberOfKnights==wave)
+								break;
+							register(new Knight(new Point(startingPoint)));
 							numberOfKnights++;
 							isRegistered=true;
 							break;
 						case SKULLY:
-							register(new Skully(startingPoint));
+							if (numberOfSkullies==wave)
+								break;
+							register(new Skully(new Point(startingPoint)));
 							numberOfSkullies++;
 							isRegistered=true;
 					}
@@ -56,16 +64,18 @@ class Timer
 			{
 				try
 				{
-					iterator.next().tickHappend();
+					Tickable tickable=iterator.next();
+					tickable.tickHappend();
+					if (tickable instanceof Creep && ((Creep)tickable).getHP()<=0)
+						iterator.remove();
 				}
 				catch (Exception e1)
 				{
 					iterator.remove();
 				}
 			}
-//			for (Tickable tickable : tickables)
-//				tickable.tickHappend();
 			ticks++;
+			board.repaint();
 		}
 	});
 	

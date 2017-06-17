@@ -23,32 +23,24 @@ class Lava extends Tower
 	void visit(Knight knight)
 	{
 		knight.setHP(knight.getHP()-(knight.isPoisoned() ? 10*Knight.getPoisonDegree() : 10));
-		if (knight.getHP()<=0)
-			Board.getTimer().unRegister(knight);
 	}
 	
 	@Override
 	void visit(Naji naji)
 	{
 		naji.setHP((int)(naji.getHP()-(naji.isPoisoned() ? 15*Naji.getPoisonDegree() : 15)));
-		if (naji.getHP()<=0)
-			Board.getTimer().unRegister(naji);
 	}
 	
 	@Override
 	void visit(Skully skully)
 	{
 		skully.setHP(skully.getHP()-15);
-		if (skully.getHP()<=0)
-			Board.getTimer().unRegister(skully);
 	}
 	
 	@Override
 	void visit(Mike mike)
 	{
 		mike.setHP(mike.getHP()-15);
-		if (mike.getHP()<=0)
-			Board.getTimer().unRegister(mike);
 	}
 	
 	@Override

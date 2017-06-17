@@ -12,7 +12,7 @@ class Timer
 		KNIGHT, MIKE, NAGI, SKULLY
 	}
 	private final LinkedList<Tickable> tickables=new LinkedList<>();
-	private int ticks, wave=1, numberOfKnights, numberOfMikes, numberOfNagis, numberOfSkullies, passedCreeps;
+	private int ticks, wave=1, numberOfKnights, numberOfMikes, numberOfNagis, numberOfSkullies, passedCreeps, deadCreeps;
 	private boolean fastFoword;
 	private Point startingPoint=getStartLocation();
 	private Board board;
@@ -29,11 +29,15 @@ class Timer
 					Tickable tickable=iterator.next();
 					tickable.tickHappend();
 					if (tickable instanceof Creep && ((Creep)tickable).getHP()<=0)
+					{
 						iterator.remove();
+						deadCreeps++;
+					}
 				}
 				catch (Exception e1)
 				{
 					iterator.remove();
+					Game.decreaseHP();
 					passedCreeps++;
 				}
 			}
@@ -77,6 +81,8 @@ class Timer
 					}
 			}
 			ticks++;
+			if (deadCreeps+passedCreeps==wave*4)
+				increaseWave();
 			board.repaint();
 		}
 	});
@@ -111,11 +117,6 @@ class Timer
 		tickables.add(tickable);
 	}
 	
-	void unRegister(Tickable tickable)
-	{
-		tickables.remove(tickable);
-	}
-	
 	void start()
 	{
 		timer.start();
@@ -131,6 +132,7 @@ class Timer
 	
 	void increaseWave()
 	{
+		timer.stop();
 		numberOfKnights=numberOfMikes=numberOfNagis=numberOfSkullies=0;
 		wave*=2;
 		getTickables().clear();

@@ -139,7 +139,7 @@ class Timer
 	{
 		timer.stop();
 		numberOfKnights=numberOfMikes=numberOfNagis=numberOfSkullies=deadCreeps=passedCreeps=0;
-		wave*=2;
+		wave++;
 		ListIterator<Tickable> iterator=getTickables().listIterator();
 		while (iterator.hasNext())
 		{
@@ -151,15 +151,7 @@ class Timer
 	
 	int getWave()
 	{
-		switch (wave)
-		{
-			case 1:
-				return 1;
-			case 2:
-				return 2;
-			default:
-				return (int)Math.sqrt(wave);
-		}
+		return wave;
 	}
 	
 	boolean isRunning()

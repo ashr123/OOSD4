@@ -124,6 +124,7 @@ class Game
 			{
 				Board.getTimer().start();
 				goButton.setEnabled(false);
+				if(board.getTimer())
 			}
 		});
 		

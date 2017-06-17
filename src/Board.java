@@ -68,7 +68,7 @@ class Board extends JPanel
 					xPosition = e.getX();
 					yPosition = e.getY();
 					
-					JFrame towerWindow = new JFrame("Choose a Tower");
+					final JFrame towerWindow = new JFrame("Choose a Tower");
 					towerWindow.setLayout(new GridLayout(2,2));
 					JButton dartButton = new JButton(IMAGE_ICON_TOWER_DART);
 					JButton poisonButton = new JButton(IMAGE_ICON_TOWER_POISON);
@@ -82,6 +82,7 @@ class Board extends JPanel
 						{
 							timer.register(new Dart(new Point(xPosition,yPosition)));
 							repaint();
+							towerWindow.dispose();
 						}
 					});
 					poisonButton.addActionListener(new ActionListener()
@@ -91,6 +92,7 @@ class Board extends JPanel
 						{
 							timer.register(new Poison(new Point(xPosition,yPosition)));
 							repaint();
+							towerWindow.dispose();
 						}
 					});
 					lavaButton.addActionListener(new ActionListener()
@@ -100,6 +102,7 @@ class Board extends JPanel
 						{
 							timer.register(new Lava(new Point(xPosition,yPosition)));
 							repaint();
+							towerWindow.dispose();
 						}
 					});
 					magicianButton.addActionListener(new ActionListener()
@@ -109,6 +112,7 @@ class Board extends JPanel
 						{
 							timer.register(new Magician(new Point(xPosition,yPosition)));
 							repaint();
+							towerWindow.dispose();
 						}
 					});
 					

@@ -83,7 +83,8 @@ class Board extends JPanel
 						@Override
 						public void actionPerformed(ActionEvent e)
 						{
-						
+							timer.register(new Dart(new Point(xPosition,yPosition)));
+							repaint();
 						}
 					});
 					towerWindow.add(dartButton);
@@ -129,7 +130,11 @@ class Board extends JPanel
 	{
 		return level;
 	}
-
+	
+	public static Timer getTimer()
+	{
+		return timer;
+	}
 	
 	@Override
 	public void paintComponent(Graphics g)
@@ -157,6 +162,10 @@ class Board extends JPanel
 					g.drawImage(IMAGE_ICON_PATH.getImage(),i*25,j*25,25,25,this);
 				}
 			}
+		}
+		
+		for (Tickable t : timer.getTickables()){
+		
 		}
 	}
 }

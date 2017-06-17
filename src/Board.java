@@ -58,7 +58,7 @@ class Board extends JPanel
 	public void paintComponent(Graphics g)
 	{
 		//g.drawString("This is my custom Panel!",10,20);
-		super.paintComponent(g);
+		//super.paintComponent(g);
 		for (int i=0 ; i<boardPath.length ; i++){
 			for (int j=0 ; j<boardPath[i].length ; j++){
 				if (boardPath[i][j].getX()==0 && boardPath[i][j].getY()==0){

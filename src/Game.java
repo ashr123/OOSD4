@@ -25,7 +25,7 @@ class Game
 		loader.load();
 		fireUpScreen();
 		Container contentPane = frame.getContentPane();
-		/*JToolBar toolBar = new JToolBar();
+		JToolBar toolBar = new JToolBar();
 		toolBar.add(new JLabel("HP: "+ HP + "    "));
 		toolBar.add(new JLabel("Wave: "+ waveNumber + "    "));
 		toolBar.add(new JLabel("Time: "+ time + "    " ));
@@ -33,7 +33,7 @@ class Game
 		toolBar.add(new JLabel("     "));
 		toolBar.add(new JButton("Go!"));
 		contentPane.add(toolBar, BorderLayout.NORTH);
-		panel = new JPanel();
+		/*panel = new JPanel();
 		map0 = new JButton("Map 1");
 		map1 = new JButton("Map 2");
 		map2 = new JButton("Map 3");
@@ -94,7 +94,6 @@ class Game
 		frame.setResizable(false);
 		frame.setSize(800, 800);
 		frame.add(new Board(0));
-		//frame.pack();
 		frame.setVisible(true);
 	}
 

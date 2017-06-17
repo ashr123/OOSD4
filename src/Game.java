@@ -43,6 +43,7 @@ class Game
 		toolBar.add(new JLabel("     "));
 		toolBar.add(new JButton("Go!"));
 		contentPane.add(toolBar, BorderLayout.NORTH);
+		frame.setVisible(true);
 		/*panel = new JPanel();
 		//JLabel maps = new JLabel("Please Choose a Map:");
 		map0 = new JButton(IMAGE_MAP_1);
@@ -106,7 +107,6 @@ class Game
 		frame.setResizable(false);
 		frame.setSize(800, 800);
 		frame.add(new Board(0));
-		frame.setVisible(true);
 	}
 	
 }

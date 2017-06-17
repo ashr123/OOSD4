@@ -132,11 +132,7 @@ class Game
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				if (Board.getTimer().isFastFoword())
-				{
-					Board.getTimer().setFastFoword(false);
-				}
-				Board.getTimer().setFastFoword(true);
+				Board.getTimer().setFastFoword(!Board.getTimer().isFastFoword());
 			}
 		});
 	}

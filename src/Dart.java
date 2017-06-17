@@ -13,9 +13,8 @@ class Dart extends Tower
 	@Override
 	public void tickHappend()
 	{
-		if (!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)//Every half a second
-			hitCreep(2, false);
-		if (Board.getTimer().isFastFoword())//Every quarter of a second
+		if ((!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)/*Every half a second*/ ||
+		    (Board.getTimer().isFastFoword())/*Every quarter of a second*/)
 			hitCreep(2, false);
 	}
 	

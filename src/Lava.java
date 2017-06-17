@@ -13,9 +13,8 @@ class Lava extends Tower
 	@Override
 	public void tickHappend()
 	{
-		if (!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%4==0)//Every second
-			hitCreep(1, true);
-		if (Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)//Every half a second
+		if ((!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%4==0)/*Every second*/ ||
+		    (Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)/*Every half a second*/)
 			hitCreep(1, true);
 	}
 	

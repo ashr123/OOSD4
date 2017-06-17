@@ -16,7 +16,7 @@ class Board extends JPanel
 	private int numOfMagician;
 	private int xPosition;
 	private int yPosition;
-	private static final Timer timer = new Timer();
+	private static Timer timer;
 	
 	/*
 	Image IMAGE_TOWER_LAVA = Toolkit.getDefaultToolkit().getImage("Media/towers/Lava.png");
@@ -51,8 +51,9 @@ class Board extends JPanel
 	
 	public Board(int level)
 	{
+		timer = new Timer();
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		boardPath = Game.getLoader().get(0);
+		boardPath = Game.getLoader().get(level);
 		boardLabels = new JLabel[32][32];
 		numOfDart=numOfLava=numOfPoison=numOfMagician=3;
 		
@@ -62,14 +63,17 @@ class Board extends JPanel
 			public void mouseClicked(MouseEvent e)
 			{
 				if(boardPath[e.getX()*32/800][e.getY()*32/800].equals(new Point())){
+					
 					xPosition = e.getX();
 					yPosition = e.getY();
-					JFrame towerWindow = new JFrame();
+					
+					JFrame towerWindow = new JFrame("Choose a Tower");
 					towerWindow.setLayout(new GridLayout(2,2));
 					JButton dartButton = new JButton(IMAGE_ICON_TOWER_DART);
 					JButton poisonButton = new JButton(IMAGE_ICON_TOWER_POISON);
 					JButton lavaButton = new JButton(IMAGE_ICON_TOWER_LAVA);
 					JButton magicianButton = new JButton(IMAGE_ICON_TOWER_MAGICIAN);
+					
 					dartButton.addActionListener(new ActionListener()
 					{
 						@Override
@@ -79,6 +83,34 @@ class Board extends JPanel
 							repaint();
 						}
 					});
+					poisonButton.addActionListener(new ActionListener()
+					{
+						@Override
+						public void actionPerformed(ActionEvent e)
+						{
+							timer.register(new Poison(new Point(xPosition,yPosition)));
+							repaint();
+						}
+					});
+					lavaButton.addActionListener(new ActionListener()
+					{
+						@Override
+						public void actionPerformed(ActionEvent e)
+						{
+							timer.register(new Lava(new Point(xPosition,yPosition)));
+							repaint();
+						}
+					});
+					magicianButton.addActionListener(new ActionListener()
+					{
+						@Override
+						public void actionPerformed(ActionEvent e)
+						{
+							timer.register(new Magician(new Point(xPosition,yPosition)));
+							repaint();
+						}
+					});
+					
 					towerWindow.add(dartButton);
 					towerWindow.add(poisonButton);
 					towerWindow.add(lavaButton);
@@ -87,6 +119,7 @@ class Board extends JPanel
 					towerWindow.setSize(150,150);
 					towerWindow.setResizable(false);
 					towerWindow.pack();
+					
 					
 				}
 			}
@@ -157,7 +190,7 @@ class Board extends JPanel
 		}
 		
 		for (Tickable t : timer.getTickables()){
-		
+			g.drawImage(t.getImageIcon().getImage(),(int)t.getLocation().getX(),(int)t.getLocation().getY(),25,25,this);
 		}
 	}
 }

@@ -19,12 +19,22 @@ class Game
 	private JPanel panel;
 	private JToolBar toolBar;
 	private int time;
+	private static final ImageIcon IMAGE_MAP_1=
+			new ImageIcon(new ImageIcon(Board.class.getResource("Media/toolbar/level0.png")).getImage()
+					              .getScaledInstance(200,200,Image.SCALE_SMOOTH));
+	private static final ImageIcon IMAGE_MAP_2=
+			new ImageIcon(new ImageIcon(Board.class.getResource("Media/toolbar/level1.png")).getImage()
+					              .getScaledInstance(200,200,Image.SCALE_SMOOTH));
+	private static final ImageIcon IMAGE_MAP_3=
+			new ImageIcon(new ImageIcon(Board.class.getResource("Media/toolbar/level2.png")).getImage()
+					              .getScaledInstance(200,200,Image.SCALE_SMOOTH));
 	
 	private Game() throws IOException
 	{
 		loader.load();
 		fireUpScreen();
 		Container contentPane = frame.getContentPane();
+		contentPane.setBackground(Color.orange);
 		JToolBar toolBar = new JToolBar();
 		toolBar.add(new JLabel("HP: "+ HP + "    "));
 		toolBar.add(new JLabel("Wave: "+ waveNumber + "    "));
@@ -34,9 +44,11 @@ class Game
 		toolBar.add(new JButton("Go!"));
 		contentPane.add(toolBar, BorderLayout.NORTH);
 		/*panel = new JPanel();
-		map0 = new JButton("Map 1");
-		map1 = new JButton("Map 2");
-		map2 = new JButton("Map 3");
+		//JLabel maps = new JLabel("Please Choose a Map:");
+		map0 = new JButton(IMAGE_MAP_1);
+		map1 = new JButton(IMAGE_MAP_2);
+		map2 = new JButton(IMAGE_MAP_3);
+		//panel.add(maps);
 		panel.add(map0);
 		panel.add(map1);
 		panel.add(map2);

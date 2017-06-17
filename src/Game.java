@@ -145,7 +145,7 @@ class Game
 		clip.loop(Integer.MAX_VALUE);
 	}
 	
-	private static void decreaseHP(){
+	public static void decreaseHP(){
 		HP--;
 	}
 }

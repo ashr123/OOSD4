@@ -218,12 +218,10 @@ class Board extends JPanel
 			g.drawImage(t.getImageIcon().getImage(),(int)t.getLocation().getX(),(int)t.getLocation().getY(),25,25,this);
 		}
 	}
-	public Point getStartLocation(){
-		for (int i=0; i<boardPath.length;i++){
-			if (!boardPath[i][0].equals(new Point())){
-				return boardPath[i][0];
-			}
-		}
+	private Point getStartLocation(){
+		for (Point point : Game.getLoader().get(level)[0])
+			if (!point.equals(new Point()))
+				return point;
 		return null;
 	}
 }

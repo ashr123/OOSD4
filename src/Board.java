@@ -71,9 +71,13 @@ class Board extends JPanel
 					final JFrame towerWindow = new JFrame("Choose a Tower");
 					towerWindow.setLayout(new GridLayout(2,2));
 					JButton dartButton = new JButton(IMAGE_ICON_TOWER_DART);
+					dartButton.setText(numOfDart+"");
 					JButton poisonButton = new JButton(IMAGE_ICON_TOWER_POISON);
+					poisonButton.setText(numOfPoison+"");
 					JButton lavaButton = new JButton(IMAGE_ICON_TOWER_LAVA);
+					lavaButton.setText(numOfLava+"");
 					JButton magicianButton = new JButton(IMAGE_ICON_TOWER_MAGICIAN);
+					magicianButton.setText(numOfMagician+"");
 					
 					dartButton.addActionListener(new ActionListener()
 					{

@@ -13,7 +13,7 @@ class Board extends JPanel
 	private int numOfPoison;
 	private int numOfMagician;
 	
-	
+	/*
 	Image IMAGE_TOWER_LAVA = Toolkit.getDefaultToolkit().getImage("Media/towers/Lava.png");
 	Image IMAGE_TOWER_DART = Toolkit.getDefaultToolkit().getImage("Media/towers/Dart.png");
 	Image IMAGE_TOWER_POISON = Toolkit.getDefaultToolkit().getImage("Media/towers/Poison.png");
@@ -24,6 +24,7 @@ class Board extends JPanel
 	Image IMAGE_CREEP_SKULLY = Toolkit.getDefaultToolkit().getImage("Media/creeps/guli-1.png");
 	Image IMAGE_GRASS = Toolkit.getDefaultToolkit().getImage("Media/environment/grass.png");
 	Image IMAGE_PATH = Toolkit.getDefaultToolkit().getImage("Media/environment/path.png");
+	*/
 	
 	private static final ImageIcon IMAGE_ICON_TOWER_LAVA=
 			new ImageIcon(Board.class.getResource("Media/towers/Lava.png"));
@@ -60,13 +61,21 @@ class Board extends JPanel
 			public void mouseClicked(MouseEvent e)
 			{
 				if(boardPath[e.getX()*32/800][e.getY()*32/800].equals(new Point())){
-					JPanel towerWindow = new JPanel();
-					towerWindow.setSize(150,150);
-					towerWindow.add(new JButton(IMAGE_ICON_TOWER_DART));
-					towerWindow.add(new JButton(IMAGE_ICON_TOWER_POISON));
-					towerWindow.add(new JButton(IMAGE_ICON_TOWER_LAVA));
-					towerWindow.add(new JButton(IMAGE_ICON_TOWER_MAGICIAN));
+					JFrame towerWindow = new JFrame();
+					JButton dartButton = new JButton(IMAGE_ICON_TOWER_DART);
+					JButton poisonButton = new JButton(IMAGE_ICON_TOWER_POISON);
+					JButton lavaButton = new JButton(IMAGE_ICON_TOWER_LAVA);
+					JButton magicianButton = new JButton(IMAGE_ICON_TOWER_MAGICIAN);
+					magicianButton.setPreferredSize(new Dimension(25,25));
+					lavaButton.setPreferredSize(new Dimension(25,25));
+					dartButton.setPreferredSize(new Dimension(25,25));
+					poisonButton.setPreferredSize(new Dimension(25,25));
+					towerWindow.add(dartButton);
+					towerWindow.add(poisonButton);
+					towerWindow.add(lavaButton);
+					towerWindow.add(magicianButton);
 					towerWindow.setVisible(true);
+					towerWindow.setSize(150,150);
 					
 				}
 			}
@@ -113,15 +122,16 @@ class Board extends JPanel
 			for (int j=0 ; j<boardPath[i].length ; j++){
 				if (boardPath[i][j].getX()==0 && boardPath[i][j].getY()==0){
 					//g.drawString("This is my custom Panel!",10,20);
-					//boardLabels[i][j] = new JLabel(IMAGE_ICON_PATH);
-					g.drawImage(IMAGE_ICON_GRASS.getImage(),i*25,j*25,25,25,this);
+					boardLabels[i][j] = new JLabel(IMAGE_ICON_GRASS);
 					//g.setColor(Color.GREEN);
 					//g.fillRect(i*25,j*25,25,25);
 					//g.setColor(Color.GREEN);
+					g.drawImage(IMAGE_ICON_GRASS.getImage(),i*25,j*25,25,25,this);
+					
 				}
 				else
 				{
-					//boardLabels[i][j]=new JLabel(IMAGE_ICON_GRASS);
+					boardLabels[i][j]=new JLabel(IMAGE_ICON_PATH);
 					//g.drawImage(IMAGE_GRASS,i*25,j*25,25,25,this);
 					//g.setColor(Color.pink);
 					//g.fillRect(i*25,j*25,25,25);

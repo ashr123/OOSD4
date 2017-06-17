@@ -29,12 +29,7 @@ class Game
 	private static final JLabel TimeLBL=new JLabel("Time: 0    ");
 	private JFrame frame;
 	private Board board;
-	private int map;
-	private JButton map0;
-	private JButton map1;
-	private JButton map2;
 	private static JPanel panel=new JPanel(new BorderLayout());
-	private JToolBar toolBar;
 	private static final JButton goButton=new JButton("Go!");
 	
 	private Game() throws IOException
@@ -43,9 +38,9 @@ class Game
 		fireUpScreen();
 		JLabel maps=new JLabel("Please Choose a Map:");
 		maps.setFont(new Font("Courier", Font.BOLD, 20));
-		map0=new JButton(IMAGE_MAP_1);
-		map1=new JButton(IMAGE_MAP_2);
-		map2=new JButton(IMAGE_MAP_3);
+		JButton map0=new JButton(IMAGE_MAP_1);
+		JButton map1=new JButton(IMAGE_MAP_2);
+		JButton map2=new JButton(IMAGE_MAP_3);
 		panel.add(maps, BorderLayout.NORTH);
 		panel.add(map0, BorderLayout.WEST);
 		panel.add(map1, BorderLayout.CENTER);
@@ -110,32 +105,32 @@ class Game
 		clip.loop(Integer.MAX_VALUE);
 	}
 	
-	public static void decreaseHP()
+	static void decreaseHP()
 	{
 		HP--;
 	}
 	
-	public static int getHP()
+	static int getHP()
 	{
 		return HP;
 	}
 	
-	public static JLabel getHPLBL()
+	static JLabel getHPLBL()
 	{
 		return HPLBL;
 	}
 	
-	public static JLabel getWaveLBL()
+	static JLabel getWaveLBL()
 	{
 		return WaveLBL;
 	}
 	
-	public static JLabel getTimeLBL()
+	static JLabel getTimeLBL()
 	{
 		return TimeLBL;
 	}
 	
-	public void fireUpScreen()
+	private void fireUpScreen()
 	{
 		frame=new JFrame("Tower Defence");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -175,12 +170,12 @@ class Game
 		});
 	}
 	
-	public static JButton getGoButton()
+	static JButton getGoButton()
 	{
 		return goButton;
 	}
 	
-	public static JPanel getPanel()
+	static JPanel getPanel()
 	{
 		return panel;
 	}

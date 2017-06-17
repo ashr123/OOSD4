@@ -12,9 +12,8 @@ class Timer
 		KNIGHT, MIKE, NAGI, SKULLY
 	}
 	private final LinkedList<Tickable> tickables=new LinkedList<>();
-	private int wave=1, numberOfKnights, numberOfMikes, numberOfNagis, numberOfSkullies;
+	private int ticks, wave=1, numberOfKnights, numberOfMikes, numberOfNagis, numberOfSkullies, passedCreeps;
 	private boolean fastFoword;
-	private int ticks;
 	private Point startingPoint=getStartLocation();
 	private Board board;
 	private final javax.swing.Timer timer=new javax.swing.Timer(250, new ActionListener()
@@ -35,11 +34,12 @@ class Timer
 				catch (Exception e1)
 				{
 					iterator.remove();
+					passedCreeps++;
 				}
 			}
 			
 			if (((!isFastFoword() && getTicks()%4==0)/*Every second*/ ||
-			     isFastFoword() && getTicks()%2==0/*Every half a second*/) &&
+			     (isFastFoword() && getTicks()%2==0)/*Every half a second*/) &&
 			    (numberOfMikes!=wave || numberOfNagis!=wave || numberOfKnights!=wave || numberOfSkullies!=wave))
 			{
 				Creeps[] enumConstants=Creeps.class.getEnumConstants();
@@ -139,5 +139,10 @@ class Timer
 	int getWave()
 	{
 		return wave/2==0 ? 1 : wave/2;
+	}
+	
+	boolean isRunning()
+	{
+		return timer.isRunning();
 	}
 }

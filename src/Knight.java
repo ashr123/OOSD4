@@ -9,17 +9,18 @@ class Knight extends Creep
 			Tickable.class.getResource("Media/creeps/abir-1.png"));
 	private static final int poisonDegree=2;
 	private boolean isPoisoned;
-	private int ticks;
+	private int ticks=1;
 	private final javax.swing.Timer cancelEffect=new javax.swing.Timer(2500, new ActionListener()
 	{
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			if (Board.getTimer().isFastFoword())//Every 2.5 seconds
-				isPoisoned=false;
-			if (!Board.getTimer().isFastFoword() && ticks%2==0)//Every 5 seconds
+			if ((!Board.getTimer().isFastFoword() && ticks%2==0)/*Every 5 seconds*/ ||
+			    (Board.getTimer().isFastFoword())/*Every 2.5 seconds*/)
 				isPoisoned=false;
 			ticks++;
+			if (isPoisoned())
+				cancelEffect.restart();
 		}
 	});
 	
@@ -60,7 +61,7 @@ class Knight extends Creep
 	
 	void setPoisoned()
 	{
-		ticks=0;
+		ticks=1;
 		isPoisoned=true;
 		cancelEffect.setRepeats(false);
 		cancelEffect.restart();

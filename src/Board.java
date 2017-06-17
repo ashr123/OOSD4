@@ -4,10 +4,20 @@ import java.awt.*;
 class Board extends JPanel
 {
 	private final Point[][] boardPath;
-	private final JButton[][] boardButtuns;
+	private final JLabel[][] boardLabels;
 	private static int level;
 	
-	private static final ImageIcon IMAGE_TOWER_LAVA=
+	Image IMAGE_TOWER_LAVA = Toolkit.getDefaultToolkit().getImage("Media/towers/Lava.png");
+	Image IMAGE_TOWER_DART = Toolkit.getDefaultToolkit().getImage("Media/towers/Dart.png");
+	Image IMAGE_TOWER_POISON = Toolkit.getDefaultToolkit().getImage("Media/towers/Poison.png");
+	Image IMAGE_TOWER_MAGICIAN = Toolkit.getDefaultToolkit().getImage("Media/towers/Magician.png");
+	Image IMAGE_CREEP_KNIGHT = Toolkit.getDefaultToolkit().getImage("Media/creeps/abir-1.png");
+	Image IMAGE_CREEP_MIKE = Toolkit.getDefaultToolkit().getImage("Media/creeps/mike-1.png");
+	Image IMAGE_CREEP_NAJI = Toolkit.getDefaultToolkit().getImage("Media/creeps/naji-1.png");
+	Image IMAGE_CREEP_SKULLY = Toolkit.getDefaultToolkit().getImage("Media/creeps/guli-1.png");
+	Image IMAGE_GRASS = Toolkit.getDefaultToolkit().getImage("Media/environment/grass.png");
+	Image IMAGE_PATH = Toolkit.getDefaultToolkit().getImage("Media/environment/path.png");
+	/*private static final ImageIcon IMAGE_TOWER_LAVA=
 			new ImageIcon(Board.class.getResource("Media/towers/Lava.png"));
 	private static final ImageIcon IMAGE_TOWER_DART=
 			new ImageIcon(Board.class.getResource("Media/towers/Dart.png"));
@@ -26,16 +36,14 @@ class Board extends JPanel
 	private static final ImageIcon IMAGE_GRASS=
 			new ImageIcon(Board.class.getResource("Media/environment/grass.png"));
 	private static final ImageIcon IMAGE_PATH=
-			new ImageIcon(Board.class.getResource("Media/environment/path.png"));
+			new ImageIcon(Board.class.getResource("Media/environment/path.png"));*/
 	
 	
 	public Board(int level)
 	{
 		boardPath = Game.getLoader().get(0);
-		boardButtuns = new JButton[32][32];
+		boardLabels = new JLabel[32][32];
 		repaint();
-		
-		
 		
 	}
 	
@@ -46,20 +54,20 @@ class Board extends JPanel
 
 	
 	@Override
-	public void paint(Graphics g)
+	public void paintComponent(Graphics g)
 	{
-		super.paint(g);
+		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D) g;
 		for (int i=0 ; i<boardPath.length ; i++){
 			for (int j=0 ; j<boardPath[i].length ; j++){
 				if (boardPath[i][j].getX()==0 && boardPath[i][j].getY()==0){
-					boardButtuns[i][j] = new JButton(IMAGE_PATH);
-					boardButtuns[i][j].repaint(i*25,j*25,25,25);
-					
+					//boardLabels[i][j] = new JLabel(IMAGE_PATH);
+					g2d.drawImage(IMAGE_PATH,i*25,j*25,25,25,this);
 				}
 				else
 				{
-					boardButtuns[i][j]=new JButton(IMAGE_GRASS);
-					boardButtuns[i][j].repaint(i*25, j*25, 25, 25);
+					//boardLabels[i][j]=new JLabel(IMAGE_GRASS);
+					g2d.drawImage(IMAGE_GRASS,i*25,j*25,25,25,this);
 				}
 			}
 		}

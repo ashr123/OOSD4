@@ -33,6 +33,7 @@ class Game extends JPanel
 		toolBar.add(new JLabel("     "));
 		toolBar.add(new JButton("Go!"));
 		contentPane.add(toolBar, BorderLayout.NORTH);
+		setVisible(true);
 		panel = new JPanel();
 		map0 = new JButton("Map 1");
 		map1 = new JButton("Map 2");
@@ -41,7 +42,6 @@ class Game extends JPanel
 		panel.add(map1);
 		panel.add(map2);
 		add(panel,BorderLayout.CENTER);
-		setVisible(true);
 		map0.addActionListener(new ActionListener()
 		{
 			@Override

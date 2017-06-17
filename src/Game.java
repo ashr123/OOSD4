@@ -10,7 +10,6 @@ class Game
 	private static final LevelLoader loader=new LevelLoader();
 	private Board board;
 	private int map;
-	private int numberOfCreeps = 20;
 	private int HP=20;
 	private int waveNumber;
 	private JButton map0;

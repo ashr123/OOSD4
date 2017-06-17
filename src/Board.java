@@ -55,7 +55,6 @@ class Board extends JPanel
 		boardPath = Game.getLoader().get(level);
 		boardLabels = new JLabel[32][32];
 		numOfDart=numOfLava=numOfPoison=numOfMagician=3;
-		getStartLocation();
 		
 		addMouseListener(new MouseListener()
 		{
@@ -228,11 +227,5 @@ class Board extends JPanel
 		for (Tickable t : timer.getTickables()){
 			g.drawImage(t.getImageIcon().getImage(),(int)t.getLocation().getX()*25,(int)t.getLocation().getY()*25,25,25,this);
 		}
-	}
-	private Point getStartLocation(){
-		for (Point point : Game.getLoader().get(level)[0])
-			if (!point.equals(new Point()))
-				return point;
-		return null;
 	}
 }

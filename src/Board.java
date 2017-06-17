@@ -80,9 +80,13 @@ class Board extends JPanel
 						@Override
 						public void actionPerformed(ActionEvent e)
 						{
-							timer.register(new Dart(new Point(xPosition,yPosition)));
-							repaint();
-							towerWindow.dispose();
+							if (numOfDart>0)
+							{
+								timer.register(new Dart(new Point(xPosition, yPosition)));
+								numOfDart--;
+								repaint();
+								towerWindow.dispose();
+							}
 						}
 					});
 					poisonButton.addActionListener(new ActionListener()
@@ -90,9 +94,13 @@ class Board extends JPanel
 						@Override
 						public void actionPerformed(ActionEvent e)
 						{
-							timer.register(new Poison(new Point(xPosition,yPosition)));
-							repaint();
-							towerWindow.dispose();
+							if (numOfPoison>0)
+							{
+								timer.register(new Poison(new Point(xPosition, yPosition)));
+								numOfPoison--;
+								repaint();
+								towerWindow.dispose();
+							}
 						}
 					});
 					lavaButton.addActionListener(new ActionListener()
@@ -100,9 +108,13 @@ class Board extends JPanel
 						@Override
 						public void actionPerformed(ActionEvent e)
 						{
-							timer.register(new Lava(new Point(xPosition,yPosition)));
-							repaint();
-							towerWindow.dispose();
+							if (numOfLava>0)
+							{
+								timer.register(new Lava(new Point(xPosition, yPosition)));
+								numOfLava--;
+								repaint();
+								towerWindow.dispose();
+							}
 						}
 					});
 					magicianButton.addActionListener(new ActionListener()
@@ -110,9 +122,13 @@ class Board extends JPanel
 						@Override
 						public void actionPerformed(ActionEvent e)
 						{
-							timer.register(new Magician(new Point(xPosition,yPosition)));
-							repaint();
-							towerWindow.dispose();
+							if (numOfMagician>0)
+							{
+								timer.register(new Magician(new Point(xPosition, yPosition)));
+								numOfMagician--;
+								repaint();
+								towerWindow.dispose();
+							}
 						}
 					});
 					

@@ -17,33 +17,34 @@ class Board extends JPanel
 	Image IMAGE_CREEP_SKULLY = Toolkit.getDefaultToolkit().getImage("Media/creeps/guli-1.png");
 	Image IMAGE_GRASS = Toolkit.getDefaultToolkit().getImage("Media/environment/grass.png");
 	Image IMAGE_PATH = Toolkit.getDefaultToolkit().getImage("Media/environment/path.png");
-	/*private static final ImageIcon IMAGE_TOWER_LAVA=
+	
+	private static final ImageIcon IMAGE_ICON_TOWER_LAVA=
 			new ImageIcon(Board.class.getResource("Media/towers/Lava.png"));
-	private static final ImageIcon IMAGE_TOWER_DART=
+	private static final ImageIcon IMAGE_ICON_TOWER_DART=
 			new ImageIcon(Board.class.getResource("Media/towers/Dart.png"));
-	private static final ImageIcon IMAGE_TOWER_POISON=
+	private static final ImageIcon IMAGE_ICON_TOWER_POISON=
 			new ImageIcon(Board.class.getResource("Media/towers/Poison.png"));
-	private static final ImageIcon IMAGE_TOWER_MAGICIAN=
+	private static final ImageIcon IMAGE_ICON_TOWER_MAGICIAN=
 			new ImageIcon(Board.class.getResource("Media/towers/Magician.png"));
-	private static final ImageIcon IMAGE_CREEP_KNIGHT=
+	private static final ImageIcon IMAGE_ICON_CREEP_KNIGHT=
 			new ImageIcon(Board.class.getResource("Media/creeps/abir-1.png"));
-	private static final ImageIcon IMAGE_CREEP_MIKE=
+	private static final ImageIcon IMAGE_ICON_CREEP_MIKE=
 			new ImageIcon(Board.class.getResource("Media/creeps/mike-1.png"));
-	private static final ImageIcon IMAGE_CREEP_NAJI=
+	private static final ImageIcon IMAGE_ICON_CREEP_NAJI=
 			new ImageIcon(Board.class.getResource("Media/creeps/naji-1.png"));
-	private static final ImageIcon IMAGE_CREEP_SKULLY=
+	private static final ImageIcon IMAGE_ICON_CREEP_SKULLY=
 			new ImageIcon(Board.class.getResource("Media/creeps/guli-1.png"));
-	private static final ImageIcon IMAGE_GRASS=
+	private static final ImageIcon IMAGE_ICON_GRASS=
 			new ImageIcon(Board.class.getResource("Media/environment/grass.png"));
-	private static final ImageIcon IMAGE_PATH=
-			new ImageIcon(Board.class.getResource("Media/environment/path.png"));*/
+	private static final ImageIcon IMAGE_ICON_PATH=
+			new ImageIcon(Board.class.getResource("Media/environment/path.png"));
 	
 	
 	public Board(int level)
 	{
+		setBorder(BorderFactory.createLineBorder(Color.black));
 		boardPath = Game.getLoader().get(0);
 		boardLabels = new JLabel[32][32];
-		repaint();
 		
 	}
 	
@@ -56,18 +57,23 @@ class Board extends JPanel
 	@Override
 	public void paintComponent(Graphics g)
 	{
+		//g.drawString("This is my custom Panel!",10,20);
 		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D) g;
 		for (int i=0 ; i<boardPath.length ; i++){
 			for (int j=0 ; j<boardPath[i].length ; j++){
 				if (boardPath[i][j].getX()==0 && boardPath[i][j].getY()==0){
-					//boardLabels[i][j] = new JLabel(IMAGE_PATH);
-					g2d.drawImage(IMAGE_PATH,i*25,j*25,25,25,this);
+					//g.drawString("This is my custom Panel!",10,20);
+					//boardLabels[i][j] = new JLabel(IMAGE_ICON_PATH);
+					//g.drawImage(IMAGE_PATH,25,25,25,25,this);
+					g.fillRect(i*25,j*25,25,25);
+					g.setColor(Color.GREEN);
 				}
 				else
 				{
-					//boardLabels[i][j]=new JLabel(IMAGE_GRASS);
-					g2d.drawImage(IMAGE_GRASS,i*25,j*25,25,25,this);
+					boardLabels[i][j]=new JLabel(IMAGE_ICON_GRASS);
+					//g.drawImage(IMAGE_GRASS,i*25,j*25,25,25,this);
+					g.fillRect(i*25,j*25,25,25);
+					g.setColor(Color.pink);
 				}
 			}
 		}

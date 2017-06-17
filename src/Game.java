@@ -33,14 +33,14 @@ class Game
 	private JButton map0;
 	private JButton map1;
 	private JButton map2;
-	private JPanel panel;
+	private static JPanel panel=new JPanel(new BorderLayout());
 	private JToolBar toolBar;
+	private static final JButton goButton=new JButton("Go!");
 	
 	private Game() throws IOException
 	{
 		loader.load();
 		fireUpScreen();
-		panel=new JPanel(new BorderLayout());
 		JLabel maps=new JLabel("Please Choose a Map:");
 		maps.setFont(new Font("Courier", Font.BOLD, 20));
 		map0=new JButton(IMAGE_MAP_1);
@@ -147,7 +147,6 @@ class Game
 	private void createToolBar()
 	{
 		JToolBar toolBar=new JToolBar();
-		final JButton goButton=new JButton("Go!");
 		JButton fastForwardButton=new JButton("Fast Forward");
 		toolBar.add(HPLBL);
 		toolBar.add(WaveLBL);
@@ -174,5 +173,15 @@ class Game
 				Board.getTimer().setFastFoword(!Board.getTimer().isFastFoword());
 			}
 		});
+	}
+	
+	public static JButton getGoButton()
+	{
+		return goButton;
+	}
+	
+	public static JPanel getPanel()
+	{
+		return panel;
 	}
 }

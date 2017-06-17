@@ -234,9 +234,14 @@ class Board extends JPanel
 	@Override
 	public void paint(Graphics g)
 	{
+		if(getLevel()>5||Game.getHP()==0){//Player Won
+			Game.getPanel().setVisible(true);
+		}
 		Game.getHPLBL().setText("HP: "+Game.getHP()+"    ");
 		Game.getTimeLBL().setText("Time: "+timer.getTime()+"    ");
 		Game.getWaveLBL().setText("Wave: "+timer.getWave()+"    ");
+		if (!timer.isRunning())
+			Game.getGoButton().setEnabled(true);
 		for (int i=0; i<boardPath.length; i++)
 			for (int j=0; j<boardPath[i].length; j++)
 				if (boardPath[i][j].getX()==0 && boardPath[i][j].getY()==0)

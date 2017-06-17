@@ -14,7 +14,7 @@ class Game
 	private static final LevelLoader loader=new LevelLoader();
 	private Board board;
 	private int map;
-	private int HP=20;
+	private static int HP;
 	private int waveNumber;
 	private JButton map0;
 	private JButton map1;
@@ -34,6 +34,7 @@ class Game
 	
 	private Game() throws IOException
 	{
+		this.HP = 20;
 		loader.load();
 		fireUpScreen();
 		panel = new JPanel(new BorderLayout());
@@ -144,7 +145,7 @@ class Game
 		clip.loop(Integer.MAX_VALUE);
 	}
 	
-	private void decreaseHP(){
-		this.HP = HP--;
+	private static void decreaseHP(){
+		HP = HP--;
 	}
 }

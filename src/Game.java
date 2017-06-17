@@ -23,11 +23,11 @@ class Game
 			new ImageIcon(new ImageIcon(Board.class.getResource("Media/toolbar/level2.png")).getImage()
 			                                                                                .getScaledInstance(200, 200,
 			                                                                                                   Image.SCALE_SMOOTH));
-	private static int HP=20;
+	private static int HP=1;//change to 20
 	private static final JLabel HPLBL=new JLabel("HP: "+HP+"    ");
 	private static final JLabel WaveLBL=new JLabel("Wave: 1    ");
 	private static final JLabel TimeLBL=new JLabel("Time: 0    ");
-	private JFrame frame;
+	private static final JFrame frame=new JFrame("Tower Defence");
 	private Board board;
 	private static JPanel panel=new JPanel(new BorderLayout());
 	private static final JButton goButton=new JButton("Go!");
@@ -132,7 +132,6 @@ class Game
 	
 	private void fireUpScreen()
 	{
-		frame=new JFrame("Tower Defence");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setSize(800, 800);
@@ -178,5 +177,10 @@ class Game
 	static JPanel getPanel()
 	{
 		return panel;
+	}
+	
+	public static JFrame getFrame()
+	{
+		return frame;
 	}
 }

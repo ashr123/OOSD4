@@ -1,9 +1,8 @@
+import sun.awt.WindowClosingListener;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
 class Board extends JPanel
 {
@@ -63,8 +62,15 @@ class Board extends JPanel
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
+				for (Tickable t: timer.getTickables()){
+					if (t instanceof Tower && t.getLocation().equals(new Point(e.getX()*32/800,e.getY()*32/800))){
+						return;
+					}
+				}
 				if(boardPath[e.getX()*32/800][e.getY()*32/800].equals(new Point())){
-					
+					Graphics graphics = getGraphics();
+					graphics.setColor(Color.BLUE);
+					graphics.fillRect(e.getX()*32/800*25,e.getY()*32/800*25,25,25);
 					xPosition = e.getX();
 					yPosition = e.getY();
 					
@@ -81,12 +87,13 @@ class Board extends JPanel
 					
 					dartButton.addActionListener(new ActionListener()
 					{
+						
 						@Override
 						public void actionPerformed(ActionEvent e)
 						{
 							if (numOfDart>0)
 							{
-								timer.register(new Dart(new Point(xPosition, yPosition)));
+								timer.register(new Dart(new Point(xPosition*32/800, yPosition*32/800)));
 								numOfDart--;
 								repaint();
 								towerWindow.dispose();
@@ -100,7 +107,7 @@ class Board extends JPanel
 						{
 							if (numOfPoison>0)
 							{
-								timer.register(new Poison(new Point(xPosition, yPosition)));
+								timer.register(new Poison(new Point(xPosition*32/800, yPosition*32/800)));
 								numOfPoison--;
 								repaint();
 								towerWindow.dispose();
@@ -114,7 +121,7 @@ class Board extends JPanel
 						{
 							if (numOfLava>0)
 							{
-								timer.register(new Lava(new Point(xPosition, yPosition)));
+								timer.register(new Lava(new Point(xPosition*32/800, yPosition*32/800)));
 								numOfLava--;
 								repaint();
 								towerWindow.dispose();
@@ -128,7 +135,7 @@ class Board extends JPanel
 						{
 							if (numOfMagician>0)
 							{
-								timer.register(new Magician(new Point(xPosition, yPosition)));
+								timer.register(new Magician(new Point(xPosition*32/800, yPosition*32/800)));
 								numOfMagician--;
 								repaint();
 								towerWindow.dispose();
@@ -144,8 +151,12 @@ class Board extends JPanel
 					towerWindow.setSize(150,150);
 					towerWindow.setResizable(false);
 					towerWindow.pack();
-					
-					
+				
+					towerWindow.addWindowListener(new WindowAdapter(){
+						public void windowClosing(WindowEvent e){
+							repaint();
+						}
+					});
 				}
 			}
 			
@@ -215,7 +226,7 @@ class Board extends JPanel
 		}
 		
 		for (Tickable t : timer.getTickables()){
-			g.drawImage(t.getImageIcon().getImage(),(int)t.getLocation().getX(),(int)t.getLocation().getY(),25,25,this);
+			g.drawImage(t.getImageIcon().getImage(),(int)t.getLocation().getX()*25,(int)t.getLocation().getY()*25,25,25,this);
 		}
 	}
 	private Point getStartLocation(){

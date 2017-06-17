@@ -54,7 +54,10 @@ class Board extends JPanel
 				yPosition = e.getY();
 				for (Tickable t: timer.getTickables()){
 					if (t instanceof Tower && t.getLocation().equals(new Point(e.getX()*32/800,e.getY()*32/800))){
-						markNeighbors(xPosition,yPosition);
+						if (t instanceof Dart)
+							markNeighbors(xPosition,yPosition);
+						else
+							markNeighborsBig(xPosition,yPosition);
 						return;
 					}
 				}
@@ -174,6 +177,37 @@ class Board extends JPanel
 			}
 		});
 		
+	}
+	
+	private void markNeighborsBig(int xPosition, int yPosition)
+	{
+		Graphics graphics = getGraphics();
+		graphics.setColor(Color.decode("#42f46e"));
+		graphics.fillRect(((xPosition*32/800)+1)*25,yPosition*32/800*25,25,25);
+		graphics.fillRect(((xPosition*32/800)-1)*25,yPosition*32/800*25,25,25);
+		graphics.fillRect(xPosition*32/800*25,((yPosition*32/800)+1)*25,25,25);
+		graphics.fillRect(xPosition*32/800*25,((yPosition*32/800)-1)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)+1)*25,((yPosition*32/800)+1)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)-1)*25,((yPosition*32/800)-1)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)+1)*25,((yPosition*32/800)-1)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)-1)*25,((yPosition*32/800)+1)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)+2)*25,yPosition*32/800*25,25,25);
+		graphics.fillRect(((xPosition*32/800)-2)*25,yPosition*32/800*25,25,25);
+		graphics.fillRect(xPosition*32/800*25,((yPosition*32/800)+2)*25,25,25);
+		graphics.fillRect(xPosition*32/800*25,((yPosition*32/800)-2)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)+2)*25,((yPosition*32/800)+2)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)-2)*25,((yPosition*32/800)-2)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)+2)*25,((yPosition*32/800)-2)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)-2)*25,((yPosition*32/800)+2)*25,25,25);
+		
+		graphics.fillRect(((xPosition*32/800)+2)*25,yPosition*32/800*25,25,25);
+		graphics.fillRect(((xPosition*32/800)-2)*25,yPosition*32/800*25,25,25);
+		graphics.fillRect(xPosition*32/800*25,((yPosition*32/800)+2)*25,25,25);
+		graphics.fillRect(xPosition*32/800*25,((yPosition*32/800)-2)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)+2)*25,((yPosition*32/800)+2)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)-2)*25,((yPosition*32/800)-2)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)+2)*25,((yPosition*32/800)-2)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)-2)*25,((yPosition*32/800)+2)*25,25,25);
 	}
 	
 	static int getLevel()

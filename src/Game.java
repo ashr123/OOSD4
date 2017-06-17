@@ -146,6 +146,6 @@ class Game
 	}
 	
 	private static void decreaseHP(){
-		HP = HP--;
+		HP--;
 	}
 }

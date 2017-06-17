@@ -45,7 +45,7 @@ class Timer
 			
 			if (((!isFastFoword() && getTicks()%4==0)/*Every second*/ ||
 			     (isFastFoword() && getTicks()%2==0)/*Every half a second*/) &&
-			    (numberOfMikes!=wave || numberOfNagis!=wave || numberOfKnights!=wave || numberOfSkullies!=wave))
+			    (numberOfMikes!=getWave() || numberOfNagis!=getWave() || numberOfKnights!=getWave() || numberOfSkullies!=getWave()))
 			{
 				Creeps[] enumConstants=Creeps.class.getEnumConstants();
 				boolean isRegistered=false;
@@ -53,28 +53,28 @@ class Timer
 					switch (enumConstants[new Random().nextInt(enumConstants.length)])
 					{
 						case MIKE:
-							if (numberOfMikes==wave)
+							if (numberOfMikes==getWave())
 								break;
 							register(new Mike(new Point(startingPoint)));
 							numberOfMikes++;
 							isRegistered=true;
 							break;
 						case NAGI:
-							if (numberOfNagis==wave)
+							if (numberOfNagis==getWave())
 								break;
 							register(new Naji(new Point(startingPoint)));
 							numberOfNagis++;
 							isRegistered=true;
 							break;
 						case KNIGHT:
-							if (numberOfKnights==wave)
+							if (numberOfKnights==getWave())
 								break;
 							register(new Knight(new Point(startingPoint)));
 							numberOfKnights++;
 							isRegistered=true;
 							break;
 						case SKULLY:
-							if (numberOfSkullies==wave)
+							if (numberOfSkullies==getWave())
 								break;
 							register(new Skully(new Point(startingPoint)));
 							numberOfSkullies++;
@@ -86,7 +86,7 @@ class Timer
 				time+=.5;
 			if (isFastFoword())
 				time+=.5;
-			if (deadCreeps+passedCreeps==wave*4)
+			if (deadCreeps+passedCreeps==getWave()*4)
 				increaseWave();
 			board.repaint();
 		}
@@ -135,7 +135,7 @@ class Timer
 		return null;
 	}
 	
-	void increaseWave()
+	private void increaseWave()
 	{
 		timer.stop();
 		numberOfKnights=numberOfMikes=numberOfNagis=numberOfSkullies=deadCreeps=passedCreeps=0;
@@ -152,7 +152,7 @@ class Timer
 			case 2:
 				return 2;
 			default:
-				return wave/2;
+				return getWave()/2;
 		}
 	}
 	
@@ -161,7 +161,7 @@ class Timer
 		return timer.isRunning();
 	}
 	
-	public double getTime()
+	double getTime()
 	{
 		return time;
 	}

@@ -34,7 +34,7 @@ class Game
 	
 	private Game() throws IOException
 	{
-		this.HP = 20;
+		HP = 20;
 		loader.load();
 		fireUpScreen();
 		panel = new JPanel(new BorderLayout());
@@ -147,5 +147,8 @@ class Game
 	
 	public static void decreaseHP(){
 		HP--;
+	}
+	public static int getHP(){
+		return HP;
 	}
 }

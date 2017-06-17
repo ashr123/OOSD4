@@ -214,6 +214,7 @@ class Board extends JPanel
 	@Override
 	public void paint(Graphics g)
 	{
+		Game.getHP();
 		for (int i=0 ; i<boardPath.length ; i++){
 			for (int j=0 ; j<boardPath[i].length ; j++){
 				if (boardPath[i][j].getX()==0 && boardPath[i][j].getY()==0){
@@ -250,4 +251,5 @@ class Board extends JPanel
 		graphics.fillRect(((xPosition*32/800)+1)*25,((yPosition*32/800)-1)*25,25,25);
 		graphics.fillRect(((xPosition*32/800)-1)*25,((yPosition*32/800)+1)*25,25,25);
 	}
+	
 }

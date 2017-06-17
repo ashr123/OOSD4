@@ -47,6 +47,9 @@ class Board extends JPanel
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
+				if (timer.isRunning()){
+					return;
+				}
 				xPosition = e.getX();
 				yPosition = e.getY();
 				for (Tickable t: timer.getTickables()){
@@ -198,6 +201,7 @@ class Board extends JPanel
 				}
 			}
 		}
+		
 		
 		for (Tickable t : timer.getTickables()){//Draws all Tickables.
 			g.drawImage(t.getImageIcon().getImage(),(int)t.getLocation().getX()*25,(int)t.getLocation().getY()*25,25,25,this);

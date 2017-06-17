@@ -124,7 +124,6 @@ class Game
 			{
 				Board.getTimer().start();
 				goButton.setEnabled(false);
-				if(board.getTimer())
 			}
 		});
 		
@@ -143,5 +142,9 @@ class Game
 		Clip clip=AudioSystem.getClip();
 		clip.open(AudioSystem.getAudioInputStream(Game.class.getResource("Sounds/backgroundMusic.wav")));
 		clip.loop(Integer.MAX_VALUE);
+	}
+	
+	private void decreaseHP(){
+		this.HP = HP--;
 	}
 }

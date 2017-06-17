@@ -22,7 +22,25 @@ class Timer
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			if (((!isFastFoword() && getTicks()%4==0)/*Every second*/ || isFastFoword() && getTicks()%2==0/*Every half a second*/) && (numberOfMikes!=wave || numberOfNagis!=wave || numberOfKnights!=wave || numberOfSkullies!=wave))
+			ListIterator<Tickable> iterator=tickables.listIterator();
+			while (iterator.hasNext())
+			{
+				try
+				{
+					Tickable tickable=iterator.next();
+					tickable.tickHappend();
+					if (tickable instanceof Creep && ((Creep)tickable).getHP()<=0)
+						iterator.remove();
+				}
+				catch (Exception e1)
+				{
+					iterator.remove();
+				}
+			}
+			
+			if (((!isFastFoword() && getTicks()%4==0)/*Every second*/ ||
+			     isFastFoword() && getTicks()%2==0/*Every half a second*/) &&
+			    (numberOfMikes!=wave || numberOfNagis!=wave || numberOfKnights!=wave || numberOfSkullies!=wave))
 			{
 				Creeps[] enumConstants=Creeps.class.getEnumConstants();
 				boolean isRegistered=false;
@@ -57,22 +75,6 @@ class Timer
 							numberOfSkullies++;
 							isRegistered=true;
 					}
-			}
-			ListIterator<Tickable> iterator=tickables.listIterator();
-			
-			while (iterator.hasNext())
-			{
-				try
-				{
-					Tickable tickable=iterator.next();
-					tickable.tickHappend();
-					if (tickable instanceof Creep && ((Creep)tickable).getHP()<=0)
-						iterator.remove();
-				}
-				catch (Exception e1)
-				{
-					iterator.remove();
-				}
 			}
 			ticks++;
 			board.repaint();

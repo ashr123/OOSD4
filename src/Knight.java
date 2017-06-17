@@ -36,9 +36,8 @@ class Knight extends Creep
 	@Override
 	public void tickHappend()
 	{
-		if (!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%4==0)//Moves every second
-			moveCreep();
-		if (Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)//Moves every half a second
+		if ((!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%4==0)/*Moves every second*/ ||
+		    (Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)/*Moves every half a second*/)
 			moveCreep();
 	}
 	

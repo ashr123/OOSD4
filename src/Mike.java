@@ -13,9 +13,8 @@ class Mike extends Creep
 	@Override
 	public void tickHappend()
 	{
-		if (!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%4==0)
-			moveCreep();
-		if (Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)
+		if ((!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%4==0)/*Every second*/ ||
+		    (Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)/*Every half a second*/)
 			moveCreep();
 	}
 	

@@ -50,6 +50,7 @@ class Board extends JPanel
 	
 	public Board(int level)
 	{
+		Board.level = level;
 		timer = new Timer(this);
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		boardPath = Game.getLoader().get(level);

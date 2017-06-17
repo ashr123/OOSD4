@@ -30,7 +30,7 @@ abstract class Tower implements Tickable//Represents also the Visitor
 	void hitCreep(int range, boolean isCashan)
 	{
 		for (Tickable tickable : Board.getTimer().getTickables())
-			if (tickable instanceof Creep && ((Creep)tickable).getLocation().distance(getLocation())
+			if (tickable instanceof Creep && tickable.getLocation().distance(getLocation())
 			                                 <=range*Math.sqrt(2))
 			{
 				((Creep)tickable).impact(this);

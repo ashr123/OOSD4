@@ -2,11 +2,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
+import java.util.ListIterator;
 import java.util.Random;
 
 class Timer
 {
-	
 	private enum Creeps
 	{
 		KNIGHT, MIKE, NAGI, SKULLY
@@ -16,6 +16,7 @@ class Timer
 	private boolean fastFoword;
 	private int ticks;
 	private Point startingPoint=getStartLocation();
+	private Board board;
 	private final javax.swing.Timer timer=new javax.swing.Timer(250, new ActionListener()
 	{
 		@Override
@@ -49,11 +50,29 @@ class Timer
 							isRegistered=true;
 					}
 			}
-			for (Tickable tickable : tickables)
-				tickable.tickHappend();
+			ListIterator<Tickable> iterator=tickables.listIterator();
+			
+			while (iterator.hasNext())
+			{
+				try
+				{
+					iterator.next().tickHappend();
+				}
+				catch (Exception e1)
+				{
+					iterator.remove();
+				}
+			}
+//			for (Tickable tickable : tickables)
+//				tickable.tickHappend();
 			ticks++;
 		}
 	});
+	
+	Timer(Board board)
+	{
+		this.board=board;
+	}
 	
 	int getTicks()
 	{
@@ -92,9 +111,9 @@ class Timer
 	
 	private Point getStartLocation()
 	{
-		for (Point point : Game.getLoader().get(Board.getLevel())[0])
-			if (!point.equals(new Point()))
-				return point;
+		for (int i=0; i<Game.getLoader().get(Board.getLevel()).length; i++)
+			if (!Game.getLoader().get(Board.getLevel())[0][i].equals(new Point()))
+				return new Point(0, i);
 		return null;
 	}
 	

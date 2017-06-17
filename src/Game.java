@@ -1,3 +1,7 @@
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -83,9 +87,10 @@ class Game
 		frame.setVisible(true);
 	}
 	
-	public static void main(String[] args) throws IOException
+	public static void main(String[] args) throws IOException, LineUnavailableException, UnsupportedAudioFileException
 	{
 		new Game();
+		playBackgroundMusic();
 	}
 	
 	static LevelLoader getLoader()
@@ -130,5 +135,12 @@ class Game
 				Board.getTimer().setFastFoword(!Board.getTimer().isFastFoword());
 			}
 		});
+	}
+	private static void playBackgroundMusic() throws LineUnavailableException, IOException,
+	                                                 UnsupportedAudioFileException
+	{
+		Clip clip=AudioSystem.getClip();
+		clip.open(AudioSystem.getAudioInputStream(Game.class.getResource("Sounds/backgroundMusic.wav")));
+		clip.loop(Integer.MAX_VALUE);
 	}
 }

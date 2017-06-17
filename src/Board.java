@@ -57,7 +57,7 @@ class Board extends JPanel
 				}
 				if(boardPath[e.getX()*32/800][e.getY()*32/800].equals(new Point())){
 					Graphics graphics = getGraphics();
-					graphics.setColor(Color.decode("#364f9b"));
+					graphics.setColor(Color.decode("#132044"));
 					graphics.fillRect(e.getX()*32/800*25,e.getY()*32/800*25,25,25);
 					
 					final JFrame towerWindow = new JFrame("Choose a Tower");
@@ -201,7 +201,8 @@ class Board extends JPanel
 		
 		for (Tickable t : timer.getTickables()){//Draws all Tickables.
 			g.drawImage(t.getImageIcon().getImage(),(int)t.getLocation().getX()*25,(int)t.getLocation().getY()*25,25,25,this);
-			if (t instanceof Creep && t.isInjured){//Marks square of injured creep
+			
+			if (t instanceof Creep && ((Creep)t).isInjured()){//Marks square of injured creep
 				g.setColor(Color.decode("#77252d"));
 				g.fillRect((int)t.getLocation().getX()*32/800*25,(int)t.getLocation().getY()*32/800*25,25,25);
 			}
@@ -210,7 +211,7 @@ class Board extends JPanel
 	
 	private void markNeighbors(int xPosition,int yPosition){
 		Graphics graphics = getGraphics();
-		graphics.setColor(Color.WHITE);
+		graphics.setColor(Color.decode("#d3d9ed"));
 		graphics.fillRect(((xPosition*32/800)+1)*25,yPosition*32/800*25,25,25);
 		graphics.fillRect(((xPosition*32/800)-1)*25,yPosition*32/800*25,25,25);
 		graphics.fillRect(xPosition*32/800*25,((yPosition*32/800)+1)*25,25,25);

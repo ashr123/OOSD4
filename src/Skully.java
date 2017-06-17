@@ -10,9 +10,9 @@ class Skully extends Creep
 	@Override
 	public void tickHappend()
 	{
-		if (!Timer.isFastFoword() && Timer.getTicks()%4==0)//Moves every second
+		if (!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%4==0)//Moves every second
 			moveCreep();
-		if (Timer.isFastFoword() && Timer.getTicks()%2==0)//Moves every half a second
+		if (Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)//Moves every half a second
 			moveCreep();
 	}
 	

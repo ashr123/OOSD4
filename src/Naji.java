@@ -12,9 +12,9 @@ class Naji extends Creep
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			if (Timer.isFastFoword())//Every 2.5 seconds
+			if (Board.getTimer().isFastFoword())//Every 2.5 seconds
 				isPoisoned=false;
-			if (!Timer.isFastFoword() && ticks%2==0)//Every 5 seconds
+			if (!Board.getTimer().isFastFoword() && ticks%2==0)//Every 5 seconds
 				isPoisoned=false;
 			ticks++;
 		}
@@ -33,9 +33,9 @@ class Naji extends Creep
 	@Override
 	public void tickHappend()
 	{
-		if (!Timer.isFastFoword() && Timer.getTicks()%2==0)//Moves every half a second
+		if (!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)//Moves every half a second
 			moveCreep();
-		if (Timer.isFastFoword())//Moves every quarter of a second
+		if (Board.getTimer().isFastFoword())//Moves every quarter of a second
 			moveCreep();
 	}
 	

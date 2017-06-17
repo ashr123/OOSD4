@@ -10,9 +10,9 @@ class Dart extends Tower
 	@Override
 	public void tickHappend()
 	{
-		if (!Timer.isFastFoword() && Timer.getTicks()%2==0)//Every half a second
+		if (!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)//Every half a second
 			hitCreep(2, false);
-		if (Timer.isFastFoword())//Every quarter of a second
+		if (Board.getTimer().isFastFoword())//Every quarter of a second
 			hitCreep(2, false);
 	}
 	
@@ -26,7 +26,7 @@ class Dart extends Tower
 	{
 		naji.setHP((int)(naji.getHP()-(naji.isPoisoned() ? 30*Naji.getPoisonDegree() : 30)));
 		if (naji.getHP()<=0)
-			Timer.unRegister(naji);
+			Board.getTimer().unRegister(naji);
 	}
 	
 	@Override
@@ -34,7 +34,7 @@ class Dart extends Tower
 	{
 		skully.setHP(skully.getHP()-15);
 		if (skully.getHP()<=0)
-			Timer.unRegister(skully);
+			Board.getTimer().unRegister(skully);
 	}
 	
 	@Override
@@ -42,6 +42,6 @@ class Dart extends Tower
 	{
 		mike.setHP(mike.getHP()-30);
 		if (mike.getHP()<=0)
-			Timer.unRegister(mike);
+			Board.getTimer().unRegister(mike);
 	}
 }

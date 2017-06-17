@@ -10,9 +10,9 @@ class Lava extends Tower
 	@Override
 	public void tickHappend()
 	{
-		if (!Timer.isFastFoword() && Timer.getTicks()%4==0)//Every second
+		if (!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%4==0)//Every second
 			hitCreep(1, true);
-		if (Timer.isFastFoword() && Timer.getTicks()%2==0)//Every half a second
+		if (Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)//Every half a second
 			hitCreep(1, true);
 	}
 	
@@ -21,7 +21,7 @@ class Lava extends Tower
 	{
 		knight.setHP(knight.getHP()-(knight.isPoisoned() ? 10*Knight.getPoisonDegree() : 10));
 		if (knight.getHP()<=0)
-			Timer.unRegister(knight);
+			Board.getTimer().unRegister(knight);
 	}
 	
 	@Override
@@ -29,7 +29,7 @@ class Lava extends Tower
 	{
 		naji.setHP((int)(naji.getHP()-(naji.isPoisoned() ? 15*Naji.getPoisonDegree() : 15)));
 		if (naji.getHP()<=0)
-			Timer.unRegister(naji);
+			Board.getTimer().unRegister(naji);
 	}
 	
 	@Override
@@ -37,7 +37,7 @@ class Lava extends Tower
 	{
 		skully.setHP(skully.getHP()-15);
 		if (skully.getHP()<=0)
-			Timer.unRegister(skully);
+			Board.getTimer().unRegister(skully);
 	}
 	
 	@Override
@@ -45,6 +45,6 @@ class Lava extends Tower
 	{
 		mike.setHP(mike.getHP()-15);
 		if (mike.getHP()<=0)
-			Timer.unRegister(mike);
+			Board.getTimer().unRegister(mike);
 	}
 }

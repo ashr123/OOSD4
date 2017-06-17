@@ -22,7 +22,7 @@ class Timer
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			ListIterator<Tickable> iterator=tickables.listIterator();
+			ListIterator<Tickable> iterator=getTickables().listIterator();
 			while (iterator.hasNext())
 			{
 				try
@@ -140,7 +140,13 @@ class Timer
 		timer.stop();
 		numberOfKnights=numberOfMikes=numberOfNagis=numberOfSkullies=deadCreeps=passedCreeps=0;
 		wave*=2;
-		getTickables().clear();
+		ListIterator<Tickable> iterator=getTickables().listIterator();
+		while (iterator.hasNext())
+		{
+			if (iterator.next() instanceof Creep)
+				iterator.remove();
+		}
+		
 	}
 	
 	int getWave()
@@ -152,7 +158,7 @@ class Timer
 			case 2:
 				return 2;
 			default:
-				return wave/2;
+				return (int)Math.sqrt(wave);
 		}
 	}
 	

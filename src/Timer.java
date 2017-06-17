@@ -145,7 +145,15 @@ class Timer
 	
 	int getWave()
 	{
-		return wave/2==0 ? 1 : wave/2;
+		switch (getWave())
+		{
+			case 1:
+				return 1;
+			case 2:
+				return 2;
+			default:
+				return wave/2;
+		}
 	}
 	
 	boolean isRunning()

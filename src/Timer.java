@@ -145,14 +145,14 @@ class Timer
 	
 	int getWave()
 	{
-		switch (getWave())
+		switch (wave)
 		{
 			case 1:
 				return 1;
 			case 2:
 				return 2;
 			default:
-				return getWave()/2;
+				return wave/2;
 		}
 	}
 	

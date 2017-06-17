@@ -7,7 +7,6 @@ import java.awt.event.*;
 class Board extends JPanel
 {
 	private final Point[][] boardPath;
-	private final JLabel[][] boardLabels;
 	private static int level;
 	private int numOfDart;
 	private int numOfLava;
@@ -16,19 +15,6 @@ class Board extends JPanel
 	private int xPosition;
 	private int yPosition;
 	private static Timer timer;
-	
-	/*
-	Image IMAGE_TOWER_LAVA = Toolkit.getDefaultToolkit().getImage("Media/towers/Lava.png");
-	Image IMAGE_TOWER_DART = Toolkit.getDefaultToolkit().getImage("Media/towers/Dart.png");
-	Image IMAGE_TOWER_POISON = Toolkit.getDefaultToolkit().getImage("Media/towers/Poison.png");
-	Image IMAGE_TOWER_MAGICIAN = Toolkit.getDefaultToolkit().getImage("Media/towers/Magician.png");
-	Image IMAGE_CREEP_KNIGHT = Toolkit.getDefaultToolkit().getImage("Media/creeps/abir-1.png");
-	Image IMAGE_CREEP_MIKE = Toolkit.getDefaultToolkit().getImage("Media/creeps/mike-1.png");
-	Image IMAGE_CREEP_NAJI = Toolkit.getDefaultToolkit().getImage("Media/creeps/naji-1.png");
-	Image IMAGE_CREEP_SKULLY = Toolkit.getDefaultToolkit().getImage("Media/creeps/guli-1.png");
-	Image IMAGE_GRASS = Toolkit.getDefaultToolkit().getImage("Media/environment/grass.png");
-	Image IMAGE_PATH = Toolkit.getDefaultToolkit().getImage("Media/environment/path.png");
-	*/
 	
 	private static final ImageIcon IMAGE_ICON_TOWER_LAVA=
 			new ImageIcon(new ImageIcon(Board.class.getResource("Media/towers/Lava.png")).getImage()
@@ -54,7 +40,6 @@ class Board extends JPanel
 		timer = new Timer(this);
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		boardPath = Game.getLoader().get(level);
-		boardLabels = new JLabel[32][32];
 		numOfDart=numOfLava=numOfPoison=numOfMagician=3;
 		
 		addMouseListener(new MouseListener()
@@ -62,8 +47,11 @@ class Board extends JPanel
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
+				xPosition = e.getX();
+				yPosition = e.getY();
 				for (Tickable t: timer.getTickables()){
 					if (t instanceof Tower && t.getLocation().equals(new Point(e.getX()*32/800,e.getY()*32/800))){
+						markNeighbors(xPosition,yPosition);
 						return;
 					}
 				}
@@ -71,8 +59,6 @@ class Board extends JPanel
 					Graphics graphics = getGraphics();
 					graphics.setColor(Color.BLUE);
 					graphics.fillRect(e.getX()*32/800*25,e.getY()*32/800*25,25,25);
-					xPosition = e.getX();
-					yPosition = e.getY();
 					
 					final JFrame towerWindow = new JFrame("Choose a Tower");
 					towerWindow.setLayout(new GridLayout(2,2));
@@ -200,26 +186,14 @@ class Board extends JPanel
 	@Override
 	public void paintComponent(Graphics g)
 	{
-		//g.drawString("This is my custom Panel!",10,20);
-		//super.paintComponent(g);
 		for (int i=0 ; i<boardPath.length ; i++){
 			for (int j=0 ; j<boardPath[i].length ; j++){
 				if (boardPath[i][j].getX()==0 && boardPath[i][j].getY()==0){
-					//g.drawString("This is my custom Panel!",10,20);
-					boardLabels[i][j] = new JLabel(IMAGE_ICON_GRASS);
-					//g.setColor(Color.GREEN);
-					//g.fillRect(i*25,j*25,25,25);
-					//g.setColor(Color.GREEN);
 					g.drawImage(IMAGE_ICON_GRASS.getImage(),i*25,j*25,25,25,this);
 					
 				}
 				else
 				{
-					boardLabels[i][j]=new JLabel(IMAGE_ICON_PATH);
-					//g.drawImage(IMAGE_GRASS,i*25,j*25,25,25,this);
-					//g.setColor(Color.pink);
-					//g.fillRect(i*25,j*25,25,25);
-					//g.setColor(Color.pink);
 					g.drawImage(IMAGE_ICON_PATH.getImage(),i*25,j*25,25,25,this);
 				}
 			}
@@ -228,5 +202,18 @@ class Board extends JPanel
 		for (Tickable t : timer.getTickables()){
 			g.drawImage(t.getImageIcon().getImage(),(int)t.getLocation().getX()*25,(int)t.getLocation().getY()*25,25,25,this);
 		}
+	}
+	
+	private void markNeighbors(int xPosition,int yPosition){
+		Graphics graphics = getGraphics();
+		graphics.setColor(Color.WHITE);
+		graphics.fillRect(((xPosition*32/800)+1)*25,yPosition*32/800*25,25,25);
+		graphics.fillRect(((xPosition*32/800)-1)*25,yPosition*32/800*25,25,25);
+		graphics.fillRect(xPosition*32/800*25,((yPosition*32/800)+1)*25,25,25);
+		graphics.fillRect(xPosition*32/800*25,((yPosition*32/800)-1)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)+1)*25,((yPosition*32/800)+1)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)-1)*25,((yPosition*32/800)-1)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)+1)*25,((yPosition*32/800)-1)*25,25,25);
+		graphics.fillRect(((xPosition*32/800)-1)*25,((yPosition*32/800)+1)*25,25,25);
 	}
 }

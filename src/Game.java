@@ -93,11 +93,6 @@ class Game
 		return loader;
 	}
 	
-	public int getMap()
-	{
-		return map;
-	}
-	
 	public void fireUpScreen(){
 		frame =  new JFrame("Tower Defence");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

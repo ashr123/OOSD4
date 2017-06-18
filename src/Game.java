@@ -23,12 +23,13 @@ class Game
 			new ImageIcon(new ImageIcon(Board.class.getResource("Media/toolbar/level2.png")).getImage()
 					              .getScaledInstance(200, 200,
 							              Image.SCALE_SMOOTH));
-	private static int HP=20;
+	private static int HP=1;
 	private static final JLabel HPLBL=new JLabel("HP: "+HP+"    ");
 	private static final JLabel WaveLBL=new JLabel("Wave: 1    ");
 	private static final JLabel TimeLBL=new JLabel("Time: 0    ");
 	private static final JFrame frame=new JFrame("Tower Defence");
 	private static Board board;
+	private static JToolBar toolBar=new JToolBar();
 	private static JPanel panel=new JPanel(new BorderLayout());
 	private static final JButton goButton=new JButton("Go!");
 	
@@ -142,7 +143,6 @@ class Game
 	
 	private void createToolBar()
 	{
-		JToolBar toolBar=new JToolBar();
 		JButton fastForwardButton=new JButton("Fast Forward");
 		toolBar.add(HPLBL);
 		toolBar.add(WaveLBL);

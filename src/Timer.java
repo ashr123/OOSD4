@@ -86,7 +86,7 @@ class Timer
 				time+=.5;
 			if (isFastFoword())
 				time+=.5;
-			if (deadCreeps+passedCreeps==getWave()*4)
+			if (deadCreeps+passedCreeps>=getWave()*4 || Game.getHP()==0)
 				increaseWave();
 			board.repaint();
 		}

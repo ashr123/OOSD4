@@ -190,12 +190,38 @@ class Game
 	
 	public static void playerWon()
 	{
-		final JPanel wonPanel=new JPanel(new BorderLayout());
-		JLabel wonMes=new JLabel("You Won!");
+		final JPanel wonPanel=new JPanel();
+		wonPanel.setLayout(new BoxLayout(wonPanel,BoxLayout.PAGE_AXIS));
+		Timer timer = Board.getTimer();
+		
+		JLabel wonMes=new JLabel("You Won!" +"\n");
+		JLabel hpLeft = new JLabel("HP:  "+getHP() +"\n");
+		JLabel passedCreeps = new JLabel("Passed Creeps:  "+timer.getPassedCreeps() +"\n");
+		JLabel deadCreeps = new JLabel("Dead Creeps:  "+timer.getDeadCreeps() +"\n");
+		JLabel time = new JLabel("Time elapsed"+timer.getTime() +"\n");
 		JButton tryAgainButton=new JButton("Chose a different level");
+		
 		wonMes.setFont(new Font("Courier", Font.PLAIN, 26));
-		wonPanel.add(wonMes,BorderLayout.NORTH);
-		wonPanel.add(tryAgainButton,BorderLayout.CENTER);
+		hpLeft.setFont(new Font("Courier", Font.PLAIN, 20));
+		passedCreeps.setFont(new Font("Courier", Font.PLAIN, 20));
+		deadCreeps.setFont(new Font("Courier", Font.PLAIN, 20));
+		time.setFont(new Font("Courier", Font.PLAIN, 20));
+		tryAgainButton.setFont(new Font("Courier", Font.PLAIN, 26));
+		
+		wonMes.setAlignmentX(Component.CENTER_ALIGNMENT);
+		hpLeft.setAlignmentX(Component.CENTER_ALIGNMENT);
+		passedCreeps.setAlignmentX(Component.CENTER_ALIGNMENT);
+		deadCreeps.setAlignmentX(Component.CENTER_ALIGNMENT);
+		time.setAlignmentX(Component.CENTER_ALIGNMENT);
+		tryAgainButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		wonPanel.add(wonMes);
+		wonPanel.add(hpLeft);
+		wonPanel.add(passedCreeps);
+		wonPanel.add(deadCreeps);
+		wonPanel.add(time);
+		wonPanel.add(tryAgainButton);
+		
 		frame.add(wonPanel);
 		board.setVisible(false);
 		tryAgainButton.addActionListener(new ActionListener()
@@ -214,12 +240,38 @@ class Game
 	//Player Lost
 	public static void playerLost()
 	{
-		final JPanel lostPanel=new JPanel(new BorderLayout());
-		JLabel lostMes=new JLabel("You Lost!");
+		final JPanel lostPanel=new JPanel();
+		lostPanel.setLayout(new BoxLayout(lostPanel,BoxLayout.PAGE_AXIS));
+		Timer timer = Board.getTimer();
+		
+		JLabel lostMes=new JLabel("You Lost!"+"\n");
+		JLabel hpLeft = new JLabel("HP:  "+getHP() +"\n");
+		JLabel passedCreeps = new JLabel("Passed Creeps:  "+timer.getPassedCreeps() +"\n");
+		JLabel deadCreeps = new JLabel("Dead Creeps:  "+timer.getDeadCreeps() +"\n");
+		JLabel time = new JLabel("Time elapsed"+timer.getTime() +"\n");
 		JButton tryAgainButton=new JButton("Try again");
+		
 		lostMes.setFont(new Font("Courier", Font.PLAIN, 26));
-		lostPanel.add(lostMes,BorderLayout.NORTH);
-		lostPanel.add(tryAgainButton,BorderLayout.CENTER);
+		hpLeft.setFont(new Font("Courier", Font.PLAIN, 20));
+		passedCreeps.setFont(new Font("Courier", Font.PLAIN, 20));
+		deadCreeps.setFont(new Font("Courier", Font.PLAIN, 20));
+		time.setFont(new Font("Courier", Font.PLAIN, 20));
+		tryAgainButton.setFont(new Font("Courier", Font.PLAIN, 26));
+		
+		lostMes.setAlignmentX(Component.CENTER_ALIGNMENT);
+		hpLeft.setAlignmentX(Component.CENTER_ALIGNMENT);
+		passedCreeps.setAlignmentX(Component.CENTER_ALIGNMENT);
+		deadCreeps.setAlignmentX(Component.CENTER_ALIGNMENT);
+		time.setAlignmentX(Component.CENTER_ALIGNMENT);
+		tryAgainButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		lostPanel.add(lostMes);
+		lostPanel.add(hpLeft);
+		lostPanel.add(passedCreeps);
+		lostPanel.add(deadCreeps);
+		lostPanel.add(time);
+		lostPanel.add(tryAgainButton);
+		
 		frame.add(lostPanel);
 		board.setVisible(false);
 		tryAgainButton.addActionListener(new ActionListener()

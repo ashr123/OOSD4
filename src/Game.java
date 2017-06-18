@@ -54,9 +54,10 @@ class Game
 			public void actionPerformed(ActionEvent e)
 			{
 				board=new Board(0);
-				frame.add(board);
+				frame.removeAll();
+				frame.add(board,  BorderLayout.CENTER);
 				frame.setVisible(true);
-				panel.setVisible(false);
+//				panel.setVisible(false);
 				createToolBar();
 			}
 		});

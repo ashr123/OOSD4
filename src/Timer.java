@@ -56,28 +56,28 @@ class Timer
 					switch (enumConstants[new Random().nextInt(enumConstants.length)])
 					{
 						case MIKE:
-							if (numberOfMikes==getWave())
+							if (numberOfMikes==Math.pow(2, getWave()-1))
 								break;
 							register(new Mike(new Point(startingPoint)));
 							numberOfMikes++;
 							isRegistered=true;
 							break;
 						case NAGI:
-							if (numberOfNagis==getWave())
+							if (numberOfNagis==Math.pow(2, getWave()-1))
 								break;
 							register(new Naji(new Point(startingPoint)));
 							numberOfNagis++;
 							isRegistered=true;
 							break;
 						case KNIGHT:
-							if (numberOfKnights==getWave())
+							if (numberOfKnights==Math.pow(2, getWave()-1))
 								break;
 							register(new Knight(new Point(startingPoint)));
 							numberOfKnights++;
 							isRegistered=true;
 							break;
 						case SKULLY:
-							if (numberOfSkullies==getWave())
+							if (numberOfSkullies==Math.pow(2, getWave()-1))
 								break;
 							register(new Skully(new Point(startingPoint)));
 							numberOfSkullies++;
@@ -89,7 +89,7 @@ class Timer
 				time+=.5;
 			if (isFastFoword())
 				time+=.5;
-			if (deadCreeps+passedCreeps>=Math.pow(2, getWave()-1)*4 || Game.getHP()==0)
+			if (deadCreeps+passedCreeps>=Math.pow(2, getWave()-1)*4)
 				increaseWave();
 			board.repaint();
 		}
@@ -142,14 +142,16 @@ class Timer
 	{
 		timer.stop();
 		numberOfKnights=numberOfMikes=numberOfNagis=numberOfSkullies=deadCreeps=passedCreeps=0;
-		wave++;
+//		wave++;
+		if (++wave==6)
+		{
+			Game.playerWon();
+			return;
+		}
 		ListIterator<Tickable> iterator=getTickables().listIterator();
 		while (iterator.hasNext())
-		{
 			if (iterator.next() instanceof Creep)
 				iterator.remove();
-		}
-		
 	}
 	
 	int getWave()
@@ -165,5 +167,15 @@ class Timer
 	double getTime()
 	{
 		return time;
+	}
+	
+	int getPassedCreeps()
+	{
+		return passedCreeps;
+	}
+	
+	int getDeadCreeps()
+	{
+		return deadCreeps;
 	}
 }

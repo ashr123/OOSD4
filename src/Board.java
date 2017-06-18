@@ -4,23 +4,14 @@ import java.awt.event.*;
 
 class Board extends JPanel
 {
-	private static final ImageIcon IMAGE_ICON_TOWER_LAVA=
-			new ImageIcon(new ImageIcon(Board.class.getResource("Media/towers/Lava.png")).getImage()
-			                                                                             .getScaledInstance(100, 162,
-			                                                                                                Image.SCALE_SMOOTH));
-	private static final ImageIcon IMAGE_ICON_TOWER_DART=
-			new ImageIcon(new ImageIcon(Board.class.getResource("Media/towers/Dart.png")).getImage()
-			                                                                             .getScaledInstance(100, 135,
-			                                                                                                Image.SCALE_SMOOTH));
-	private static final ImageIcon IMAGE_ICON_TOWER_POISON=
-			new ImageIcon(new ImageIcon(Board.class.getResource("Media/towers/Poison.png")).getImage()
-			                                                                               .getScaledInstance(100, 131,
-			                                                                                                  Image.SCALE_SMOOTH));
-	private static final ImageIcon IMAGE_ICON_TOWER_MAGICIAN=
-			new ImageIcon(new ImageIcon(Board.class.getResource("Media/towers/Magician.png")).getImage()
-			                                                                                 .getScaledInstance(100,
-			                                                                                                    145,
-			                                                                                                    Image.SCALE_SMOOTH));
+	private static final ImageIcon IMAGE_ICON_TOWER_LAVA=new ImageIcon(new ImageIcon(Board.class.getResource(
+			"Media/towers/Lava.png")).getImage().getScaledInstance(100, 162, Image.SCALE_SMOOTH));
+	private static final ImageIcon IMAGE_ICON_TOWER_DART=new ImageIcon(new ImageIcon(Board.class.getResource(
+			"Media/towers/Dart.png")).getImage().getScaledInstance(100, 135, Image.SCALE_SMOOTH));
+	private static final ImageIcon IMAGE_ICON_TOWER_POISON=new ImageIcon(new ImageIcon(Board.class.getResource(
+			"Media/towers/Poison.png")).getImage().getScaledInstance(100, 131, Image.SCALE_SMOOTH));
+	private static final ImageIcon IMAGE_ICON_TOWER_MAGICIAN=new ImageIcon(new ImageIcon(Board.class.getResource(
+			"Media/towers/Magician.png")).getImage().getScaledInstance(100, 145, Image.SCALE_SMOOTH));
 	private static final ImageIcon IMAGE_ICON_GRASS=
 			new ImageIcon(Board.class.getResource("Media/environment/grass.png"));
 	private static final ImageIcon IMAGE_ICON_PATH=
@@ -34,7 +25,6 @@ class Board extends JPanel
 	private int numOfMagician;
 	private int xPosition;
 	private int yPosition;
-	
 	
 	public Board(int level)
 	{
@@ -238,15 +228,16 @@ class Board extends JPanel
 		for (int i=0; i<boardPath.length; i++)
 			for (int j=0; j<boardPath[i].length; j++)
 				if (boardPath[i][j].getX()==0 && boardPath[i][j].getY()==0)
-					g.drawImage(IMAGE_ICON_GRASS.getImage(), i*25, j*25, 25, 25, this);
+					g.drawImage(IMAGE_ICON_GRASS.getImage(), i*25, j*25, 25, 25,
+					            this);
 				else
 					g.drawImage(IMAGE_ICON_PATH.getImage(), i*25, j*25, 25, 25, this);
 		
 		
-		for (Tickable t : timer.getTickables())
-		{//Draws all Tickables.
-			if (t instanceof Creep && ((Creep)t).isInjured())
-			{//Marks square of injured creep
+		for (Tickable t : timer.getTickables())//Draws all Tickables
+		{
+			if (t instanceof Creep && ((Creep)t).isInjured())//Marks square of injured creep
+			{
 				g.setColor(Color.decode("#77252d"));
 				g.fillRect((int)t.getLocation().getX()*25, (int)t.getLocation().getY()*25,
 				           25, 25);
@@ -271,5 +262,4 @@ class Board extends JPanel
 		graphics.fillRect(((xPosition*32/800)+1)*25, ((yPosition*32/800)-1)*25, 25, 25);
 		graphics.fillRect(((xPosition*32/800)-1)*25, ((yPosition*32/800)+1)*25, 25, 25);
 	}
-	
 }

@@ -251,6 +251,7 @@ class Board extends JPanel
 			{//Marks square of injured creep
 				g.setColor(Color.decode("#77252d"));
 				g.fillRect((int)t.getLocation().getX()*32/800*25, (int)t.getLocation().getY()*32/800*25, 25, 25);
+				((Creep)t).setInjured(false);
 			}
 		}
 	}

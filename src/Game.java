@@ -109,6 +109,7 @@ class Game
 	static void decreaseHP()
 	{
 		HP--;
+		HPLBL.setText("HP: "+HP+"    ");
 		if (getHP()==0)
 			playerLost();
 	}
@@ -202,6 +203,7 @@ class Game
 			public void actionPerformed(ActionEvent e)
 			{
 				panel.setVisible(true);
+				//frame.remove(toolBar);
 				frame.add(panel);
 				wonPanel.setVisible(false);
 			}
@@ -225,7 +227,7 @@ class Game
 			public void actionPerformed(ActionEvent e)
 			{
 				panel.setVisible(true);
-				frame.add(panel);
+				frame.setContentPane(panel);
 				lostPanel.setVisible(false);
 			}
 		});

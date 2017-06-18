@@ -28,17 +28,20 @@ class Poison extends Tower
 	void visit(Naji naji)
 	{
 		naji.setPoisoned();
+		naji.setInjured(true);
 	}
 	
 	@Override
 	void visit(Skully skully)
 	{
 		skully.setHP(skully.getHP()-20);
+		skully.setInjured(true);
 	}
 	
 	@Override
 	void visit(Mike mike)
 	{
+		mike.setInjured(true);
 	}
 	
 	@Override

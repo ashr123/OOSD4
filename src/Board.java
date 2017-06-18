@@ -245,14 +245,16 @@ class Board extends JPanel
 		
 		for (Tickable t : timer.getTickables())
 		{//Draws all Tickables.
-			g.drawImage(t.getImageIcon().getImage(), (int)t.getLocation().getX()*25, (int)t.getLocation().getY()*25, 25, 25, this);
-			
 			if (t instanceof Creep && ((Creep)t).isInjured())
 			{//Marks square of injured creep
 				g.setColor(Color.decode("#77252d"));
-				g.fillRect((int)t.getLocation().getX()*32/800*25, (int)t.getLocation().getY()*32/800*25, 25, 25);
+				g.fillRect((int)t.getLocation().getX()*25, (int)t.getLocation().getY()*25,
+				           25, 25);
 				((Creep)t).setInjured(false);
 			}
+			
+			g.drawImage(t.getImageIcon().getImage(), (int)t.getLocation().getX()*25,
+			            (int)t.getLocation().getY()*25, 25, 25, this);
 		}
 	}
 	

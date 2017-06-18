@@ -22,24 +22,28 @@ class Lava extends Tower
 	void visit(Knight knight)
 	{
 		knight.setHP(knight.getHP()-(knight.isPoisoned() ? 10*Knight.getPoisonDegree() : 10));
+		knight.setInjured(true);
 	}
 	
 	@Override
 	void visit(Naji naji)
 	{
 		naji.setHP((int)(naji.getHP()-(naji.isPoisoned() ? 15*Naji.getPoisonDegree() : 15)));
+		naji.setInjured(true);
 	}
 	
 	@Override
 	void visit(Skully skully)
 	{
 		skully.setHP(skully.getHP()-15);
+		skully.setInjured(true);
 	}
 	
 	@Override
 	void visit(Mike mike)
 	{
 		mike.setHP(mike.getHP()-15);
+		mike.setInjured(true);
 	}
 	
 	@Override

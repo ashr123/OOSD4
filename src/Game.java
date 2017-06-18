@@ -188,19 +188,22 @@ class Game
 	
 	public static void playerWon()
 	{
-		JPanel lostPanel=new JPanel();
-		JLabel lostMes=new JLabel("You Won!");
+		final JPanel wonPanel=new JPanel(new BorderLayout());
+		JLabel wonMes=new JLabel("You Won!");
 		JButton tryAgainButton=new JButton("Chose a different level");
-		lostMes.setFont(new Font("Serif", Font.PLAIN, 26));
-		lostPanel.add(lostMes);
-		lostPanel.add(tryAgainButton);
-		frame.add(lostPanel);
+		wonMes.setFont(new Font("Courier", Font.PLAIN, 26));
+		wonPanel.add(wonMes,BorderLayout.NORTH);
+		wonPanel.add(tryAgainButton,BorderLayout.CENTER);
+		frame.add(wonPanel);
+		board.setVisible(false);
 		tryAgainButton.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				getFrame().add(Game.getPanel());
+				panel.setVisible(true);
+				frame.add(panel);
+				wonPanel.setVisible(false);
 			}
 		});
 	}
@@ -211,7 +214,7 @@ class Game
 		final JPanel lostPanel=new JPanel(new BorderLayout());
 		JLabel lostMes=new JLabel("You Lost!");
 		JButton tryAgainButton=new JButton("Try again");
-		lostMes.setFont(new Font("Serif", Font.PLAIN, 26));
+		lostMes.setFont(new Font("Courier", Font.PLAIN, 26));
 		lostPanel.add(lostMes,BorderLayout.NORTH);
 		lostPanel.add(tryAgainButton,BorderLayout.CENTER);
 		frame.add(lostPanel);

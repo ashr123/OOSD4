@@ -38,6 +38,8 @@ class Timer
 				catch (Exception e1)
 				{
 					iterator.remove();
+					if (Game.getHP()==0)
+						timer.stop();
 					Game.decreaseHP();
 					passedCreeps++;
 				}

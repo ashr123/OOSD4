@@ -172,7 +172,6 @@ class Board extends JPanel
 			
 			}
 		});
-		
 	}
 	
 	static int getLevel()
@@ -232,7 +231,6 @@ class Board extends JPanel
 					            this);
 				else
 					g.drawImage(IMAGE_ICON_PATH.getImage(), i*25, j*25, 25, 25, this);
-		
 		
 		for (Tickable t : timer.getTickables())//Draws all Tickables
 		{

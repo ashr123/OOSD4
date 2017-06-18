@@ -45,7 +45,10 @@ class Timer
 			
 			if (((!isFastFoword() && getTicks()%4==0)/*Every second*/ ||
 			     (isFastFoword() && getTicks()%2==0)/*Every half a second*/) &&
-			    (numberOfMikes!=getWave() || numberOfNagis!=getWave() || numberOfKnights!=getWave() || numberOfSkullies!=getWave()))
+			    (numberOfMikes!=Math.pow(2, getWave()-1) ||
+			     numberOfNagis!=Math.pow(2, getWave()-1) ||
+			     numberOfKnights!=Math.pow(2, getWave()-1) ||
+			     numberOfSkullies!=Math.pow(2, getWave()-1)))
 			{
 				Creeps[] enumConstants=Creeps.class.getEnumConstants();
 				boolean isRegistered=false;
@@ -86,7 +89,7 @@ class Timer
 				time+=.5;
 			if (isFastFoword())
 				time+=.5;
-			if (deadCreeps+passedCreeps>=getWave()*4 || Game.getHP()==0)
+			if (deadCreeps+passedCreeps>=Math.pow(2, getWave()-1)*4 || Game.getHP()==0)
 				increaseWave();
 			board.repaint();
 		}

@@ -211,22 +211,18 @@ class Board extends JPanel
 		graphics.fillRect(((xPosition*32/800)-2)*25, yPosition*32/800*25, 25, 25);
 		graphics.fillRect(xPosition*32/800*25, ((yPosition*32/800)+2)*25, 25, 25);
 		graphics.fillRect(xPosition*32/800*25, ((yPosition*32/800)-2)*25, 25, 25);
-		
 		graphics.fillRect(((xPosition*32/800)+2)*25, ((yPosition*32/800)+1)*25, 25, 25);
 		graphics.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)+1)*25, 25, 25);
 		graphics.fillRect(((xPosition*32/800)+2)*25, ((yPosition*32/800)-1)*25, 25, 25);
 		graphics.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)+1)*25, 25, 25);
-		
 		graphics.fillRect(((xPosition*32/800)+1)*25, ((yPosition*32/800)+2)*25, 25, 25);
 		graphics.fillRect(((xPosition*32/800)-1)*25, ((yPosition*32/800)-2)*25, 25, 25);
 		graphics.fillRect(((xPosition*32/800)+1)*25, ((yPosition*32/800)-2)*25, 25, 25);
 		graphics.fillRect(((xPosition*32/800)-1)*25, ((yPosition*32/800)+2)*25, 25, 25);
-		
 		graphics.fillRect(((xPosition*32/800)+2)*25, ((yPosition*32/800)+2)*25, 25, 25);
 		graphics.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)+2)*25, 25, 25);
 		graphics.fillRect(((xPosition*32/800)+2)*25, ((yPosition*32/800)-2)*25, 25, 25);
 		graphics.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)+2)*25, 25, 25);
-		
 		graphics.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)-2)*25, 25, 25);
 		graphics.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)-1)*25, 25, 25);
 	}

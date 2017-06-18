@@ -13,48 +13,27 @@ class Game
 	private static final LevelLoader loader=new LevelLoader();
 	private static final ImageIcon IMAGE_MAP_1=
 			new ImageIcon(new ImageIcon(Board.class.getResource("Media/toolbar/level0.png")).getImage()
-			                                                                                .getScaledInstance(200, 200,
-			                                                                                                   Image.SCALE_SMOOTH));
+					              .getScaledInstance(200, 200,
+							              Image.SCALE_SMOOTH));
 	private static final ImageIcon IMAGE_MAP_2=
 			new ImageIcon(new ImageIcon(Board.class.getResource("Media/toolbar/level1.png")).getImage()
-			                                                                                .getScaledInstance(200, 200,
-			                                                                                                   Image.SCALE_SMOOTH));
+					              .getScaledInstance(200, 200,
+							              Image.SCALE_SMOOTH));
 	private static final ImageIcon IMAGE_MAP_3=
 			new ImageIcon(new ImageIcon(Board.class.getResource("Media/toolbar/level2.png")).getImage()
-			                                                                                .getScaledInstance(200, 200,
-			                                                                                                   Image.SCALE_SMOOTH));
-	private static int HP=1;//change to 20
+					              .getScaledInstance(200, 200,
+							              Image.SCALE_SMOOTH));
+	private static int HP=20;
 	private static final JLabel HPLBL=new JLabel("HP: "+HP+"    ");
 	private static final JLabel WaveLBL=new JLabel("Wave: 1    ");
 	private static final JLabel TimeLBL=new JLabel("Time: 0    ");
 	private static final JFrame frame=new JFrame("Tower Defence");
-	private Board board;
+	private static Board board;
 	private static JPanel panel=new JPanel(new BorderLayout());
 	private static final JButton goButton=new JButton("Go!");
 	
 	private Game() throws IOException
 	{
-		if(Board.getLevel()>5||getHP()==0){//Player Won
-			JPanel winPanel = new JPanel();
-			JLabel mes = new JLabel("You Won!");
-			JButton continueButton = new JButton("Continue");
-			mes.setFont(new Font("Serif", Font.PLAIN, 26));
-			winPanel.add(mes);
-			winPanel.add(continueButton);
-			Game.getFrame().add(winPanel);
-			continueButton.addActionListener(new ActionListener()
-			{
-				@Override
-				public void actionPerformed(ActionEvent e)
-				{
-					getFrame().setContentPane(Game.getPanel());
-				}
-			});
-			
-			//Game.getPanel().setVisible(true);
-			//Game.getPanel().setEnabled(true);
-			
-		}
 		loader.load();
 		fireUpScreen();
 		JLabel maps=new JLabel("Please Choose a Map:");
@@ -129,6 +108,8 @@ class Game
 	static void decreaseHP()
 	{
 		HP--;
+		if (getHP()==0)
+			playerLost();
 	}
 	
 	static int getHP()
@@ -203,5 +184,47 @@ class Game
 	public static JFrame getFrame()
 	{
 		return frame;
+	}
+	
+	public static void playerWon()
+	{
+		JPanel lostPanel=new JPanel();
+		JLabel lostMes=new JLabel("You Won!");
+		JButton tryAgainButton=new JButton("Chose a different level");
+		lostMes.setFont(new Font("Serif", Font.PLAIN, 26));
+		lostPanel.add(lostMes);
+		lostPanel.add(tryAgainButton);
+		frame.add(lostPanel);
+		tryAgainButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				getFrame().add(Game.getPanel());
+			}
+		});
+	}
+	
+	//Player Lost
+	public static void playerLost()
+	{
+		final JPanel lostPanel=new JPanel(new BorderLayout());
+		JLabel lostMes=new JLabel("You Lost!");
+		JButton tryAgainButton=new JButton("Try again");
+		lostMes.setFont(new Font("Serif", Font.PLAIN, 26));
+		lostPanel.add(lostMes,BorderLayout.NORTH);
+		lostPanel.add(tryAgainButton,BorderLayout.CENTER);
+		frame.add(lostPanel);
+		board.setVisible(false);
+		tryAgainButton.addActionListener(new ActionListener()
+		{
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				panel.setVisible(true);
+				frame.add(panel);
+				lostPanel.setVisible(false);
+			}
+		});
 	}
 }

@@ -35,8 +35,6 @@ class Timer
 				{
 					iterator.remove();
 					Game.decreaseHP();
-					if (Game.getHP()==0)
-						return;
 					passedCreeps++;
 				}
 			}

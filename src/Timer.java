@@ -7,17 +7,13 @@ import java.util.Random;
 
 class Timer
 {
-	private enum Creeps
-	{
-		KNIGHT, MIKE, NAGI, SKULLY
-	}
 	private final LinkedList<Tickable> tickables=new LinkedList<>();
 	private int ticks, wave=1, numberOfKnights, numberOfMikes, numberOfNagis, numberOfSkullies, passedCreeps, deadCreeps;
 	private boolean fastFoword;
 	private Point startingPoint=getStartLocation();
 	private Board board;
 	private double time;
-	private final javax.swing.Timer timer=new javax.swing.Timer(250, new ActionListener()
+	private javax.swing.Timer timer=new javax.swing.Timer(250, new ActionListener()
 	{
 		@Override
 		public void actionPerformed(ActionEvent e)
@@ -38,13 +34,12 @@ class Timer
 				catch (Exception e1)
 				{
 					iterator.remove();
-					if (Game.getHP()==0)
-						timer.stop();
 					Game.decreaseHP();
+					if (Game.getHP()==0)
+						return;
 					passedCreeps++;
 				}
 			}
-			
 			if (((!isFastFoword() && getTicks()%4==0)/*Every second*/ ||
 			     (isFastFoword() && getTicks()%2==0)/*Every half a second*/) &&
 			    (numberOfMikes!=Math.pow(2, getWave()-1) ||
@@ -52,7 +47,7 @@ class Timer
 			     numberOfKnights!=Math.pow(2, getWave()-1) ||
 			     numberOfSkullies!=Math.pow(2, getWave()-1)))
 			{
-				Creeps[] enumConstants=Creeps.class.getEnumConstants();
+				final Creeps[] enumConstants=Creeps.class.getEnumConstants();
 				boolean isRegistered=false;
 				while (!isRegistered)
 					switch (enumConstants[new Random().nextInt(enumConstants.length)])
@@ -96,7 +91,6 @@ class Timer
 			board.repaint();
 		}
 	});
-	
 	Timer(Board board)
 	{
 		this.board=board;
@@ -144,7 +138,6 @@ class Timer
 	{
 		timer.stop();
 		numberOfKnights=numberOfMikes=numberOfNagis=numberOfSkullies=deadCreeps=passedCreeps=0;
-//		wave++;
 		if (++wave==6)
 		{
 			Game.playerWon();
@@ -179,5 +172,15 @@ class Timer
 	int getDeadCreeps()
 	{
 		return deadCreeps;
+	}
+	
+	void stop()
+	{
+		timer.stop();
+	}
+	
+	private enum Creeps
+	{
+		KNIGHT, MIKE, NAGI, SKULLY
 	}
 }

@@ -23,16 +23,14 @@ class Game
 			new ImageIcon(new ImageIcon(Board.class.getResource("Media/toolbar/level2.png")).getImage()
 					              .getScaledInstance(200, 200,
 							              Image.SCALE_SMOOTH));
-	private static int HP=1;
+	private static int HP;
 	private static final JLabel HPLBL=new JLabel("HP: "+HP+"    ");
 	private static final JLabel WaveLBL=new JLabel("Wave: 1    ");
 	private static final JLabel TimeLBL=new JLabel("Time: 0    ");
 	private static final JFrame frame=new JFrame("Tower Defence");
 	private static Board board;
-	private static JToolBar toolBar=new JToolBar();
 	private static JPanel panel=new JPanel(new BorderLayout());
 	private static final JButton goButton=new JButton("Go!");
-	private static JPanel gamePanel=new JPanel(new BorderLayout());
 	
 	private Game() throws IOException
 	{
@@ -49,8 +47,6 @@ class Game
 		panel.add(map2, BorderLayout.EAST);
 		frame.setContentPane(panel);
 		panel.setBackground(Color.orange);
-		//createToolBar();
-		toolBar.setVisible(false);
 		map0.addActionListener(new ActionListener()
 		{
 			@Override
@@ -59,13 +55,9 @@ class Game
 				board=new Board(0);
 				JPanel gamePanel=new JPanel(new BorderLayout());
 				createToolBar(gamePanel);
-				//gamePanel.add(toolBar);
 				gamePanel.add(board);
 				frame.setContentPane(gamePanel);
 				frame.setVisible(true);
-				//panel.setVisible(false);
-				toolBar.setVisible(true);
-				//createToolBar();
 			}
 		});
 		map1.addActionListener(new ActionListener()
@@ -77,10 +69,8 @@ class Game
 				JPanel gamePanel=new JPanel(new BorderLayout());
 				createToolBar(gamePanel);
 				gamePanel.add(board);
+				frame.setContentPane(gamePanel);
 				frame.setVisible(true);
-				panel.setVisible(false);
-				toolBar.setVisible(true);
-				//createToolBar();
 			}
 		});
 		map2.addActionListener(new ActionListener()
@@ -92,10 +82,8 @@ class Game
 				JPanel gamePanel=new JPanel(new BorderLayout());
 				createToolBar(gamePanel);
 				gamePanel.add(board);
+				frame.setContentPane(gamePanel);
 				frame.setVisible(true);
-				panel.setVisible(false);
-				toolBar.setVisible(true);
-				//createToolBar();
 			}
 		});
 		frame.setVisible(true);
@@ -104,7 +92,7 @@ class Game
 	public static void main(String[] args) throws IOException, LineUnavailableException, UnsupportedAudioFileException
 	{
 		new Game();
-		frame.setVisible(true);
+		resetHP();
 		playBackgroundMusic();
 	}
 	
@@ -154,11 +142,11 @@ class Game
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.setSize(800, 800);
-		//frame.add(new Board(map));
 	}
 	
 	private void createToolBar(JPanel gamePanel)
 	{
+		JToolBar toolBar=new JToolBar();
 		JButton fastForwardButton=new JButton("Fast Forward");
 		toolBar.add(HPLBL);
 		toolBar.add(WaveLBL);
@@ -166,8 +154,7 @@ class Game
 		toolBar.add(fastForwardButton);
 		toolBar.add(new JLabel("     "));
 		toolBar.add(goButton);
-		//frame.add(toolBar, BorderLayout.NORTH);
-		gamePanel.add(toolBar,BorderLayout.NORTH);
+		gamePanel.add(toolBar, BorderLayout.NORTH);
 		goButton.addActionListener(new ActionListener()
 		{
 			@Override
@@ -193,17 +180,7 @@ class Game
 		return goButton;
 	}
 	
-	static JPanel getPanel()
-	{
-		return panel;
-	}
-	
-	public static JFrame getFrame()
-	{
-		return frame;
-	}
-	
-	public static void playerWon()
+	static void playerWon()
 	{
 		final JPanel wonPanel=new JPanel();
 		wonPanel.setLayout(new BoxLayout(wonPanel,BoxLayout.PAGE_AXIS));
@@ -238,22 +215,21 @@ class Game
 		wonPanel.add(tryAgainButton);
 		
 		frame.setContentPane(wonPanel);
-		board.setVisible(false);
+		timer.stop();
 		tryAgainButton.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				panel.setVisible(true);
-				//frame.remove(toolBar);
 				frame.setContentPane(panel);
-				wonPanel.setVisible(false);
 			}
 		});
+		resetHP();
+		frame.setVisible(true);
 	}
 	
 	//Player Lost
-	public static void playerLost()
+	private static void playerLost()
 	{
 		final JPanel lostPanel=new JPanel();
 		lostPanel.setLayout(new BoxLayout(lostPanel,BoxLayout.PAGE_AXIS));
@@ -288,45 +264,20 @@ class Game
 		lostPanel.add(tryAgainButton);
 		
 		frame.setContentPane(lostPanel);
-		board.setVisible(false);
-		toolBar.setVisible(false);
+		timer.stop();
 		tryAgainButton.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent e)
 			{
-				panel.setVisible(true);
 				frame.setContentPane(panel);
-				lostPanel.setVisible(false);
 			}
 		});
+		resetHP();
 	}
 	
-	private static void restToolBar()
+	private static void resetHP()
 	{
-		toolBar.remove(HPLBL);
-		toolBar.remove(WaveLBL);
-		toolBar.remove(TimeLBL);
-		toolBar.remove(new JLabel("     "));
-		toolBar.remove(goButton);
-		toolBar.revalidate();
-		JButton fastForwardButton=new JButton("Fast Forward");
-		toolBar.add(HPLBL);
-		toolBar.add(WaveLBL);
-		toolBar.add(TimeLBL);
-		toolBar.add(fastForwardButton);
-		toolBar.add(new JLabel("     "));
-		toolBar.add(goButton);
-		frame.add(toolBar, BorderLayout.NORTH);
-		//toolBar.repaint();
-		goButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				Board.getTimer().start();
-				goButton.setEnabled(false);
-			}
-		});
+		HP=20;
 	}
 }

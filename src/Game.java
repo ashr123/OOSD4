@@ -29,7 +29,7 @@ class Game
 	private static final JLabel TimeLBL=new JLabel("Time: 0    ");
 	private static final JFrame frame=new JFrame("Tower Defence");
 	private static Board board;
-	private static JPanel panel=new JPanel(new BorderLayout());
+	private static final JPanel panel=new JPanel(new BorderLayout());
 	private static final JButton goButton=new JButton("Go!");
 	
 	private Game() throws IOException
@@ -147,7 +147,7 @@ class Game
 	private void createToolBar(JPanel gamePanel)
 	{
 		JToolBar toolBar=new JToolBar();
-		JButton fastForwardButton=new JButton("Fast Forward");
+		final JButton fastForwardButton=new JButton("Fast Forward");
 		toolBar.add(HPLBL);
 		toolBar.add(WaveLBL);
 		toolBar.add(TimeLBL);
@@ -171,6 +171,7 @@ class Game
 			public void actionPerformed(ActionEvent e)
 			{
 				Board.getTimer().setFastFoword(!Board.getTimer().isFastFoword());
+				fastForwardButton.setText(Board.getTimer().isFastFoword() ? "Slow down" : "Fast Forward");
 			}
 		});
 	}

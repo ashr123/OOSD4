@@ -3,7 +3,7 @@ import java.awt.*;
 
 abstract class Creep implements Tickable
 {
-	private int HP=100;
+	private double HP=100;
 	private Point location;
 	private boolean injured;
 	
@@ -20,12 +20,12 @@ abstract class Creep implements Tickable
 	
 	abstract void impact(Tower tower);
 	
-	int getHP()
+	double getHP()
 	{
 		return HP;
 	}
 	
-	void setHP(int HP)
+	void setHP(double HP)
 	{
 		this.HP=HP;
 	}
@@ -36,7 +36,7 @@ abstract class Creep implements Tickable
 		return location;
 	}
 	
-	protected void moveCreep()
+	void moveCreep()
 	{
 		getLocation().translate((int)Game.getLoader().get(Board.getLevel())[(int)getLocation().getX()][(int)getLocation().getY()].getX(), (int)Game.getLoader().get(Board.getLevel())[(int)getLocation().getX()][(int)getLocation().getY()].getY());
 	}

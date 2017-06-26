@@ -28,7 +28,7 @@ class Magician extends Tower
 	@Override
 	void visit(Naji naji)
 	{
-		naji.setHP((int)(naji.getHP()-(naji.isPoisoned() ? 10*Naji.getPoisonDegree() : 10)));
+		naji.setHP(naji.getHP()-(naji.isPoisoned() ? 10*Naji.getPoisonDegree() : 10));
 		naji.setInjured(true);
 	}
 	

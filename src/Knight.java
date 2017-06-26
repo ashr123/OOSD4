@@ -7,7 +7,7 @@ class Knight extends Creep
 {
 	private static final ImageIcon IMAGE_ICON=new ImageIcon(
 			Tickable.class.getResource("Media/creeps/abir-1.png"));
-	private static final int poisonDegree=2;
+	private static final double POISON_DEGREE=2;
 	private boolean isPoisoned;
 	private int ticks=1;
 	private final javax.swing.Timer cancelEffect=new javax.swing.Timer(2500, new ActionListener()
@@ -29,9 +29,9 @@ class Knight extends Creep
 		super(location);
 	}
 	
-	static int getPoisonDegree()
+	static double getPoisonDegree()
 	{
-		return poisonDegree;
+		return POISON_DEGREE;
 	}
 	
 	@Override

@@ -28,7 +28,7 @@ class Lava extends Tower
 	@Override
 	void visit(Naji naji)
 	{
-		naji.setHP((int)(naji.getHP()-(naji.isPoisoned() ? 15*Naji.getPoisonDegree() : 15)));
+		naji.setHP(naji.getHP()-(naji.isPoisoned() ? 15*Naji.getPoisonDegree() : 15));
 		naji.setInjured(true);
 	}
 	

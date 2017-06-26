@@ -27,7 +27,7 @@ class Dart extends Tower
 	@Override
 	void visit(Naji naji)
 	{
-		naji.setHP((int)(naji.getHP()-(naji.isPoisoned() ? 30*Naji.getPoisonDegree() : 30)));
+		naji.setHP(naji.getHP()-(naji.isPoisoned() ? 30*Naji.getPoisonDegree() : 30));
 		naji.setInjured(true);
 	}
 	

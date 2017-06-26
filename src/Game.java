@@ -191,7 +191,7 @@ class Game
 		JLabel hpLeft = new JLabel("HP:  "+getHP() +"\n");
 		JLabel passedCreeps = new JLabel("Passed Creeps:  "+timer.getPassedCreeps() +"\n");
 		JLabel deadCreeps = new JLabel("Dead Creeps:  "+timer.getDeadCreeps() +"\n");
-		JLabel time = new JLabel("Time elapsed"+timer.getTime() +"\n");
+		JLabel time = new JLabel("Time elapsed:  "+timer.getTime() +"\n");
 		JButton tryAgainButton=new JButton("Chose a different level");
 		
 		wonMes.setFont(new Font("Courier", Font.PLAIN, 26));
@@ -240,7 +240,7 @@ class Game
 		JLabel hpLeft = new JLabel("HP:  "+getHP() +"\n");
 		JLabel passedCreeps = new JLabel("Passed Creeps:  "+timer.getPassedCreeps() +"\n");
 		JLabel deadCreeps = new JLabel("Dead Creeps:  "+timer.getDeadCreeps() +"\n");
-		JLabel time = new JLabel("Time elapsed"+timer.getTime() +"\n");
+		JLabel time = new JLabel("Time elapsed:  "+timer.getTime() +"\n");
 		JButton tryAgainButton=new JButton("Try again");
 		
 		lostMes.setFont(new Font("Courier", Font.PLAIN, 26));

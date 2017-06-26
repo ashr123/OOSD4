@@ -89,6 +89,7 @@ class Timer
 			board.repaint();
 		}
 	});
+	
 	Timer(Board board)
 	{
 		this.board=board;

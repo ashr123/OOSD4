@@ -5,6 +5,7 @@ class Lava extends Tower
 {
 	private static final ImageIcon IMAGE_ICON=new ImageIcon(
 			Tickable.class.getResource("Media/towers/Lava.png"));
+	
 	Lava(Point location)
 	{
 		super(location);

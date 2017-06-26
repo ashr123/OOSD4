@@ -5,6 +5,7 @@ class Poison extends Tower
 {
 	private static final ImageIcon IMAGE_ICON=new ImageIcon(
 			Tickable.class.getResource("Media/towers/Poison.png"));
+	
 	Poison(Point location)
 	{
 		super(location);

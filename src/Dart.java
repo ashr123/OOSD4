@@ -5,6 +5,7 @@ class Dart extends Tower
 {
 	private static final ImageIcon IMAGE_ICON=new ImageIcon(
 			Tickable.class.getResource("Media/towers/Dart.png"));
+	
 	Dart(Point location)
 	{
 		super(location);

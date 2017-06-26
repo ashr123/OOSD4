@@ -5,6 +5,7 @@ class Magician extends Tower
 {
 	private static final ImageIcon IMAGE_ICON=new ImageIcon(
 			Tickable.class.getResource("Media/towers/Magician.png"));
+	
 	Magician(Point location)
 	{
 		super(location);

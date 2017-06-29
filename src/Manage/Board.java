@@ -1,3 +1,6 @@
+import Creeps.Creep;
+import Towers.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -26,6 +29,7 @@ class Board extends JPanel
 	
 	Board(int level)
 	{
+		setPreferredSize(new Dimension(800, 800));
 		Board.level=level;
 		timer=new Timer(this);
 		setBorder(BorderFactory.createLineBorder(Color.black));
@@ -37,27 +41,23 @@ class Board extends JPanel
 			@Override
 			public void mouseClicked(final MouseEvent e)
 			{
-				if (timer.isRunning())
-					return;
 				for (Tickable t : timer.getTickables())
-				{
 					if (t instanceof Tower && t.getLocation().equals(new Point(e.getX()*32/800,
 					                                                           e.getY()*32/800)))
 					{
-						if (t instanceof Dart)
-							markNeighborsBig(e.getX(), e.getY());
-						else
-							markNeighbors(e.getX(), e.getY());
+						((Tower)t).setClicked(!((Tower)t).isClicked());
+						repaint();
 						return;
 					}
-				}
+				if (timer.isRunning())
+					return;
 				if (boardPath[e.getX()*32/800][e.getY()*32/800].equals(new Point()))
 				{
 					Graphics graphics=getGraphics();
 					graphics.setColor(Color.decode("#132044"));
 					graphics.fillRect(e.getX()*32/800*25, e.getY()*32/800*25, 25, 25);
 					
-					final JFrame towerWindow=new JFrame("Choose a Tower");
+					final JFrame towerWindow=new JFrame("Choose a Towers.Tower");
 					towerWindow.setLayout(new GridLayout(2, 2));
 					JButton dartButton=new JButton(IMAGE_ICON_TOWER_DART);
 					dartButton.setText(numOfDart+"");
@@ -179,36 +179,35 @@ class Board extends JPanel
 		return timer;
 	}
 	
-	private void markNeighborsBig(int xPosition, int yPosition)
+	private void markNeighborsBig(int xPosition, int yPosition, Graphics g)
 	{
-		Graphics graphics=getGraphics();
-		graphics.setColor(Color.decode("#42f46e"));
-		graphics.fillRect(((xPosition*32/800)+1)*25, yPosition*32/800*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)-1)*25, yPosition*32/800*25, 25, 25);
-		graphics.fillRect(xPosition*32/800*25, ((yPosition*32/800)+1)*25, 25, 25);
-		graphics.fillRect(xPosition*32/800*25, ((yPosition*32/800)-1)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)+1)*25, ((yPosition*32/800)+1)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)-1)*25, ((yPosition*32/800)-1)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)+1)*25, ((yPosition*32/800)-1)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)-1)*25, ((yPosition*32/800)+1)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)+2)*25, yPosition*32/800*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)-2)*25, yPosition*32/800*25, 25, 25);
-		graphics.fillRect(xPosition*32/800*25, ((yPosition*32/800)+2)*25, 25, 25);
-		graphics.fillRect(xPosition*32/800*25, ((yPosition*32/800)-2)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)+2)*25, ((yPosition*32/800)+1)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)+1)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)+2)*25, ((yPosition*32/800)-1)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)+1)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)+1)*25, ((yPosition*32/800)+2)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)-1)*25, ((yPosition*32/800)-2)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)+1)*25, ((yPosition*32/800)-2)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)-1)*25, ((yPosition*32/800)+2)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)+2)*25, ((yPosition*32/800)+2)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)+2)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)+2)*25, ((yPosition*32/800)-2)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)+2)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)-2)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)-1)*25, 25, 25);
+		g.setColor(Color.decode("#42f46e"));
+		g.fillRect(((xPosition*32/800)+1)*25, yPosition*32/800*25, 25, 25);
+		g.fillRect(((xPosition*32/800)-1)*25, yPosition*32/800*25, 25, 25);
+		g.fillRect(xPosition*32/800*25, ((yPosition*32/800)+1)*25, 25, 25);
+		g.fillRect(xPosition*32/800*25, ((yPosition*32/800)-1)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)+1)*25, ((yPosition*32/800)+1)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)-1)*25, ((yPosition*32/800)-1)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)+1)*25, ((yPosition*32/800)-1)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)-1)*25, ((yPosition*32/800)+1)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)+2)*25, yPosition*32/800*25, 25, 25);
+		g.fillRect(((xPosition*32/800)-2)*25, yPosition*32/800*25, 25, 25);
+		g.fillRect(xPosition*32/800*25, ((yPosition*32/800)+2)*25, 25, 25);
+		g.fillRect(xPosition*32/800*25, ((yPosition*32/800)-2)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)+2)*25, ((yPosition*32/800)+1)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)+1)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)+2)*25, ((yPosition*32/800)-1)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)+1)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)+1)*25, ((yPosition*32/800)+2)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)-1)*25, ((yPosition*32/800)-2)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)+1)*25, ((yPosition*32/800)-2)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)-1)*25, ((yPosition*32/800)+2)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)+2)*25, ((yPosition*32/800)+2)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)+2)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)+2)*25, ((yPosition*32/800)-2)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)+2)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)-2)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)-2)*25, ((yPosition*32/800)-1)*25, 25, 25);
 	}
 	
 	@Override
@@ -229,6 +228,20 @@ class Board extends JPanel
 		
 		for (Tickable t : timer.getTickables())//Draws all Tickables
 		{
+			if (t instanceof Tower)
+				if (t instanceof Dart)
+				{
+					if (((Dart)t).isClicked())
+						markNeighborsBig((int)t.getLocation().getX()*25,
+						                 (int)t.getLocation().getY()*25, g);
+				}
+				else
+					if (((Tower)t).isClicked())
+						markNeighbors((int)t.getLocation().getX()*25,
+						              (int)t.getLocation().getY()*25, g);
+		}
+		for (Tickable t : timer.getTickables())
+		{
 			if (t instanceof Creep && ((Creep)t).isInjured())//Marks square of injured creep
 			{
 				g.setColor(Color.decode("#77252d"));
@@ -236,23 +249,21 @@ class Board extends JPanel
 				           25, 25);
 				((Creep)t).setInjured(false);
 			}
-			
 			g.drawImage(t.getImageIcon().getImage(), (int)t.getLocation().getX()*25,
 			            (int)t.getLocation().getY()*25, 25, 25, this);
 		}
 	}
 	
-	private void markNeighbors(int xPosition, int yPosition)
+	private void markNeighbors(int xPosition, int yPosition, Graphics g)
 	{
-		Graphics graphics=getGraphics();
-		graphics.setColor(Color.decode("#d3d9ed"));
-		graphics.fillRect(((xPosition*32/800)+1)*25, yPosition*32/800*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)-1)*25, yPosition*32/800*25, 25, 25);
-		graphics.fillRect(xPosition*32/800*25, ((yPosition*32/800)+1)*25, 25, 25);
-		graphics.fillRect(xPosition*32/800*25, ((yPosition*32/800)-1)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)+1)*25, ((yPosition*32/800)+1)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)-1)*25, ((yPosition*32/800)-1)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)+1)*25, ((yPosition*32/800)-1)*25, 25, 25);
-		graphics.fillRect(((xPosition*32/800)-1)*25, ((yPosition*32/800)+1)*25, 25, 25);
+		g.setColor(Color.decode("#d3d9ed"));
+		g.fillRect(((xPosition*32/800)+1)*25, yPosition*32/800*25, 25, 25);
+		g.fillRect(((xPosition*32/800)-1)*25, yPosition*32/800*25, 25, 25);
+		g.fillRect(xPosition*32/800*25, ((yPosition*32/800)+1)*25, 25, 25);
+		g.fillRect(xPosition*32/800*25, ((yPosition*32/800)-1)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)+1)*25, ((yPosition*32/800)+1)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)-1)*25, ((yPosition*32/800)-1)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)+1)*25, ((yPosition*32/800)-1)*25, 25, 25);
+		g.fillRect(((xPosition*32/800)-1)*25, ((yPosition*32/800)+1)*25, 25, 25);
 	}
 }

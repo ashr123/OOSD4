@@ -1,8 +1,8 @@
-package Towers;
+package Tickables.Towers;
 
-import Creeps.*;
+import Tickables.Creeps.*;
 import Manage.Board;
-import Manage.Tickable;
+import Tickables.Tickable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -32,7 +32,7 @@ public abstract class Tower implements Tickable//Represents also the Visitor
 	}
 	
 	@Override
-	public abstract void tickHappend();
+	public abstract void tickHappened();
 	
 	/**
 	 * Injures a {@code Knight}

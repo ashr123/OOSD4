@@ -1,27 +1,38 @@
-package Creeps;
+package Tickables.Creeps;
 
 import Manage.Board;
-import Manage.Tickable;
-import Towers.Tower;
+import Tickables.Tickable;
+import Tickables.Towers.Tower;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Represents a {@code Mike}
+ */
 public class Mike extends Creep
 {
+	/**
+	 * Stores this mike's image
+	 */
 	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("../Media/creeps/mike-1.png"));
+			new ImageIcon(Tickable.class.getResource("/Media/creeps/mike-1.png"));
 	
+	/**
+	 * Creates a new mike
+	 * @param location the location of this knight
+	 * @see Mike#location
+	 */
 	public Mike(Point location)
 	{
 		super(location);
 	}
 	
 	@Override
-	public void tickHappend()
+	public void tickHappened()
 	{
-		if ((!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%4==0)/*Every second*/ ||
-		    (Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)/*Every half a second*/)
+		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%4==0)/*Every second*/ ||
+		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Every half a second*/)
 			moveCreep();
 	}
 	

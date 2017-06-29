@@ -1,28 +1,43 @@
-package Creeps;
+package Tickables.Creeps;
 
 import Manage.Board;
-import Manage.Tickable;
-import Towers.Tower;
+import Tickables.Tickable;
+import Tickables.Towers.Tower;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Represents a {@code Naji}
+ */
 public class Naji extends Creep
 {
+	/**
+	 * Stores this naji's image
+	 */
 	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("../Media/creeps/naji-1.png"));
+			new ImageIcon(Tickable.class.getResource("/Media/creeps/naji-1.png"));
+	/**
+	 * States the severity of poisoning
+	 */
 	private static final double POISON_DEGREE=1.5;
+	/**
+	 * States if this naji has been poisoned
+	 */
 	private boolean isPoisoned;
 	private int ticks=1;
+	/**
+	 * Responsible of canceling the poison's effect
+	 */
 	private final javax.swing.Timer cancelEffect=new javax.swing.Timer(2500, new ActionListener()
 	{
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			if ((!Board.getTimer().isFastFoword() && ticks%2==0)/*Every 5 seconds*/ ||
-			    (Board.getTimer().isFastFoword())/*Every 2.5 seconds*/)
+			if ((!Board.getTimer().isFastForward() && ticks%2==0)/*Every 5 seconds*/ ||
+			    (Board.getTimer().isFastForward())/*Every 2.5 seconds*/)
 				isPoisoned=false;
 			ticks++;
 			if (isPoisoned())
@@ -30,21 +45,29 @@ public class Naji extends Creep
 		}
 	});
 	
+	/**
+	 * Creates a new Naji
+	 * @param location the location of this knight
+	 * @see Naji#location
+	 */
 	public Naji(Point location)
 	{
 		super(location);
 	}
 	
+	/**
+	 * @return returns the {@link Naji#POISON_DEGREE} of this naji
+	 */
 	public static double getPoisonDegree()
 	{
 		return POISON_DEGREE;
 	}
 	
 	@Override
-	public void tickHappend()
+	public void tickHappened()
 	{
-		if ((!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)/*Moves every half a second*/ ||
-		    (Board.getTimer().isFastFoword())/*Moves every quarter of a second*/)
+		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Moves every half a second*/ ||
+		    (Board.getTimer().isFastForward())/*Moves every quarter of a second*/)
 			moveCreep();
 	}
 	
@@ -60,11 +83,17 @@ public class Naji extends Creep
 		return IMAGE_ICON;
 	}
 	
+	/**
+	 * @return {@code true} if this naji is poisoned, {@code false} otherwise
+	 */
 	public boolean isPoisoned()
 	{
 		return isPoisoned;
 	}
 	
+	/**
+	 * Changes this naji's poisoned state
+	 */
 	public void setPoisoned()
 	{
 		ticks=1;

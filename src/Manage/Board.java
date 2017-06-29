@@ -1,25 +1,33 @@
-import Creeps.Creep;
-import Towers.*;
+package Manage;
+
+import Tickables.Creeps.Creep;
+import Tickables.Tickable;
+import Tickables.Towers.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-class Board extends JPanel
+/**
+ * Represents the {@code Board}
+ */
+public class Board extends JPanel
 {
 	private static final ImageIcon IMAGE_ICON_TOWER_LAVA=new ImageIcon(new ImageIcon(Board.class.getResource(
-			"Media/towers/Lava.png")).getImage().getScaledInstance(100, 162, Image.SCALE_SMOOTH));
+			"/Media/towers/Lava.png")).getImage().getScaledInstance(100, 162,
+	                                                                  Image.SCALE_SMOOTH));
 	private static final ImageIcon IMAGE_ICON_TOWER_DART=new ImageIcon(new ImageIcon(Board.class.getResource(
-			"Media/towers/Dart.png")).getImage().getScaledInstance(100, 135, Image.SCALE_SMOOTH));
+			"/Media/towers/Dart.png")).getImage().getScaledInstance(100, 135,
+	                                                                  Image.SCALE_SMOOTH));
 	private static final ImageIcon IMAGE_ICON_TOWER_POISON=new ImageIcon(new ImageIcon(Board.class.getResource(
-			"Media/towers/Poison.png")).getImage().getScaledInstance(100, 131, Image.SCALE_SMOOTH));
-	private static final ImageIcon IMAGE_ICON_TOWER_MAGICIAN=new ImageIcon(new ImageIcon(Board.class.getResource(
-			"Media/towers/Magician.png")).getImage().getScaledInstance(100, 145, Image.SCALE_SMOOTH));
+			"/Media/towers/Poison.png")).getImage().getScaledInstance(100, 131,
+	                                                                    Image.SCALE_SMOOTH));
+	private static final ImageIcon IMAGE_ICON_TOWER_MAGICIAN=new ImageIcon(new ImageIcon(Board.class.getResource("/Media/towers/Magician.png")).getImage().getScaledInstance(100, 145, Image.SCALE_SMOOTH));
 	private static final ImageIcon IMAGE_ICON_GRASS=
-			new ImageIcon(Board.class.getResource("Media/environment/grass.png"));
+			new ImageIcon(Board.class.getResource("/Media/environment/grass.png"));
 	private static final ImageIcon IMAGE_ICON_PATH=
-			new ImageIcon(Board.class.getResource("Media/environment/path.png"));
-	private static int level;
+			new ImageIcon(Board.class.getResource("/Media/environment/path.png"));
+	private static int mapNum;
 	private static Timer timer;
 	private final Point[][] boardPath;
 	private int numOfDart;
@@ -27,17 +35,24 @@ class Board extends JPanel
 	private int numOfPoison;
 	private int numOfMagician;
 	
-	Board(int level)
+	/**
+	 * Builds a new board
+	 * @param mapNum the number of the map to be loaded
+	 */
+	public Board(int mapNum)
 	{
 		setPreferredSize(new Dimension(800, 800));
-		Board.level=level;
+		Board.mapNum=mapNum;
 		timer=new Timer(this);
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		boardPath=Game.getLoader().get(level);
+		boardPath=Game.getLoader().get(mapNum);
 		numOfDart=numOfLava=numOfPoison=numOfMagician=3;
 		
 		addMouseListener(new MouseListener()
 		{
+			/**
+			 * Builds a new frame to choose a tower from only if its between waves andthe user didn't clicked on the path
+			 */
 			@Override
 			public void mouseClicked(final MouseEvent e)
 			{
@@ -57,7 +72,7 @@ class Board extends JPanel
 					graphics.setColor(Color.decode("#132044"));
 					graphics.fillRect(e.getX()*32/800*25, e.getY()*32/800*25, 25, 25);
 					
-					final JFrame towerWindow=new JFrame("Choose a Towers.Tower");
+					final JFrame towerWindow=new JFrame("Choose a Tower:");
 					towerWindow.setLayout(new GridLayout(2, 2));
 					JButton dartButton=new JButton(IMAGE_ICON_TOWER_DART);
 					dartButton.setText(numOfDart+"");
@@ -169,16 +184,28 @@ class Board extends JPanel
 		});
 	}
 	
-	static int getLevel()
+	/**
+	 * @return the number of current map
+	 */
+	public static int getMapNum()
 	{
-		return level;
+		return mapNum;
 	}
 	
-	static Timer getTimer()
+	/**
+	 * @return returns the board's timer
+	 */
+	public static Timer getTimer()
 	{
 		return timer;
 	}
 	
+	/**
+	 * Draws a big range of attack of a tower
+	 * @param xPosition the {@code x} coordinate of the tower
+	 * @param yPosition the {@code y} coordinate of the tower
+	 * @param g the {@code Graphics} context in which to paint
+	 */
 	private void markNeighborsBig(int xPosition, int yPosition, Graphics g)
 	{
 		g.setColor(Color.decode("#42f46e"));
@@ -254,6 +281,12 @@ class Board extends JPanel
 		}
 	}
 	
+	/**
+	 * Draws a regular range of attack of a tower
+	 * @param xPosition the {@code x} coordinate of the tower
+	 * @param yPosition the {@code y} coordinate of the tower
+	 * @param g the {@code Graphics} context in which to paint
+	 */
 	private void markNeighbors(int xPosition, int yPosition, Graphics g)
 	{
 		g.setColor(Color.decode("#d3d9ed"));

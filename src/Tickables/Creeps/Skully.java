@@ -1,27 +1,38 @@
-package Creeps;
+package Tickables.Creeps;
 
 import Manage.Board;
-import Manage.Tickable;
-import Towers.Tower;
+import Tickables.Tickable;
+import Tickables.Towers.Tower;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Represents a {@code Skully}
+ */
 public class Skully extends Creep
 {
+	/**
+	 * Stores this skully's image
+	 */
 	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("../Media/creeps/guli-1.png"));
+			new ImageIcon(Tickable.class.getResource("/Media/creeps/guli-1.png"));
 	
+	/**
+	 * Creates a new skully
+	 * @param location the location of this knight
+	 * @see Skully#location
+	 */
 	public Skully(Point location)
 	{
 		super(location);
 	}
 	
 	@Override
-	public void tickHappend()
+	public void tickHappened()
 	{
-		if ((!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%4==0)/*Moves every second*/ ||
-		    (Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)/*Moves every half a second*/)
+		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%4==0)/*Moves every second*/ ||
+		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Moves every half a second*/)
 			moveCreep();
 	}
 	

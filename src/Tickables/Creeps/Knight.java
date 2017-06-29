@@ -1,8 +1,8 @@
-package Creeps;
+package Tickables.Creeps;
 
 import Manage.Board;
-import Manage.Tickable;
-import Towers.Tower;
+import Tickables.Tickable;
+import Tickables.Towers.Tower;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +18,7 @@ public class Knight extends Creep
 	 * Stores this knight's image
 	 */
 	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("../Media/creeps/abir-1.png"));
+			new ImageIcon(Tickable.class.getResource("/Media/creeps/abir-1.png"));
 	/**
 	 * States the severity of poisoning
 	 */
@@ -36,8 +36,8 @@ public class Knight extends Creep
 		@Override
 		public void actionPerformed(ActionEvent e)
 		{
-			if ((!Board.getTimer().isFastFoword() && ticks%2==0)/*Every 5 seconds*/ ||
-			    (Board.getTimer().isFastFoword())/*Every 2.5 seconds*/)
+			if ((!Board.getTimer().isFastForward() && ticks%2==0)/*Every 5 seconds*/ ||
+			    (Board.getTimer().isFastForward())/*Every 2.5 seconds*/)
 				isPoisoned=false;
 			ticks++;
 			if (isPoisoned())
@@ -46,24 +46,28 @@ public class Knight extends Creep
 	});
 	
 	/**
-	 *
-	 * @param location
+	 * Creates a new knight
+	 * @param location the location of this knight
+	 * @see Knight#location
 	 */
 	public Knight(Point location)
 	{
 		super(location);
 	}
 	
+	/**
+	 * @return returns the {@link Knight#POISON_DEGREE} of this knight
+	 */
 	public static double getPoisonDegree()
 	{
 		return POISON_DEGREE;
 	}
 	
 	@Override
-	public void tickHappend()
+	public void tickHappened()
 	{
-		if ((!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%4==0)/*Moves every second*/ ||
-		    (Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)/*Moves every half a second*/)
+		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%4==0)/*Moves every second*/ ||
+		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Moves every half a second*/)
 			moveCreep();
 	}
 	
@@ -79,11 +83,17 @@ public class Knight extends Creep
 		return IMAGE_ICON;
 	}
 	
+	/**
+	 * @return {@code true} if this knight is poisoned, {@code false} otherwise
+	 */
 	public boolean isPoisoned()
 	{
 		return isPoisoned;
 	}
 	
+	/**
+	 * Changes this knight's poisoned state
+	 */
 	public void setPoisoned()
 	{
 		ticks=1;

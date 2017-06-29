@@ -18,7 +18,7 @@ public abstract class Creep implements Tickable
 	 */
 	private double HP=100;
 	/**
-	 * Represents this cree['s location
+	 * Represents this creep's location
 	 */
 	private Point location;
 	/**
@@ -40,7 +40,7 @@ public abstract class Creep implements Tickable
 	 * Moves the {@code Creep} to a new location
 	 */
 	@Override
-	public abstract void tickHappend();
+	public abstract void tickHappened();
 	
 	/**
 	 * Orders this creep to be impacted
@@ -77,9 +77,9 @@ public abstract class Creep implements Tickable
 	void moveCreep()
 	{
 		getLocation().translate((int)Game.getLoader().get(
-				Board.getLevel())[(int)getLocation().getX()][(int)getLocation().getY()].getX(),
+				Board.getMapNum())[(int)getLocation().getX()][(int)getLocation().getY()].getX(),
 		                        (int)Game.getLoader()
-		                                 .get(Board.getLevel())
+		                                 .get(Board.getMapNum())
 				                             [(int)getLocation().getX()][(int)getLocation().getY()].getY());
 	}
 	

@@ -1,30 +1,41 @@
-package Towers;
+package Tickables.Towers;
 
-import Creeps.Knight;
-import Creeps.Mike;
-import Creeps.Naji;
-import Creeps.Skully;
+import Tickables.Creeps.Knight;
+import Tickables.Creeps.Mike;
+import Tickables.Creeps.Naji;
+import Tickables.Creeps.Skully;
 import Manage.Board;
-import Manage.Tickable;
+import Tickables.Tickable;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Represents a {@code Lava}
+ */
 public class Lava extends Tower
 {
+	/**
+	 * Stores this lava's image
+	 */
 	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("../Media/towers/Lava.png"));
+			new ImageIcon(Tickable.class.getResource("/Media/towers/Lava.png"));
 	
+	/**
+	 * Creates a new lava
+	 * @param location the location of this lava
+	 * @see Lava#location
+	 */
 	public Lava(Point location)
 	{
 		super(location);
 	}
 	
 	@Override
-	public void tickHappend()
+	public void tickHappened()
 	{
-		if ((!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%4==0)/*Every second*/ ||
-		    (Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)/*Every half a second*/)
+		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%4==0)/*Every second*/ ||
+		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Every half a second*/)
 			hitCreep(1, true);
 	}
 	

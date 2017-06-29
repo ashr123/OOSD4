@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="OOSD4:jar">
+    <output-path>$PROJECT_DIR$/</output-path>
+    <root id="archive" name="hw4.jar">
+      <element id="module-output" name="OOSD4" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src" />
+    </root>
+  </artifact>
+</component>

@@ -1,30 +1,41 @@
-package Towers;
+package Tickables.Towers;
 
-import Creeps.Knight;
-import Creeps.Mike;
-import Creeps.Naji;
-import Creeps.Skully;
+import Tickables.Creeps.Knight;
+import Tickables.Creeps.Mike;
+import Tickables.Creeps.Naji;
+import Tickables.Creeps.Skully;
 import Manage.Board;
-import Manage.Tickable;
+import Tickables.Tickable;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Represents a {@code Dart}
+ */
 public class Dart extends Tower
 {
+	/**
+	 * Stores this dart's image
+	 */
 	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("../Media/towers/Dart.png"));
+			new ImageIcon(Tickable.class.getResource("/Media/towers/Dart.png"));
 	
+	/**
+	 * Creates a new dart
+	 * @param location the location of this dart
+	 * @see Dart#location
+	 */
 	public Dart(Point location)
 	{
 		super(location);
 	}
 	
 	@Override
-	public void tickHappend()
+	public void tickHappened()
 	{
-		if ((!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)/*Every half a second*/ ||
-		    (Board.getTimer().isFastFoword())/*Every quarter of a second*/)
+		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Every half a second*/ ||
+		    (Board.getTimer().isFastForward())/*Every quarter of a second*/)
 			hitCreep(2, false);
 	}
 	

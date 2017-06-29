@@ -1,4 +1,4 @@
-package Manage;
+package Tickables;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,5 +21,5 @@ public interface Tickable
 	/**
 	 * Performs an action
 	 */
-	void tickHappend();
+	void tickHappened();
 }

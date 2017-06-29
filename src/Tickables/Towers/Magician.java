@@ -1,30 +1,41 @@
-package Towers;
+package Tickables.Towers;
 
-import Creeps.Knight;
-import Creeps.Mike;
-import Creeps.Naji;
-import Creeps.Skully;
+import Tickables.Creeps.Knight;
+import Tickables.Creeps.Mike;
+import Tickables.Creeps.Naji;
+import Tickables.Creeps.Skully;
 import Manage.Board;
-import Manage.Tickable;
+import Tickables.Tickable;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Represents a {@code Magician}
+ */
 public class Magician extends Tower
 {
+	/**
+	 * Stores this magician's image
+	 */
 	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("../Media/towers/Magician.png"));
+			new ImageIcon(Tickable.class.getResource("/Media/towers/Magician.png"));
 	
+	/**
+	 * Creates a new magician
+	 * @param location the location of this magician
+	 * @see Magician#location
+	 */
 	public Magician(Point location)
 	{
 		super(location);
 	}
 	
 	@Override
-	public void tickHappend()
+	public void tickHappened()
 	{
-		if ((!Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%4==0)/*Every second*/ ||
-		    (Board.getTimer().isFastFoword() && Board.getTimer().getTicks()%2==0)/*Every half a second*/)
+		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%4==0)/*Every second*/ ||
+		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Every half a second*/)
 			hitCreep(1, false);
 	}
 	

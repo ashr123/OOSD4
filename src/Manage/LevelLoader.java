@@ -1,10 +1,12 @@
+package Manage;
+
 import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Vector;
 
-class LevelLoader
+public class LevelLoader
 {
 	private static final char CHAR_RIGHT='>';
 	private static final char CHAR_LEFT='<';
@@ -114,19 +116,19 @@ class LevelLoader
 		br.close();
 	}
 	
-	/**
-	 * @return the number of levels available
-	 */
-	int getLevelsCount()
-	{
-		return _levels.size();
-	}
+//	/**
+//	 * @return the number of levels available
+//	 */
+//	int getLevelsCount()
+//	{
+//		return _levels.size();
+//	}
 	
 	/**
 	 * @param index the level number
 	 * @return a deep copy of the initial state of level number {@code index}
 	 */
-	Point[][] get(int index)
+	public Point[][] get(int index)
 	{
 		return _levels.get(index);
 	}

@@ -17,15 +17,15 @@ public class Game
 {
 	private static final LevelLoader loader=new LevelLoader();
 	private static final ImageIcon IMAGE_MAP_1=
-			new ImageIcon(new ImageIcon(Game.class.getResource("Media/toolbar/level0.png"))
+			new ImageIcon(new ImageIcon(Game.class.getResource("/Media/toolbar/level0.png"))
 					              .getImage().getScaledInstance(200,200,
 					                                            Image.SCALE_SMOOTH));
 	private static final ImageIcon IMAGE_MAP_2=
-			new ImageIcon(new ImageIcon(Game.class.getResource("Media/toolbar/level1.png"))
+			new ImageIcon(new ImageIcon(Game.class.getResource("/Media/toolbar/level1.png"))
 					              .getImage().getScaledInstance(200, 200,
 					                                            Image.SCALE_SMOOTH));
 	private static final ImageIcon IMAGE_MAP_3=
-			new ImageIcon(new ImageIcon(Game.class.getResource("Media/toolbar/level2.png"))
+			new ImageIcon(new ImageIcon(Game.class.getResource("/Media/toolbar/level2.png"))
 					              .getImage().getScaledInstance(200, 200,
 					                                            Image.SCALE_SMOOTH));
 	private static final JLabel WaveLBL=new JLabel("Wave: 1    ");
@@ -128,7 +128,7 @@ public class Game
 	                                                 UnsupportedAudioFileException
 	{
 		final Clip clip=AudioSystem.getClip();
-		clip.open(AudioSystem.getAudioInputStream(Game.class.getResource("../Sounds/backgroundMusic.wav")));
+		clip.open(AudioSystem.getAudioInputStream(Game.class.getResource("/Sounds/backgroundMusic.wav")));
 		clip.loop(Integer.MAX_VALUE);
 	}
 	

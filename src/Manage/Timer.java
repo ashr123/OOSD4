@@ -4,8 +4,6 @@ import Tickables.Creeps.*;
 import Tickables.Tickable;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Random;
@@ -23,7 +21,10 @@ public class Timer
 	 * The starting point of the new creeps that to be created
 	 */
 	private final Point startingPoint=getStartLocation();
-	private final Board board;
+	/**
+	 * Creates and moves the creeps and hits them with the towers
+	 */
+	private final javax.swing.Timer timer;
 	private int ticks, wave=1, numberOfKnights, numberOfMikes, numberOfNagis, numberOfSkullies, passedCreeps, deadCreeps, totalDeadCreeps, totalPassedCreeps;
 	/**
 	 * {@code true} if the game to be tick twice as fase, {@code false} otherwise
@@ -33,18 +34,16 @@ public class Timer
 	 * Counting the time since the 1st wave
 	 */
 	private double time;
+	
 	/**
-	 * Runs the game
+	 * Creates a new timer
+	 * @param board only for repainting
 	 */
-	private final javax.swing.Timer timer=new javax.swing.Timer(250, new ActionListener()
+	Timer(Board board)
 	{
-		/**
-		 * Creates and moves the creeps and hits them with the towers
-		 */
-		@SuppressWarnings("ConstantConditions")
-		@Override
-		public void actionPerformed(ActionEvent e)
+		timer=new javax.swing.Timer(250, e ->
 		{
+			@SuppressWarnings("ConstantConditions")
 			ListIterator<Tickable> iterator=getTickables().listIterator();
 			while (iterator.hasNext())
 			{
@@ -116,16 +115,7 @@ public class Timer
 			if (deadCreeps+passedCreeps>=Math.pow(2, getWave()-1)*4)
 				increaseWave();
 			board.repaint();
-		}
-	});
-	
-	/**
-	 * Creates a new timer
-	 * @param board only for repainting
-	 */
-	Timer(Board board)
-	{
-		this.board=board;
+		});
 	}
 	
 	/**

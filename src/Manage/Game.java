@@ -6,8 +6,6 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
 /**
@@ -57,42 +55,30 @@ public class Game
 		panel.add(map2, BorderLayout.EAST);
 		frame.setContentPane(panel);
 		panel.setBackground(Color.orange);
-		map0.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				final JPanel gamePanel=new JPanel(new BorderLayout());
-				createToolBar(gamePanel);
-				gamePanel.add(new Board(0));
-				frame.setContentPane(gamePanel);
-				frame.pack();
-			}
-		});
-		map1.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				final JPanel gamePanel=new JPanel(new BorderLayout());
-				createToolBar(gamePanel);
-				gamePanel.add(new Board(1));
-				frame.setContentPane(gamePanel);
-				frame.pack();
-			}
-		});
-		map2.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				final JPanel gamePanel=new JPanel(new BorderLayout());
-				createToolBar(gamePanel);
-				gamePanel.add(new Board(2));
-				frame.setContentPane(gamePanel);
-				frame.pack();
-			}
-		});
+		map0.addActionListener(e ->
+		                       {
+			                       final JPanel gamePanel=new JPanel(new BorderLayout());
+			                       createToolBar(gamePanel);
+			                       gamePanel.add(new Board(0));
+			                       frame.setContentPane(gamePanel);
+			                       frame.pack();
+		                       });
+		map1.addActionListener(e ->
+		                       {
+			                       final JPanel gamePanel=new JPanel(new BorderLayout());
+			                       createToolBar(gamePanel);
+			                       gamePanel.add(new Board(1));
+			                       frame.setContentPane(gamePanel);
+			                       frame.pack();
+		                       });
+		map2.addActionListener(e ->
+		                       {
+			                       final JPanel gamePanel=new JPanel(new BorderLayout());
+			                       createToolBar(gamePanel);
+			                       gamePanel.add(new Board(2));
+			                       frame.setContentPane(gamePanel);
+			                       frame.pack();
+		                       });
 	}
 	
 	/**
@@ -237,15 +223,11 @@ public class Game
 		afterPanel.add(tryAgainButton);
 		
 		frame.setContentPane(afterPanel);
-		tryAgainButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				frame.setContentPane(panel);
-				frame.setSize(800, 800);
-			}
-		});
+		tryAgainButton.addActionListener(e ->
+		                                 {
+			                                 frame.setContentPane(panel);
+			                                 frame.setSize(800, 800);
+		                                 });
 		frame.setVisible(true);
 		resetHP();
 	}
@@ -274,24 +256,16 @@ public class Game
 		toolBar.add(new JLabel("     "));
 		toolBar.add(goButton);
 		gamePanel.add(toolBar, BorderLayout.NORTH);
-		goButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				Board.getTimer().start();
-				goButton.setEnabled(false);
-			}
-		});
+		goButton.addActionListener(e ->
+		                           {
+			                           Board.getTimer().start();
+			                           goButton.setEnabled(false);
+		                           });
 		
-		fastForwardButton.addActionListener(new ActionListener()
-		{
-			@Override
-			public void actionPerformed(ActionEvent e)
-			{
-				Board.getTimer().setFastForward(!Board.getTimer().isFastForward());
-				fastForwardButton.setText(Board.getTimer().isFastForward() ? "Slow Down" : "Fast Forward");
-			}
-		});
+		fastForwardButton.addActionListener(e ->
+		                                    {
+			                                    Board.getTimer().setFastForward(!Board.getTimer().isFastForward());
+			                                    fastForwardButton.setText(Board.getTimer().isFastForward() ? "Slow Down" : "Fast Forward");
+		                                    });
 	}
 }

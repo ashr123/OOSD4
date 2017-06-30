@@ -82,62 +82,46 @@ public class Board extends JPanel
 					lavaButton.setText(numOfLava+"");
 					JButton magicianButton=new JButton(IMAGE_ICON_TOWER_MAGICIAN);
 					magicianButton.setText(numOfMagician+"");
-					dartButton.addActionListener(new ActionListener()
-					{
-						@Override
-						public void actionPerformed(final ActionEvent e1)
-						{
-							if (numOfDart>0)
-							{
-								timer.register(new Dart(new Point(e.getX()*32/800, e.getY()*32/800)));
-								numOfDart--;
-								repaint();
-								towerWindow.dispose();
-							}
-						}
-					});
-					poisonButton.addActionListener(new ActionListener()
-					{
-						@Override
-						public void actionPerformed(final ActionEvent e1)
-						{
-							if (numOfPoison>0)
-							{
-								timer.register(new Poison(new Point(e.getX()*32/800, e.getY()*32/800)));
-								numOfPoison--;
-								repaint();
-								towerWindow.dispose();
-							}
-						}
-					});
-					lavaButton.addActionListener(new ActionListener()
-					{
-						@Override
-						public void actionPerformed(final ActionEvent e1)
-						{
-							if (numOfLava>0)
-							{
-								timer.register(new Lava(new Point(e.getX()*32/800, e.getY()*32/800)));
-								numOfLava--;
-								repaint();
-								towerWindow.dispose();
-							}
-						}
-					});
-					magicianButton.addActionListener(new ActionListener()
-					{
-						@Override
-						public void actionPerformed(final ActionEvent e1)
-						{
-							if (numOfMagician>0)
-							{
-								timer.register(new Magician(new Point(e.getX()*32/800, e.getY()*32/800)));
-								numOfMagician--;
-								repaint();
-								towerWindow.dispose();
-							}
-						}
-					});
+					dartButton.addActionListener(e1 ->
+					                             {
+						                             if (numOfDart>0)
+						                             {
+							                             timer.register(new Dart(new Point(e.getX()*32/800, e.getY()*32/800)));
+							                             numOfDart--;
+							                             repaint();
+							                             towerWindow.dispose();
+						                             }
+					                             });
+					poisonButton.addActionListener(e1 ->
+					                               {
+						                               if (numOfPoison>0)
+						                               {
+							                               timer.register(new Poison(new Point(e.getX()*32/800, e.getY()*32/800)));
+							                               numOfPoison--;
+							                               repaint();
+							                               towerWindow.dispose();
+						                               }
+					                               });
+					lavaButton.addActionListener(e1 ->
+					                             {
+						                             if (numOfLava>0)
+						                             {
+							                             timer.register(new Lava(new Point(e.getX()*32/800, e.getY()*32/800)));
+							                             numOfLava--;
+							                             repaint();
+							                             towerWindow.dispose();
+						                             }
+					                             });
+					magicianButton.addActionListener(e1 ->
+					                                 {
+						                                 if (numOfMagician>0)
+						                                 {
+							                                 timer.register(new Magician(new Point(e.getX()*32/800, e.getY()*32/800)));
+							                                 numOfMagician--;
+							                                 repaint();
+							                                 towerWindow.dispose();
+						                                 }
+					                                 });
 					
 					towerWindow.add(dartButton);
 					towerWindow.add(poisonButton);

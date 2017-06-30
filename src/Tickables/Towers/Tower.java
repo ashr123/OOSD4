@@ -1,10 +1,9 @@
 package Tickables.Towers;
 
-import Tickables.Creeps.*;
 import Manage.Board;
+import Tickables.Creeps.*;
 import Tickables.Tickable;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -85,8 +84,8 @@ public abstract class Tower implements Tickable//Represents also the Visitor
 			}
 	}
 	
-	@Override
-	public abstract ImageIcon getImageIcon();
+	//@Override
+	//public abstract ImageIcon getImageIcon();
 	
 	/**
 	 * @return if this tower has been clicked

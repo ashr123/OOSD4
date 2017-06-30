@@ -16,18 +16,14 @@ public class Game
 	private static final LevelLoader loader=new LevelLoader();
 	private static final ImageIcon IMAGE_MAP_1=
 			new ImageIcon(new ImageIcon(Game.class.getResource("/Media/toolbar/level0.png"))
-					              .getImage().getScaledInstance(200,200,
-					                                            Image.SCALE_SMOOTH));
-	private static final ImageIcon IMAGE_MAP_2=
-			new ImageIcon(new ImageIcon(Game.class.getResource("/Media/toolbar/level1.png"))
 					              .getImage().getScaledInstance(200, 200,
-					                                            Image.SCALE_SMOOTH));
-	private static final ImageIcon IMAGE_MAP_3=
-			new ImageIcon(new ImageIcon(Game.class.getResource("/Media/toolbar/level2.png"))
-					              .getImage().getScaledInstance(200, 200,
-					                                            Image.SCALE_SMOOTH));
-	private static final JLabel WaveLBL=new JLabel("Wave: 1    ");
-	private static final JLabel TimeLBL=new JLabel("Time: 0    ");
+					                                            Image.SCALE_SMOOTH)),
+			IMAGE_MAP_2=new ImageIcon(new ImageIcon(Game.class.getResource("/Media/toolbar/level1.png"))
+					                          .getImage().getScaledInstance(200, 200,
+					                                                        Image.SCALE_SMOOTH)),
+			IMAGE_MAP_3=new ImageIcon(new ImageIcon(Game.class.getResource("/Media/toolbar/level2.png"))
+					                          .getImage().getScaledInstance(200, 200,
+					                                                        Image.SCALE_SMOOTH));
 	private static final JFrame frame=new JFrame("Tower Defence");
 	private static final JPanel panel=new JPanel(new BorderLayout());
 	private static final JButton goButton=new JButton("Go!");
@@ -35,7 +31,8 @@ public class Game
 	 * Represents the helth-points of the player
 	 */
 	private static int HP;
-	private static final JLabel HPLBL=new JLabel("HP: "+HP+"    ");
+	private static final JLabel WaveLBL=new JLabel("Wave: 1    "), TimeLBL=new JLabel("Time: 0    "),
+			HPLBL=new JLabel("HP: "+HP+"    ");
 	
 	/**
 	 * Builds the main frame: the maps selection frame
@@ -265,7 +262,8 @@ public class Game
 		fastForwardButton.addActionListener(e ->
 		                                    {
 			                                    Board.getTimer().setFastForward(!Board.getTimer().isFastForward());
-			                                    fastForwardButton.setText(Board.getTimer().isFastForward() ? "Slow Down" : "Fast Forward");
+			                                    fastForwardButton.setText(Board.getTimer()
+			                                                                   .isFastForward() ? "Slow Down" : "Fast Forward");
 		                                    });
 	}
 }

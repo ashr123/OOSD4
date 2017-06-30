@@ -15,25 +15,19 @@ public class Board extends JPanel
 {
 	private static final ImageIcon IMAGE_ICON_TOWER_LAVA=new ImageIcon(new ImageIcon(Board.class.getResource(
 			"/Media/towers/Lava.png")).getImage().getScaledInstance(100, 162,
-	                                                                  Image.SCALE_SMOOTH));
-	private static final ImageIcon IMAGE_ICON_TOWER_DART=new ImageIcon(new ImageIcon(Board.class.getResource(
+	                                                                  Image.SCALE_SMOOTH)),
+			IMAGE_ICON_TOWER_DART=new ImageIcon(new ImageIcon(Board.class.getResource(
 			"/Media/towers/Dart.png")).getImage().getScaledInstance(100, 135,
-	                                                                  Image.SCALE_SMOOTH));
-	private static final ImageIcon IMAGE_ICON_TOWER_POISON=new ImageIcon(new ImageIcon(Board.class.getResource(
+	                                                                  Image.SCALE_SMOOTH)),
+			IMAGE_ICON_TOWER_POISON=new ImageIcon(new ImageIcon(Board.class.getResource(
 			"/Media/towers/Poison.png")).getImage().getScaledInstance(100, 131,
-	                                                                    Image.SCALE_SMOOTH));
-	private static final ImageIcon IMAGE_ICON_TOWER_MAGICIAN=new ImageIcon(new ImageIcon(Board.class.getResource("/Media/towers/Magician.png")).getImage().getScaledInstance(100, 145, Image.SCALE_SMOOTH));
-	private static final ImageIcon IMAGE_ICON_GRASS=
-			new ImageIcon(Board.class.getResource("/Media/environment/grass.png"));
-	private static final ImageIcon IMAGE_ICON_PATH=
-			new ImageIcon(Board.class.getResource("/Media/environment/path.png"));
+	                                                                    Image.SCALE_SMOOTH)),
+			IMAGE_ICON_TOWER_MAGICIAN=new ImageIcon(new ImageIcon(Board.class.getResource("/Media/towers/Magician.png")).getImage().getScaledInstance(100, 145, Image.SCALE_SMOOTH)),
+			IMAGE_ICON_GRASS=new ImageIcon(Board.class.getResource("/Media/environment/grass.png")),
+			IMAGE_ICON_PATH=new ImageIcon(Board.class.getResource("/Media/environment/path.png"));
 	private static int mapNum;
 	private static Timer timer;
-	private final Point[][] boardPath;
-	private int numOfDart;
-	private int numOfLava;
-	private int numOfPoison;
-	private int numOfMagician;
+	private int numOfDart=3, numOfLava=3, numOfPoison=3, numOfMagician=3;
 	
 	/**
 	 * Builds a new board
@@ -45,8 +39,6 @@ public class Board extends JPanel
 		Board.mapNum=mapNum;
 		timer=new Timer(this);
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		boardPath=Game.getLoader().get(mapNum);
-		numOfDart=numOfLava=numOfPoison=numOfMagician=3;
 		
 		addMouseListener(new MouseListener()
 		{
@@ -54,7 +46,7 @@ public class Board extends JPanel
 			 * Builds a new frame to choose a tower from only if its between waves andthe user didn't clicked on the path
 			 */
 			@Override
-			public void mouseClicked(final MouseEvent e)
+			public void mouseClicked(MouseEvent e)
 			{
 				for (Tickable t : timer.getTickables())
 					if (t instanceof Tower && t.getLocation().equals(new Point(e.getX()*32/800,
@@ -64,9 +56,9 @@ public class Board extends JPanel
 						repaint();
 						return;
 					}
-				if (timer.isRunning())
+				if (getTimer().isRunning())
 					return;
-				if (boardPath[e.getX()*32/800][e.getY()*32/800].equals(new Point()))
+				if (Game.getLoader().get(mapNum)[e.getX()*32/800][e.getY()*32/800].equals(new Point()))
 				{
 					Graphics graphics=getGraphics();
 					graphics.setColor(Color.decode("#132044"));
@@ -86,7 +78,7 @@ public class Board extends JPanel
 					                             {
 						                             if (numOfDart>0)
 						                             {
-							                             timer.register(new Dart(new Point(e.getX()*32/800, e.getY()*32/800)));
+							                             getTimer().register(new Dart(new Point(e.getX()*32/800, e.getY()*32/800)));
 							                             numOfDart--;
 							                             repaint();
 							                             towerWindow.dispose();
@@ -96,7 +88,7 @@ public class Board extends JPanel
 					                               {
 						                               if (numOfPoison>0)
 						                               {
-							                               timer.register(new Poison(new Point(e.getX()*32/800, e.getY()*32/800)));
+							                               getTimer().register(new Poison(new Point(e.getX()*32/800, e.getY()*32/800)));
 							                               numOfPoison--;
 							                               repaint();
 							                               towerWindow.dispose();
@@ -106,7 +98,7 @@ public class Board extends JPanel
 					                             {
 						                             if (numOfLava>0)
 						                             {
-							                             timer.register(new Lava(new Point(e.getX()*32/800, e.getY()*32/800)));
+							                             getTimer().register(new Lava(new Point(e.getX()*32/800, e.getY()*32/800)));
 							                             numOfLava--;
 							                             repaint();
 							                             towerWindow.dispose();
@@ -116,7 +108,7 @@ public class Board extends JPanel
 					                                 {
 						                                 if (numOfMagician>0)
 						                                 {
-							                                 timer.register(new Magician(new Point(e.getX()*32/800, e.getY()*32/800)));
+							                                 getTimer().register(new Magician(new Point(e.getX()*32/800, e.getY()*32/800)));
 							                                 numOfMagician--;
 							                                 repaint();
 							                                 towerWindow.dispose();
@@ -225,19 +217,20 @@ public class Board extends JPanel
 	public void paint(Graphics g)
 	{
 		Game.getHPLBL().setText("HP: "+Game.getHP()+"    ");
-		Game.getTimeLBL().setText("Time: "+timer.getTime()+"    ");
-		Game.getWaveLBL().setText("Wave: "+timer.getWave()+"    ");
-		if (!timer.isRunning())
+		Game.getTimeLBL().setText("Time: "+getTimer().getTime()+"    ");
+		Game.getWaveLBL().setText("Wave: "+getTimer().getWave()+"    ");
+		if (!getTimer().isRunning())
 			Game.getGoButton().setEnabled(true);
-		for (int i=0; i<boardPath.length; i++)
-			for (int j=0; j<boardPath[i].length; j++)
-				if (boardPath[i][j].getX()==0 && boardPath[i][j].getY()==0)
+		for (int i=0; i<Game.getLoader().get(getMapNum()).length; i++)
+			for (int j=0; j<Game.getLoader().get(getMapNum())[i].length; j++)
+				if (Game.getLoader().get(getMapNum())[i][j].getX()==0 &&
+				    Game.getLoader().get(getMapNum())[i][j].getY()==0)
 					g.drawImage(IMAGE_ICON_GRASS.getImage(), i*25, j*25, 25, 25,
 					            this);
 				else
 					g.drawImage(IMAGE_ICON_PATH.getImage(), i*25, j*25, 25, 25, this);
 		
-		for (Tickable t : timer.getTickables())//Draws all Tickables
+		for (Tickable t : getTimer().getTickables())//Draws all Tickables
 		{
 			if (t instanceof Tower)
 				if (t instanceof Dart)
@@ -251,7 +244,7 @@ public class Board extends JPanel
 						markNeighbors((int)t.getLocation().getX()*25,
 						              (int)t.getLocation().getY()*25, g);
 		}
-		for (Tickable t : timer.getTickables())
+		for (Tickable t : getTimer().getTickables())
 		{
 			if (t instanceof Creep && ((Creep)t).isInjured())//Marks square of injured creep
 			{

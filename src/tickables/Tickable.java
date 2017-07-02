@@ -1,4 +1,4 @@
-package Tickables;
+package tickables;
 
 import javax.swing.*;
 import java.awt.*;

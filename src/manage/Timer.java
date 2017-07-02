@@ -1,7 +1,7 @@
-package Manage;
+package manage;
 
-import Tickables.Creeps.*;
-import Tickables.Tickable;
+import tickables.creeps.*;
+import tickables.Tickable;
 
 import java.awt.*;
 import java.util.LinkedList;

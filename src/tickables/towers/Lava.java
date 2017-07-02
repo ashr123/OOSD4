@@ -1,11 +1,11 @@
-package Tickables.Towers;
+package tickables.towers;
 
-import Tickables.Creeps.Knight;
-import Tickables.Creeps.Mike;
-import Tickables.Creeps.Naji;
-import Tickables.Creeps.Skully;
-import Manage.Board;
-import Tickables.Tickable;
+import tickables.creeps.Knight;
+import tickables.creeps.Mike;
+import tickables.creeps.Naji;
+import tickables.creeps.Skully;
+import manage.Board;
+import tickables.Tickable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +19,7 @@ public class Lava extends Tower
 	 * Stores this lava's image
 	 */
 	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("/Media/towers/Lava.png"));
+			new ImageIcon(Tickable.class.getResource("/media/towers/Lava.png"));
 	
 	/**
 	 * Creates a new lava

@@ -1,8 +1,8 @@
-package Tickables.Creeps;
+package tickables.creeps;
 
-import Manage.Board;
-import Tickables.Tickable;
-import Tickables.Towers.Tower;
+import manage.Board;
+import tickables.Tickable;
+import tickables.towers.Tower;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +16,7 @@ public class Mike extends Creep
 	 * Stores this mike's image
 	 */
 	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("/Media/creeps/mike-1.png"));
+			new ImageIcon(Tickable.class.getResource("/media/creeps/mike-1.png"));
 	
 	/**
 	 * Creates a new mike

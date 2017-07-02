@@ -1,4 +1,4 @@
-package Manage;
+package manage;
 
 import java.awt.*;
 import java.io.BufferedReader;

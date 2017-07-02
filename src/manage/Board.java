@@ -1,8 +1,8 @@
-package Manage;
+package manage;
 
-import Tickables.Creeps.Creep;
-import Tickables.Tickable;
-import Tickables.Towers.*;
+import tickables.creeps.Creep;
+import tickables.Tickable;
+import tickables.towers.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,17 +14,18 @@ import java.awt.event.*;
 public class Board extends JPanel
 {
 	private static final ImageIcon IMAGE_ICON_TOWER_LAVA=new ImageIcon(new ImageIcon(Board.class.getResource(
-			"/Media/towers/Lava.png")).getImage().getScaledInstance(100, 162,
-	                                                                  Image.SCALE_SMOOTH)),
+			"/media/towers/Lava.png")).getImage().getScaledInstance(100, 162,
+	                                                                Image.SCALE_SMOOTH)),
 			IMAGE_ICON_TOWER_DART=new ImageIcon(new ImageIcon(Board.class.getResource(
-			"/Media/towers/Dart.png")).getImage().getScaledInstance(100, 135,
-	                                                                  Image.SCALE_SMOOTH)),
+					"/media/towers/Dart.png")).getImage().getScaledInstance(100, 135,
+			                                                                Image.SCALE_SMOOTH)),
 			IMAGE_ICON_TOWER_POISON=new ImageIcon(new ImageIcon(Board.class.getResource(
-			"/Media/towers/Poison.png")).getImage().getScaledInstance(100, 131,
-	                                                                    Image.SCALE_SMOOTH)),
-			IMAGE_ICON_TOWER_MAGICIAN=new ImageIcon(new ImageIcon(Board.class.getResource("/Media/towers/Magician.png")).getImage().getScaledInstance(100, 145, Image.SCALE_SMOOTH)),
-			IMAGE_ICON_GRASS=new ImageIcon(Board.class.getResource("/Media/environment/grass.png")),
-			IMAGE_ICON_PATH=new ImageIcon(Board.class.getResource("/Media/environment/path.png"));
+					"/media/towers/Poison.png")).getImage().getScaledInstance(100, 131,
+			                                                                  Image.SCALE_SMOOTH)),
+			IMAGE_ICON_TOWER_MAGICIAN=new ImageIcon(new ImageIcon(Board.class.getResource(
+					"/media/towers/Magician.png")).getImage().getScaledInstance(100, 145, Image.SCALE_SMOOTH)),
+			IMAGE_ICON_GRASS=new ImageIcon(Board.class.getResource("/media/environment/grass.png")),
+			IMAGE_ICON_PATH=new ImageIcon(Board.class.getResource("/media/environment/path.png"));
 	private static int mapNum;
 	private static Timer timer;
 	private int numOfDart=3, numOfLava=3, numOfPoison=3, numOfMagician=3;
@@ -230,7 +231,7 @@ public class Board extends JPanel
 				else
 					g.drawImage(IMAGE_ICON_PATH.getImage(), i*25, j*25, 25, 25, this);
 		
-		for (Tickable t : getTimer().getTickables())//Draws all Tickables
+		for (Tickable t : getTimer().getTickables())//Draws all tickables
 		{
 			if (t instanceof Tower)
 				if (t instanceof Dart)

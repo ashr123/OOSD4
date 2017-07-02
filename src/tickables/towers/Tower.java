@@ -1,8 +1,8 @@
-package Tickables.Towers;
+package tickables.towers;
 
-import Tickables.Creeps.*;
-import Manage.Board;
-import Tickables.Tickable;
+import tickables.creeps.*;
+import manage.Board;
+import tickables.Tickable;
 
 import javax.swing.*;
 import java.awt.*;

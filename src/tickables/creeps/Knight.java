@@ -1,8 +1,8 @@
-package Tickables.Creeps;
+package tickables.creeps;
 
-import Manage.Board;
-import Tickables.Tickable;
-import Tickables.Towers.Tower;
+import manage.Board;
+import tickables.Tickable;
+import tickables.towers.Tower;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +18,7 @@ public class Knight extends Creep
 	 * Stores this knight's image
 	 */
 	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("/Media/creeps/abir-1.png"));
+			new ImageIcon(Tickable.class.getResource("/media/creeps/abir-1.png"));
 	/**
 	 * States the severity of poisoning
 	 */

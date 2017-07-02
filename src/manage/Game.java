@@ -1,4 +1,4 @@
-package Manage;
+package manage;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -15,13 +15,13 @@ public class Game
 {
 	private static final LevelLoader loader=new LevelLoader();
 	private static final ImageIcon IMAGE_MAP_1=
-			new ImageIcon(new ImageIcon(Game.class.getResource("/Media/toolbar/level0.png"))
+			new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level0.png"))
 					              .getImage().getScaledInstance(200, 200,
 					                                            Image.SCALE_SMOOTH)),
-			IMAGE_MAP_2=new ImageIcon(new ImageIcon(Game.class.getResource("/Media/toolbar/level1.png"))
+			IMAGE_MAP_2=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level1.png"))
 					                          .getImage().getScaledInstance(200, 200,
 					                                                        Image.SCALE_SMOOTH)),
-			IMAGE_MAP_3=new ImageIcon(new ImageIcon(Game.class.getResource("/Media/toolbar/level2.png"))
+			IMAGE_MAP_3=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level2.png"))
 					                          .getImage().getScaledInstance(200, 200,
 					                                                        Image.SCALE_SMOOTH));
 	private static final JFrame frame=new JFrame("Tower Defence");
@@ -41,7 +41,7 @@ public class Game
 	private Game() throws IOException
 	{
 		loader.load();
-		final JLabel maps=new JLabel("Please Choose a Map:");
+		final JLabel maps=new JLabel("Please choose a map:");
 		maps.setFont(new Font("Courier", Font.BOLD, 20));
 		final JButton map0=new JButton(IMAGE_MAP_1);
 		final JButton map1=new JButton(IMAGE_MAP_2);
@@ -111,7 +111,7 @@ public class Game
 	                                                 UnsupportedAudioFileException
 	{
 		final Clip clip=AudioSystem.getClip();
-		clip.open(AudioSystem.getAudioInputStream(Game.class.getResource("/Sounds/backgroundMusic.wav")));
+		clip.open(AudioSystem.getAudioInputStream(Game.class.getResource("/sounds/backgroundMusic.wav")));
 		clip.loop(Integer.MAX_VALUE);
 	}
 	
@@ -193,17 +193,19 @@ public class Game
 		final JPanel afterPanel=new JPanel();
 		afterPanel.setLayout(new BoxLayout(afterPanel, BoxLayout.PAGE_AXIS));
 		final JLabel hpLeft=new JLabel("HP:  "+getHP());
-		final JLabel passedCreeps=new JLabel("Passed Tickables.Creeps:  "+Board.getTimer().getTotalPassedCreeps());
-		final JLabel deadCreeps=new JLabel("Dead Tickables.Creeps:  "+Board.getTimer().getTotalDeadCreeps());
+		final JLabel passedCreeps=new JLabel("Passed creeps:  "+Board.getTimer().getTotalPassedCreeps());
+		final JLabel deadCreeps=new JLabel("Dead creeps:  "+Board.getTimer().getTotalDeadCreeps());
 		final JLabel time=new JLabel("Time elapsed:  "+Board.getTimer().getTime()+" seconds");
 		final JButton tryAgainButton=new JButton("Choose a different map");
 		
-		afterLabel.setFont(new Font("Courier", Font.PLAIN, 26));
-		hpLeft.setFont(new Font("Courier", Font.PLAIN, 20));
-		passedCreeps.setFont(new Font("Courier", Font.PLAIN, 20));
-		deadCreeps.setFont(new Font("Courier", Font.PLAIN, 20));
-		time.setFont(new Font("Courier", Font.PLAIN, 20));
-		tryAgainButton.setFont(new Font("Courier", Font.PLAIN, 26));
+		final Font smallFont=new Font("Courier", Font.PLAIN, 20),
+				bigFont=new Font("Courier", Font.PLAIN, 26);
+		afterLabel.setFont(bigFont);
+		hpLeft.setFont(smallFont);
+		passedCreeps.setFont(smallFont);
+		deadCreeps.setFont(smallFont);
+		time.setFont(smallFont);
+		tryAgainButton.setFont(bigFont);
 		
 		afterLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		hpLeft.setAlignmentX(Component.CENTER_ALIGNMENT);

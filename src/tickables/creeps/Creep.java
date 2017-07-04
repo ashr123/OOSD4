@@ -20,7 +20,7 @@ public abstract class Creep implements Tickable
 	/**
 	 * Represents this creep's location
 	 */
-	private Point location;
+	private final Point location;
 	/**
 	 * Indicates if this creep has been injured
 	 */

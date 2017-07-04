@@ -1,11 +1,12 @@
 package tickables.towers;
 
-import tickables.creeps.*;
 import manage.Board;
 import tickables.Tickable;
+import tickables.creeps.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Iterator;
 
 /**
  * Represents a general type of tower
@@ -75,7 +76,11 @@ public abstract class Tower implements Tickable//Represents also the Visitor
 	 */
 	void hitCreep(int range, boolean isCashan)
 	{
-		for (Tickable tickable : Board.getTimer().getTickables())
+		//for (Tickable tickable : Board.getTimer().getTickables())
+		Iterator<Tickable> listIterator=Board.getTimer().getTickables().descendingIterator();
+		while (listIterator.hasNext())
+		{
+			Tickable tickable=listIterator.next();
 			if (tickable instanceof Creep &&
 			    tickable.getLocation().distance(getLocation())<=range*Math.sqrt(2))
 			{
@@ -83,6 +88,7 @@ public abstract class Tower implements Tickable//Represents also the Visitor
 				if (!isCashan)
 					return;
 			}
+		}
 	}
 	
 	@Override

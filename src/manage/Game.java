@@ -11,7 +11,8 @@ import java.io.IOException;
 /**
  * Represents the main class of this game
  */
-public class Game
+@SuppressWarnings("MagicNumber")
+public final class Game
 {
 	private static final LevelLoader loader=new LevelLoader();
 	private static final ImageIcon IMAGE_MAP_1=
@@ -170,7 +171,7 @@ public class Game
 	 */
 	static void playerWon()
 	{
-		final JLabel wonMes=new JLabel("You Won!"+"\n");
+		final JLabel wonMes=new JLabel("You Won!"+'\n');
 		after(wonMes);
 	}
 	
@@ -179,7 +180,7 @@ public class Game
 	 */
 	private static void playerLost()
 	{
-		final JLabel lostMes=new JLabel("You Lost!"+"\n");
+		final JLabel lostMes=new JLabel("You Lost!"+'\n');
 		after(lostMes);
 	}
 	
@@ -243,7 +244,7 @@ public class Game
 	 * Creates the toolbar for the new game
 	 * @param gamePanel the toolbar will be inserted to this panel
 	 */
-	private void createToolBar(JPanel gamePanel)
+	private static void createToolBar(JPanel gamePanel)
 	{
 		final JToolBar toolBar=new JToolBar();
 		toolBar.setFloatable(false);

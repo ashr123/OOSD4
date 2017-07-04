@@ -6,8 +6,6 @@ import tickables.towers.Tower;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 /**
  * Represents a {@code Knight}
@@ -31,18 +29,14 @@ public class Knight extends Creep
 	/**
 	 * Responsible of canceling the poison's effect
 	 */
-	private final javax.swing.Timer cancelEffect=new javax.swing.Timer(2500, new ActionListener()
+	private final Timer cancelEffect=new Timer(2500, e ->
 	{
-		@Override
-		public void actionPerformed(ActionEvent e)
-		{
-			if ((!Board.getTimer().isFastForward() && ticks%2==0)/*Every 5 seconds*/ ||
-			    (Board.getTimer().isFastForward())/*Every 2.5 seconds*/)
-				isPoisoned=false;
-			ticks++;
-			if (isPoisoned())
-				cancelEffect.restart();
-		}
+		if ((!Board.getTimer().isFastForward() && ticks%2==0)/*Every 5 seconds*/ ||
+		    (Board.getTimer().isFastForward())/*Every 2.5 seconds*/)
+			isPoisoned=false;
+		ticks++;
+		if (isPoisoned())
+			((Timer)e.getSource()).restart();
 	});
 	
 	/**
@@ -53,6 +47,7 @@ public class Knight extends Creep
 	public Knight(Point location)
 	{
 		super(location);
+		cancelEffect.setRepeats(false);
 	}
 	
 	/**
@@ -98,7 +93,6 @@ public class Knight extends Creep
 	{
 		ticks=1;
 		isPoisoned=true;
-		cancelEffect.setRepeats(false);
 		cancelEffect.restart();
 	}
 }

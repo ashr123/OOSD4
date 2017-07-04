@@ -4,8 +4,9 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Vector;
+import java.util.ArrayList;
 
+@SuppressWarnings("ClassHasNoToStringMethod")
 public class LevelLoader
 {
 	private static final char CHAR_RIGHT='>';
@@ -17,12 +18,7 @@ public class LevelLoader
 	/**
 	 * Contains the initial board state of all the levels
 	 */
-	private Vector<Point[][]> _levels;
-	
-	LevelLoader()
-	{
-		_levels=new Vector<>();
-	}
+	private final ArrayList<Point[][]> _levels=new ArrayList<>();
 	
 	/**
 	 * Creates {@link Point} instance from {@code char} representation

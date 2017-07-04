@@ -11,6 +11,7 @@ import java.util.Random;
 /**
  * Represents the "engine" of the game responsible for the towers's attacks and the movement of the creeps
  */
+@SuppressWarnings("ClassHasNoToStringMethod")
 public class Timer
 {
 	/**
@@ -171,7 +172,7 @@ public class Timer
 	/**
 	 * @return the starting point of the creeps to be created
 	 */
-	private Point getStartLocation()
+	private static Point getStartLocation()
 	{
 		for (int i=0; i<Game.getLoader().get(Board.getMapNum())[0].length; i++)
 			if (!Game.getLoader().get(Board.getMapNum())[0][i].equals(new Point()))

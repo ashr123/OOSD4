@@ -11,6 +11,7 @@ import java.awt.event.*;
 /**
  * Represents the {@code Board}
  */
+@SuppressWarnings({"ClassHasNoToStringMethod", "MagicNumber"})
 public class Board extends JPanel
 {
 	private static final ImageIcon IMAGE_ICON_TOWER_LAVA=new ImageIcon(new ImageIcon(Board.class.getResource(
@@ -183,7 +184,7 @@ public class Board extends JPanel
 	 * @param yPosition the {@code y} coordinate of the tower
 	 * @param g the {@code Graphics} context in which to paint
 	 */
-	private void markNeighborsBig(int xPosition, int yPosition, Graphics g)
+	private static void markNeighborsBig(int xPosition, int yPosition, Graphics g)
 	{
 		g.setColor(Color.decode("#42f46e"));
 		g.fillRect(((xPosition*32/800)+1)*25, yPosition*32/800*25, 25, 25);
@@ -265,7 +266,7 @@ public class Board extends JPanel
 	 * @param yPosition the {@code y} coordinate of the tower
 	 * @param g the {@code Graphics} context in which to paint
 	 */
-	private void markNeighbors(int xPosition, int yPosition, Graphics g)
+	private static void markNeighbors(int xPosition, int yPosition, Graphics g)
 	{
 		g.setColor(Color.decode("#d3d9ed"));
 		g.fillRect(((xPosition*32/800)+1)*25, yPosition*32/800*25, 25, 25);

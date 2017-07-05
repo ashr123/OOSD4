@@ -121,11 +121,8 @@ public class Board extends JPanel
 					towerWindow.add(poisonButton);
 					towerWindow.add(lavaButton);
 					towerWindow.add(magicianButton);
-					towerWindow.setVisible(true);
-					towerWindow.setSize(150, 150);
-					towerWindow.setResizable(false);
 					towerWindow.pack();
-					
+					towerWindow.setResizable(false);
 					towerWindow.addWindowListener(new WindowAdapter()
 					{
 						public void windowClosing(WindowEvent e)
@@ -133,6 +130,7 @@ public class Board extends JPanel
 							repaint();
 						}
 					});
+					towerWindow.setVisible(true);
 				}
 			}
 			
@@ -233,19 +231,13 @@ public class Board extends JPanel
 					g.drawImage(IMAGE_ICON_PATH.getImage(), i*25, j*25, 25, 25, this);
 		
 		for (Tickable t : getTimer().getTickables())//Draws all tickables
-		{
-			if (t instanceof Tower)
+			if (t instanceof Tower && ((Tower)t).isClicked())
 				if (t instanceof Dart)
-				{
-					if (((Dart)t).isClicked())
-						markNeighborsBig((int)t.getLocation().getX()*25,
-						                 (int)t.getLocation().getY()*25, g);
-				}
+					markNeighborsBig((int)t.getLocation().getX()*25,
+					                 (int)t.getLocation().getY()*25, g);
 				else
-					if (((Tower)t).isClicked())
-						markNeighbors((int)t.getLocation().getX()*25,
-						              (int)t.getLocation().getY()*25, g);
-		}
+					markNeighbors((int)t.getLocation().getX()*25,
+					              (int)t.getLocation().getY()*25, g);
 		for (Tickable t : getTimer().getTickables())
 		{
 			if (t instanceof Creep && ((Creep)t).isInjured())//Marks square of injured creep

@@ -158,7 +158,7 @@ public class Timer
 	 */
 	void register(Tickable tickable)
 	{
-		tickables.addFirst(tickable);
+		getTickables().addFirst(tickable);
 	}
 	
 	/**

@@ -5,7 +5,6 @@ import manage.Game;
 import tickables.Tickable;
 import tickables.towers.Tower;
 
-import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -35,12 +34,6 @@ public abstract class Creep implements Tickable
 	{
 		this.location=location;
 	}
-	
-	/**
-	 * Moves the {@code Creep} to a new location
-	 */
-	@Override
-	public abstract void tickHappened();
 	
 	/**
 	 * Orders this creep to be impacted
@@ -82,8 +75,6 @@ public abstract class Creep implements Tickable
 		                                 .get(Board.getMapNum())
 				                             [(int)getLocation().getX()][(int)getLocation().getY()].getY());
 	}
-	
-	public abstract ImageIcon getImageIcon();
 	
 	/**
 	 * @return {@code true} if this creep has been injured, {@code false} otherwise

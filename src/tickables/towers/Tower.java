@@ -4,7 +4,6 @@ import manage.Board;
 import tickables.Tickable;
 import tickables.creeps.*;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.Iterator;
 
@@ -31,9 +30,6 @@ public abstract class Tower implements Tickable//Represents also the Visitor
 	{
 		this.location=location;
 	}
-	
-	@Override
-	public abstract void tickHappened();
 	
 	/**
 	 * Injures a {@code Knight}
@@ -90,9 +86,6 @@ public abstract class Tower implements Tickable//Represents also the Visitor
 			}
 		}
 	}
-	
-	@Override
-	public abstract ImageIcon getImageIcon();
 	
 	/**
 	 * @return if this tower has been clicked

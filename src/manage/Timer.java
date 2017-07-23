@@ -44,7 +44,6 @@ public class Timer
 	{
 		timer=new javax.swing.Timer(250, e ->
 		{
-			@SuppressWarnings("ConstantConditions")
 			ListIterator<Tickable> iterator=getTickables().listIterator();
 			while (iterator.hasNext())
 			{
@@ -77,6 +76,7 @@ public class Timer
 				final Creeps[] enumConstants=Creeps.class.getEnumConstants();
 				boolean isRegistered=false;
 				while (!isRegistered)
+					//noinspection UnsecureRandomNumberGeneration
 					switch (enumConstants[new Random().nextInt(enumConstants.length)])
 					{
 						case MIKE:
@@ -174,8 +174,9 @@ public class Timer
 	 */
 	private static Point getStartLocation()
 	{
+		Point zeroPoint=new Point();
 		for (int i=0; i<Game.getLoader().get(Board.getMapNum())[0].length; i++)
-			if (!Game.getLoader().get(Board.getMapNum())[0][i].equals(new Point()))
+			if (!Game.getLoader().get(Board.getMapNum())[0][i].equals(zeroPoint))
 				return new Point(0, i);
 		return null;
 	}

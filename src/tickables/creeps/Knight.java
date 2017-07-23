@@ -51,7 +51,7 @@ public class Knight extends Creep
 	}
 	
 	/**
-	 * @return returns the {@link Knight#POISON_DEGREE} of this knight
+	 * @return the {@link Knight#POISON_DEGREE} of this knight
 	 */
 	public static double getPoisonDegree()
 	{

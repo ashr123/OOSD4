@@ -51,7 +51,7 @@ public class Naji extends Creep
 	}
 	
 	/**
-	 * @return returns the {@link Naji#POISON_DEGREE} of this naji
+	 * @return the {@link Naji#POISON_DEGREE} of this naji
 	 */
 	public static double getPoisonDegree()
 	{

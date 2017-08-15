@@ -72,7 +72,6 @@ public abstract class Tower implements Tickable//Represents also the Visitor
 	 */
 	void hitCreep(int range, boolean isCashan)
 	{
-		//for (Tickable tickable : Board.getTimer().getTickables())
 		Iterator<Tickable> listIterator=Board.getTimer().getTickables().descendingIterator();
 		while (listIterator.hasNext())
 		{
@@ -103,4 +102,14 @@ public abstract class Tower implements Tickable//Represents also the Visitor
 	{
 		this.clicked=clicked;
 	}
+	
+	/**
+	 * @return the affected area of this tower
+	 */
+	public abstract int getRadius();
+	
+	/**
+	 * @return the color of the affected area of this tower
+	 */
+	public abstract Color getRadiusColor();
 }

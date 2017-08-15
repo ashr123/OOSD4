@@ -20,6 +20,14 @@ public class Poison extends Tower
 	 */
 	private static final ImageIcon IMAGE_ICON=
 			new ImageIcon(Tickable.class.getResource("/media/towers/Poison.png"));
+	/**
+	 * The radius of the affected area
+	 */
+	private static final int RADIUS=1;
+	/**
+	 * The color of the affected area
+	 */
+	private static final Color RADIUSCOLOR=Color.decode("#d3d9ed");
 	
 	/**
 	 * Creates a new poison
@@ -36,7 +44,7 @@ public class Poison extends Tower
 	{
 		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%4==0)/*Every second*/ ||
 		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Every half a second*/)
-			hitCreep(1, false);
+			hitCreep(RADIUS, false);
 	}
 	
 	@Override
@@ -64,6 +72,18 @@ public class Poison extends Tower
 	public void visit(Mike mike)
 	{
 		mike.setInjured(true);
+	}
+	
+	@Override
+	public int getRadius()
+	{
+		return RADIUS;
+	}
+	
+	@Override
+	public Color getRadiusColor()
+	{
+		return RADIUSCOLOR;
 	}
 	
 	@Override

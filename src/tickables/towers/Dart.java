@@ -20,6 +20,14 @@ public class Dart extends Tower
 	 */
 	private static final ImageIcon IMAGE_ICON=
 			new ImageIcon(Tickable.class.getResource("/media/towers/Dart.png"));
+	/**
+	 * The radius of the affected area
+	 */
+	private static final int RADIUS=2;
+	/**
+	 * The color of the affected area
+	 */
+	private static final Color RADIUSCOLOR=Color.decode("#42f46e");
 	
 	/**
 	 * Creates a new dart
@@ -36,7 +44,7 @@ public class Dart extends Tower
 	{
 		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Every half a second*/ ||
 		    (Board.getTimer().isFastForward())/*Every quarter of a second*/)
-			hitCreep(2, false);
+			hitCreep(RADIUS, false);
 	}
 	
 	@Override
@@ -64,6 +72,18 @@ public class Dart extends Tower
 	{
 		mike.setHP(mike.getHP()-30);
 		mike.setInjured(true);
+	}
+	
+	@Override
+	public int getRadius()
+	{
+		return RADIUS;
+	}
+	
+	@Override
+	public Color getRadiusColor()
+	{
+		return RADIUSCOLOR;
 	}
 	
 	@Override

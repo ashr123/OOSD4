@@ -1,11 +1,11 @@
 package tickables.towers;
 
+import manage.Board;
+import tickables.Tickable;
 import tickables.creeps.Knight;
 import tickables.creeps.Mike;
 import tickables.creeps.Naji;
 import tickables.creeps.Skully;
-import manage.Board;
-import tickables.Tickable;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,6 +20,14 @@ public class Magician extends Tower
 	 */
 	private static final ImageIcon IMAGE_ICON=
 			new ImageIcon(Tickable.class.getResource("/media/towers/Magician.png"));
+	/**
+	 * The radius of the affected area
+	 */
+	private static final int RADIUS=1;
+	/**
+	 * The color of the affected area
+	 */
+	private static final Color RADIUSCOLOR=Color.decode("#d3d9ed");
 	
 	/**
 	 * Creates a new magician
@@ -36,7 +44,7 @@ public class Magician extends Tower
 	{
 		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%4==0)/*Every second*/ ||
 		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Every half a second*/)
-			hitCreep(1, false);
+			hitCreep(RADIUS, false);
 	}
 	
 	@Override
@@ -65,6 +73,18 @@ public class Magician extends Tower
 	{
 		mike.setHP(mike.getHP()-10);
 		mike.setInjured(true);
+	}
+	
+	@Override
+	public int getRadius()
+	{
+		return RADIUS;
+	}
+	
+	@Override
+	public Color getRadiusColor()
+	{
+		return RADIUSCOLOR;
 	}
 	
 	@Override

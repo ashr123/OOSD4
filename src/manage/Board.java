@@ -14,22 +14,11 @@ import java.awt.event.*;
 @SuppressWarnings({"ClassHasNoToStringMethod", "MagicNumber"})
 public class Board extends JPanel
 {
-	private static final ImageIcon IMAGE_ICON_TOWER_LAVA=new ImageIcon(new ImageIcon(Board.class.getResource(
-			"/media/towers/Lava.png")).getImage().getScaledInstance(100, 162,
-	                                                                Image.SCALE_SMOOTH)),
-			IMAGE_ICON_TOWER_DART=new ImageIcon(new ImageIcon(Board.class.getResource(
-					"/media/towers/Dart.png")).getImage().getScaledInstance(100, 135,
-			                                                                Image.SCALE_SMOOTH)),
-			IMAGE_ICON_TOWER_POISON=new ImageIcon(new ImageIcon(Board.class.getResource(
-					"/media/towers/Poison.png")).getImage().getScaledInstance(100, 131,
-			                                                                  Image.SCALE_SMOOTH)),
-			IMAGE_ICON_TOWER_MAGICIAN=new ImageIcon(new ImageIcon(Board.class.getResource(
-					"/media/towers/Magician.png")).getImage().getScaledInstance(100, 145, Image.SCALE_SMOOTH)),
+	private static final ImageIcon
 			IMAGE_ICON_GRASS=new ImageIcon(Board.class.getResource("/media/environment/grass.png")),
 			IMAGE_ICON_PATH=new ImageIcon(Board.class.getResource("/media/environment/path.png"));
 	private static int mapNum;
 	private static Timer timer;
-	private int numOfDart=3, numOfLava=3, numOfPoison=3, numOfMagician=3;
 	
 	/**
 	 * Builds a new board
@@ -38,14 +27,13 @@ public class Board extends JPanel
 	public Board(int mapNum)
 	{
 		setPreferredSize(new Dimension(800, 800));
+		TowerWindow.reset(this);
 		Board.mapNum=mapNum;
 		timer=new Timer(this);
-		setBorder(BorderFactory.createLineBorder(Color.black));
-		
 		addMouseListener(new MouseListener()
 		{
 			/**
-			 * Builds a new frame to choose a tower from only if its between waves andthe user didn't clicked on the path
+			 * Builds a new frame to choose a tower from only if its between waves and the user didn't clicked on the path
 			 */
 			@Override
 			public void mouseClicked(MouseEvent e)
@@ -63,74 +51,10 @@ public class Board extends JPanel
 				if (Game.getLoader().get(mapNum)[e.getX()*32/800][e.getY()*32/800].equals(new Point()))
 				{
 					Graphics graphics=getGraphics();
-					graphics.setColor(Color.decode("#132044"));
-					graphics.fillRect(e.getX()*32/800*25, e.getY()*32/800*25, 25, 25);
-					
-					final JFrame towerWindow=new JFrame("Choose a Tower:");
-					towerWindow.setLayout(new GridLayout(2, 2));
-					JButton dartButton=new JButton(IMAGE_ICON_TOWER_DART);
-					dartButton.setText(numOfDart+"");
-					JButton poisonButton=new JButton(IMAGE_ICON_TOWER_POISON);
-					poisonButton.setText(numOfPoison+"");
-					JButton lavaButton=new JButton(IMAGE_ICON_TOWER_LAVA);
-					lavaButton.setText(numOfLava+"");
-					JButton magicianButton=new JButton(IMAGE_ICON_TOWER_MAGICIAN);
-					magicianButton.setText(numOfMagician+"");
-					dartButton.addActionListener(e1 ->
-					                             {
-						                             if (numOfDart>0)
-						                             {
-							                             getTimer().register(new Dart(new Point(e.getX()*32/800, e.getY()*32/800)));
-							                             numOfDart--;
-							                             repaint();
-							                             towerWindow.dispose();
-						                             }
-					                             });
-					poisonButton.addActionListener(e1 ->
-					                               {
-						                               if (numOfPoison>0)
-						                               {
-							                               getTimer().register(new Poison(new Point(e.getX()*32/800, e.getY()*32/800)));
-							                               numOfPoison--;
-							                               repaint();
-							                               towerWindow.dispose();
-						                               }
-					                               });
-					lavaButton.addActionListener(e1 ->
-					                             {
-						                             if (numOfLava>0)
-						                             {
-							                             getTimer().register(new Lava(new Point(e.getX()*32/800, e.getY()*32/800)));
-							                             numOfLava--;
-							                             repaint();
-							                             towerWindow.dispose();
-						                             }
-					                             });
-					magicianButton.addActionListener(e1 ->
-					                                 {
-						                                 if (numOfMagician>0)
-						                                 {
-							                                 getTimer().register(new Magician(new Point(e.getX()*32/800, e.getY()*32/800)));
-							                                 numOfMagician--;
-							                                 repaint();
-							                                 towerWindow.dispose();
-						                                 }
-					                                 });
-					
-					towerWindow.add(dartButton);
-					towerWindow.add(poisonButton);
-					towerWindow.add(lavaButton);
-					towerWindow.add(magicianButton);
-					towerWindow.pack();
-					towerWindow.setResizable(false);
-					towerWindow.addWindowListener(new WindowAdapter()
-					{
-						public void windowClosing(WindowEvent e)
-						{
-							repaint();
-						}
-					});
-					towerWindow.setVisible(true);
+					graphics.setColor(new Color(32, 32, 32));
+					graphics.fillRect(e.getX()*32/800*25, e.getY()*32/800*25, 25,
+					                       25);
+					TowerWindow.displayFrame(e);
 				}
 			}
 			
@@ -199,16 +123,17 @@ public class Board extends JPanel
 		Game.getWaveLBL().setText("Wave: "+getTimer().getWave()+"    ");
 		if (!getTimer().isRunning())
 			Game.getGoButton().setEnabled(true);
-		for (int i=0; i<Game.getLoader().get(getMapNum()).length; i++)
+		for (int i=0; i<Game.getLoader().get(getMapNum()).length; i++)//Draws the land
 			for (int j=0; j<Game.getLoader().get(getMapNum())[i].length; j++)
 				if (Game.getLoader().get(getMapNum())[i][j].getX()==0 &&
 				    Game.getLoader().get(getMapNum())[i][j].getY()==0)
 					g.drawImage(IMAGE_ICON_GRASS.getImage(), i*25, j*25, 25, 25,
 					            this);
 				else
-					g.drawImage(IMAGE_ICON_PATH.getImage(), i*25, j*25, 25, 25, this);
+					g.drawImage(IMAGE_ICON_PATH.getImage(), i*25, j*25, 25, 25,
+					            this);
 		
-		for (Tickable t : getTimer().getTickables())//Draws all tickables
+		for (Tickable t : getTimer().getTickables())//Draws all the clicked towers affected area
 			if (t instanceof Tower && ((Tower)t).isClicked())
 				markNeighbors((Tower)t, g);
 		
@@ -216,7 +141,7 @@ public class Board extends JPanel
 		{
 			if (t instanceof Creep && ((Creep)t).isInjured())//Marks square of injured creep
 			{
-				g.setColor(Color.decode("#77252d"));
+				g.setColor(Color.red);
 				g.fillRect((int)t.getLocation().getX()*25, (int)t.getLocation().getY()*25,
 				           25, 25);
 				((Creep)t).setInjured(false);

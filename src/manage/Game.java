@@ -64,30 +64,18 @@ public final class Game
 		panel.add(map2, BorderLayout.EAST);
 		frame.setContentPane(panel);
 		panel.setBackground(Color.orange);
-		map0.addActionListener(e ->
-		                       {
-			                       final JPanel gamePanel=new JPanel(new BorderLayout());
-			                       createToolBar(gamePanel);
-			                       gamePanel.add(new Board(0));
-			                       frame.setContentPane(gamePanel);
-			                       frame.pack();
-		                       });
-		map1.addActionListener(e ->
-		                       {
-			                       final JPanel gamePanel=new JPanel(new BorderLayout());
-			                       createToolBar(gamePanel);
-			                       gamePanel.add(new Board(1));
-			                       frame.setContentPane(gamePanel);
-			                       frame.pack();
-		                       });
-		map2.addActionListener(e ->
-		                       {
-			                       final JPanel gamePanel=new JPanel(new BorderLayout());
-			                       createToolBar(gamePanel);
-			                       gamePanel.add(new Board(2));
-			                       frame.setContentPane(gamePanel);
-			                       frame.pack();
-		                       });
+		map0.addActionListener(e -> createMap(0));
+		map1.addActionListener(e -> createMap(1));
+		map2.addActionListener(e -> createMap(2));
+	}
+	
+	private static void createMap(int mapNum)
+	{
+		final JPanel gamePanel=new JPanel(new BorderLayout());
+		createToolBar(gamePanel);
+		gamePanel.add(new Board(mapNum));
+		frame.setContentPane(gamePanel);
+		frame.pack();
 	}
 	
 	/**

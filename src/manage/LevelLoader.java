@@ -1,6 +1,6 @@
 package manage;
 
-import java.awt.*;
+import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,12 +9,12 @@ import java.util.ArrayList;
 @SuppressWarnings("ClassHasNoToStringMethod")
 public class LevelLoader
 {
-	private static final char CHAR_RIGHT='>';
-	private static final char CHAR_LEFT='<';
-	private static final char CHAR_UP='^';
-	private static final char CHAR_DOWN='v';
-	private static final char CHAR_GRASS='*';
-	
+	private static final char
+			CHAR_RIGHT='>',
+			CHAR_LEFT='<',
+			CHAR_UP='^',
+			CHAR_DOWN='v',
+			CHAR_GRASS='*';
 	/**
 	 * Contains the initial board state of all the levels
 	 */

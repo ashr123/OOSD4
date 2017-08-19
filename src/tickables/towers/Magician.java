@@ -7,8 +7,9 @@ import tickables.creeps.Mike;
 import tickables.creeps.Naji;
 import tickables.creeps.Skully;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Point;
 
 /**
  * Represents a {@code Magician}
@@ -27,7 +28,7 @@ public class Magician extends Tower
 	/**
 	 * The color of the affected area
 	 */
-	private static final Color RADIUSCOLOR=Color.decode("#d3d9ed");
+	private static final Color RADIUS_COLOR=Color.decode("#d3d9ed");
 	
 	/**
 	 * Creates a new magician
@@ -84,7 +85,7 @@ public class Magician extends Tower
 	@Override
 	public Color getRadiusColor()
 	{
-		return RADIUSCOLOR;
+		return RADIUS_COLOR;
 	}
 	
 	@Override

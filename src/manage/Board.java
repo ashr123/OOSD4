@@ -2,11 +2,17 @@ package manage;
 
 import tickables.creeps.Creep;
 import tickables.Tickable;
-import tickables.towers.*;
+import tickables.towers.Tower;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Point;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 /**
  * Represents the {@code Board}
@@ -14,9 +20,11 @@ import java.awt.event.*;
 @SuppressWarnings({"ClassHasNoToStringMethod", "MagicNumber"})
 public class Board extends JPanel
 {
-	private static final ImageIcon
-			IMAGE_ICON_GRASS=new ImageIcon(Board.class.getResource("/media/environment/grass.png")),
-			IMAGE_ICON_PATH=new ImageIcon(Board.class.getResource("/media/environment/path.png"));
+	private static final Image
+			IMAGE_GRASS=new ImageIcon(Board.class.getResource("/media/environment/grass.png"))
+					            .getImage(),
+			IMAGE_PATH=new ImageIcon(Board.class.getResource("/media/environment/path.png"))
+					           .getImage();
 	private static int mapNum;
 	private static Timer timer;
 	
@@ -50,11 +58,8 @@ public class Board extends JPanel
 					return;
 				if (Game.getLoader().get(mapNum)[e.getX()*32/800][e.getY()*32/800].equals(new Point()))
 				{
-					Graphics graphics=getGraphics();
-					graphics.setColor(new Color(32, 32, 32));
-					graphics.fillRect(e.getX()*32/800*25, e.getY()*32/800*25, 25,
-					                       25);
 					TowerWindow.displayFrame(e);
+					repaint();
 				}
 			}
 			
@@ -125,13 +130,19 @@ public class Board extends JPanel
 			Game.getGoButton().setEnabled(true);
 		for (int i=0; i<Game.getLoader().get(getMapNum()).length; i++)//Draws the land
 			for (int j=0; j<Game.getLoader().get(getMapNum())[i].length; j++)
-				if (Game.getLoader().get(getMapNum())[i][j].getX()==0 &&
-				    Game.getLoader().get(getMapNum())[i][j].getY()==0)
-					g.drawImage(IMAGE_ICON_GRASS.getImage(), i*25, j*25, 25, 25,
-					            this);
-				else
-					g.drawImage(IMAGE_ICON_PATH.getImage(), i*25, j*25, 25, 25,
-					            this);
+				if (TowerWindow.getE()!= null &&
+				    TowerWindow.getE().getY()*32/800==j &&
+				    TowerWindow.getE().getX()*32/800==i)
+				{
+					g.setColor(new Color(32, 32, 32));
+					g.fillRect(i*25, j*25, 25, 25);
+				}
+					else
+						if (Game.getLoader().get(getMapNum())[i][j].getX()==0 &&
+						    Game.getLoader().get(getMapNum())[i][j].getY()==0)
+							g.drawImage(IMAGE_GRASS, i*25, j*25, 25, 25, this);
+						else
+							g.drawImage(IMAGE_PATH, i*25, j*25, 25, 25, this);
 		
 		for (Tickable t : getTimer().getTickables())//Draws all the clicked towers affected area
 			if (t instanceof Tower && ((Tower)t).isClicked())

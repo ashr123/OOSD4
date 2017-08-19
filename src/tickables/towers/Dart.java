@@ -1,14 +1,15 @@
 package tickables.towers;
 
+import manage.Board;
+import tickables.Tickable;
 import tickables.creeps.Knight;
 import tickables.creeps.Mike;
 import tickables.creeps.Naji;
 import tickables.creeps.Skully;
-import manage.Board;
-import tickables.Tickable;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import java.awt.Point;
 
 /**
  * Represents a {@code Dart}
@@ -27,7 +28,7 @@ public class Dart extends Tower
 	/**
 	 * The color of the affected area
 	 */
-	private static final Color RADIUSCOLOR=Color.decode("#42f46e");
+	private static final Color RADIUS_COLOR=Color.decode("#42f46e");
 	
 	/**
 	 * Creates a new dart
@@ -83,7 +84,7 @@ public class Dart extends Tower
 	@Override
 	public Color getRadiusColor()
 	{
-		return RADIUSCOLOR;
+		return RADIUS_COLOR;
 	}
 	
 	@Override

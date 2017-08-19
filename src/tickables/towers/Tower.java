@@ -2,18 +2,23 @@ package tickables.towers;
 
 import manage.Board;
 import tickables.Tickable;
-import tickables.creeps.*;
+import tickables.creeps.Creep;
+import tickables.creeps.Knight;
+import tickables.creeps.Mike;
+import tickables.creeps.Naji;
+import tickables.creeps.Skully;
 
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Point;
 import java.util.Iterator;
 
 /**
  * Represents a general type of tower
  */
-public abstract class Tower implements Tickable//Represents also the Visitor
+public abstract class Tower implements Tickable//Also represents the Visitor
 {
 	/**
-	 * Represents this cree['s location
+	 * Represents this tower's location
 	 */
 	private final Point location;
 	/**

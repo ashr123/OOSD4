@@ -4,8 +4,9 @@ import manage.Board;
 import tickables.Tickable;
 import tickables.towers.Tower;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.Timer;
+import java.awt.Point;
 
 /**
  * Represents a {@code Naji}
@@ -61,7 +62,8 @@ public class Naji extends Creep
 	@Override
 	public void tickHappened()
 	{
-		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Moves every half a second*/ || (Board.getTimer().isFastForward())/*Moves every quarter of a second*/)
+		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Moves every half a second*/ ||
+		    (Board.getTimer().isFastForward())/*Moves every quarter of a second*/)
 			moveCreep();
 	}
 	

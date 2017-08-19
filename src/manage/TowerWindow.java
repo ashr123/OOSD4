@@ -5,8 +5,12 @@ import tickables.towers.Lava;
 import tickables.towers.Magician;
 import tickables.towers.Poison;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import java.awt.GridLayout;
+import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -51,8 +55,7 @@ final class TowerWindow extends JFrame
 				                             Board.getTimer().register(new Dart(
 				                             		new Point(e.getX()*32/800, e.getY()*32/800)));
 				                             numOfDart--;
-				                             board.repaint();
-				                             dispose();
+				                             disposeTowerWindow();
 			                             }
 		                             });
 		poisonButton.addActionListener(e1 ->
@@ -62,8 +65,7 @@ final class TowerWindow extends JFrame
 				                               Board.getTimer().register(new Poison(
 				                               		new Point(e.getX()*32/800, e.getY()*32/800)));
 				                               numOfPoison--;
-				                               board.repaint();
-				                               dispose();
+				                               disposeTowerWindow();
 			                               }
 		                               });
 		lavaButton.addActionListener(e1 ->
@@ -73,8 +75,7 @@ final class TowerWindow extends JFrame
 				                             Board.getTimer().register(new Lava(
 				                             		new Point(e.getX()*32/800, e.getY()*32/800)));
 				                             numOfLava--;
-				                             board.repaint();
-				                             dispose();
+				                             disposeTowerWindow();
 			                             }
 		                             });
 		magicianButton.addActionListener(e1 ->
@@ -84,8 +85,7 @@ final class TowerWindow extends JFrame
 				                                 Board.getTimer().register(new Magician(
 				                                 		new Point(e.getX()*32/800, e.getY()*32/800)));
 				                                 numOfMagician--;
-				                                 board.repaint();
-				                                 dispose();
+				                                 disposeTowerWindow();
 			                                 }
 		                                 });
 		
@@ -97,11 +97,19 @@ final class TowerWindow extends JFrame
 		setResizable(false);
 		addWindowListener(new WindowAdapter()
 		{
-			public void windowClosing(WindowEvent e)
+			public void windowClosing(WindowEvent e1)
 			{
+				e=null;
 				board.repaint();
 			}
 		});
+	}
+	
+	static void disposeTowerWindow()
+	{
+		e=null;
+		board.repaint();
+		ourInstance.dispose();
 	}
 	
 	private static void setLabels()
@@ -118,10 +126,15 @@ final class TowerWindow extends JFrame
 		TowerWindow.board=board;
 	}
 	
-	static void displayFrame(MouseEvent e)
+	static void displayFrame(MouseEvent e1)
 	{
-		TowerWindow.e=e;
+		e=e1;
 		setLabels();
 		ourInstance.setVisible(true);
+	}
+	
+	static MouseEvent getE()
+	{
+		return e;
 	}
 }

@@ -1,7 +1,7 @@
 package tickables;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import java.awt.Point;
 
 /**
  * Represents an object that can response to timer's listener

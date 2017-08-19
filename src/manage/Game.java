@@ -4,26 +4,34 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JToolBar;
+import javax.swing.WindowConstants;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Font;
+import java.awt.Image;
 import java.io.IOException;
 
 /**
  * Represents the main class of this game
  */
-@SuppressWarnings("MagicNumber")
+@SuppressWarnings({"MagicNumber", "UtilityClassCanBeEnum"})
 public final class Game
 {
 	private static final LevelLoader loader=new LevelLoader();
-	private static final ImageIcon IMAGE_MAP_1=
-			new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level0.png"))
-					              .getImage().getScaledInstance(200, 200,
-					                                            Image.SCALE_SMOOTH)),
-			IMAGE_MAP_2=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level1.png"))
-					                          .getImage().getScaledInstance(200, 200,
+	private static final ImageIcon
+			IMAGE_MAP_1=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level0.png")).getImage().getScaledInstance(200, 200,
 					                                                        Image.SCALE_SMOOTH)),
-			IMAGE_MAP_3=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level2.png"))
-					                          .getImage().getScaledInstance(200, 200,
+			IMAGE_MAP_2=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level1.png")).getImage().getScaledInstance(200, 200,
+					                                                        Image.SCALE_SMOOTH)),
+			IMAGE_MAP_3=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level2.png")).getImage().getScaledInstance(200, 200,
 					                                                        Image.SCALE_SMOOTH));
 	private static final JFrame frame=new JFrame("Tower Defence");
 	private static final JPanel panel=new JPanel(new BorderLayout());
@@ -32,7 +40,9 @@ public final class Game
 	 * Represents the helth-points of the player
 	 */
 	private static int HP;
-	private static final JLabel WaveLBL=new JLabel("Wave: 1    "), TimeLBL=new JLabel("Time: 0    "),
+	private static final JLabel
+			WaveLBL=new JLabel("Wave: 1    "),
+			TimeLBL=new JLabel("Time: 0    "),
 			HPLBL=new JLabel("HP: "+HP+"    ");
 	
 	/**
@@ -44,9 +54,10 @@ public final class Game
 		loader.load();
 		final JLabel maps=new JLabel("Please choose a map:");
 		maps.setFont(new Font("Courier", Font.BOLD, 20));
-		final JButton map0=new JButton(IMAGE_MAP_1);
-		final JButton map1=new JButton(IMAGE_MAP_2);
-		final JButton map2=new JButton(IMAGE_MAP_3);
+		final JButton
+				map0=new JButton(IMAGE_MAP_1),
+				map1=new JButton(IMAGE_MAP_2),
+				map2=new JButton(IMAGE_MAP_3);
 		panel.add(maps, BorderLayout.NORTH);
 		panel.add(map0, BorderLayout.WEST);
 		panel.add(map1, BorderLayout.CENTER);
@@ -112,7 +123,8 @@ public final class Game
 	                                                 UnsupportedAudioFileException
 	{
 		final Clip clip=AudioSystem.getClip();
-		clip.open(AudioSystem.getAudioInputStream(Game.class.getResource("/sounds/backgroundMusic.wav")));
+		clip.open(AudioSystem.getAudioInputStream(Game.class.getResource(
+				"/sounds/backgroundMusic.wav")));
 		clip.loop(Integer.MAX_VALUE);
 	}
 	
@@ -193,13 +205,15 @@ public final class Game
 		Board.getTimer().stop();
 		final JPanel afterPanel=new JPanel();
 		afterPanel.setLayout(new BoxLayout(afterPanel, BoxLayout.PAGE_AXIS));
-		final JLabel hpLeft=new JLabel("HP:  "+getHP());
-		final JLabel passedCreeps=new JLabel("Passed creeps:  "+Board.getTimer().getTotalPassedCreeps());
-		final JLabel deadCreeps=new JLabel("Dead creeps:  "+Board.getTimer().getTotalDeadCreeps());
-		final JLabel time=new JLabel("Time elapsed:  "+Board.getTimer().getTime()+" seconds");
+		final JLabel
+				hpLeft=new JLabel("HP:  "+getHP()),
+				passedCreeps=new JLabel("Passed creeps:  "+Board.getTimer().getTotalPassedCreeps()),
+				deadCreeps=new JLabel("Dead creeps:  "+Board.getTimer().getTotalDeadCreeps()),
+				time=new JLabel("Time elapsed:  "+Board.getTimer().getTime()+" seconds");
 		final JButton tryAgainButton=new JButton("Choose a different map");
 		
-		final Font smallFont=new Font("Courier", Font.PLAIN, 20),
+		final Font
+				smallFont=new Font("Courier", Font.PLAIN, 20),
 				bigFont=new Font("Courier", Font.PLAIN, 26);
 		afterLabel.setFont(bigFont);
 		hpLeft.setFont(smallFont);
@@ -264,9 +278,11 @@ public final class Game
 		
 		fastForwardButton.addActionListener(e ->
 		                                    {
-			                                    Board.getTimer().setFastForward(!Board.getTimer().isFastForward());
+			                                    Board.getTimer().setFastForward(!Board.getTimer()
+			                                                                          .isFastForward());
 			                                    fastForwardButton.setText(Board.getTimer()
-			                                                                   .isFastForward() ? "Slow Down" : "Fast Forward");
+			                                                                   .isFastForward() ?
+			                                                              "Slow Down" : "Fast Forward");
 		                                    });
 	}
 }

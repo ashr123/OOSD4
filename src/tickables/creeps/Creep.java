@@ -5,7 +5,7 @@ import manage.Game;
 import tickables.Tickable;
 import tickables.towers.Tower;
 
-import java.awt.*;
+import java.awt.Point;
 
 /**
  * Represents a general type of Creep
@@ -13,13 +13,13 @@ import java.awt.*;
 public abstract class Creep implements Tickable
 {
 	/**
-	 * Represents this creep's health-points
-	 */
-	private double HP=100;
-	/**
 	 * Represents this creep's location
 	 */
 	private final Point location;
+	/**
+	 * Represents this creep's health-points
+	 */
+	private double HP=100;
 	/**
 	 * Indicates if this creep has been injured
 	 */

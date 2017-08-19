@@ -4,8 +4,8 @@ import manage.Board;
 import tickables.Tickable;
 import tickables.towers.Tower;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.ImageIcon;
+import java.awt.Point;
 
 /**
  * Represents a {@code Mike}

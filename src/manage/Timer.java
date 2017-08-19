@@ -1,9 +1,13 @@
 package manage;
 
-import tickables.creeps.*;
 import tickables.Tickable;
+import tickables.creeps.Creep;
+import tickables.creeps.Knight;
+import tickables.creeps.Mike;
+import tickables.creeps.Naji;
+import tickables.creeps.Skully;
 
-import java.awt.*;
+import java.awt.Point;
 import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Random;
@@ -166,6 +170,7 @@ public class Timer
 	 */
 	void start()
 	{
+		TowerWindow.disposeTowerWindow();
 		timer.start();
 	}
 	

@@ -31,7 +31,7 @@ public abstract class Tower implements Tickable//Also represents the Visitor
 	 * @param location the location of this tower
 	 * @see Tower#location
 	 */
-	public Tower(Point location)
+	Tower(Point location)
 	{
 		this.location=location;
 	}

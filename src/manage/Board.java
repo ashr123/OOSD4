@@ -1,7 +1,7 @@
 package manage;
 
-import tickables.creeps.Creep;
 import tickables.Tickable;
+import tickables.creeps.Creep;
 import tickables.towers.Tower;
 
 import javax.swing.ImageIcon;
@@ -130,19 +130,19 @@ public class Board extends JPanel
 			Game.getGoButton().setEnabled(true);
 		for (int i=0; i<Game.getLoader().get(getMapNum()).length; i++)//Draws the land
 			for (int j=0; j<Game.getLoader().get(getMapNum())[i].length; j++)
-				if (TowerWindow.getE()!= null &&
+				if (TowerWindow.getE()!=null &&
 				    TowerWindow.getE().getY()*32/800==j &&
 				    TowerWindow.getE().getX()*32/800==i)
 				{
 					g.setColor(new Color(32, 32, 32));
 					g.fillRect(i*25, j*25, 25, 25);
 				}
+				else
+					if (Game.getLoader().get(getMapNum())[i][j].getX()==0 &&
+					    Game.getLoader().get(getMapNum())[i][j].getY()==0)
+						g.drawImage(IMAGE_GRASS, i*25, j*25, 25, 25, this);
 					else
-						if (Game.getLoader().get(getMapNum())[i][j].getX()==0 &&
-						    Game.getLoader().get(getMapNum())[i][j].getY()==0)
-							g.drawImage(IMAGE_GRASS, i*25, j*25, 25, 25, this);
-						else
-							g.drawImage(IMAGE_PATH, i*25, j*25, 25, 25, this);
+						g.drawImage(IMAGE_PATH, i*25, j*25, 25, 25, this);
 		
 		for (Tickable t : getTimer().getTickables())//Draws all the clicked towers affected area
 			if (t instanceof Tower && ((Tower)t).isClicked())

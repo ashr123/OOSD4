@@ -8,6 +8,7 @@ import tickables.towers.Poison;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.WindowConstants;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
@@ -103,6 +104,7 @@ final class TowerWindow extends JFrame
 				board.repaint();
 			}
 		});
+		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 	}
 	
 	static void disposeTowerWindow()
@@ -131,6 +133,7 @@ final class TowerWindow extends JFrame
 		e=e1;
 		setLabels();
 		ourInstance.setVisible(true);
+		ourInstance.isShowing();
 	}
 	
 	static MouseEvent getE()

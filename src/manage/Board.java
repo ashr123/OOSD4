@@ -46,7 +46,7 @@ public class Board extends JPanel
 			@Override
 			public void mouseClicked(MouseEvent e)
 			{
-				for (Tickable t : timer.getTickables())
+				for (Tickable t : getTimer().getTickables())
 					if (t instanceof Tower && t.getLocation().equals(new Point(e.getX()*32/800,
 					                                                           e.getY()*32/800)))
 					{
@@ -56,7 +56,7 @@ public class Board extends JPanel
 					}
 				if (getTimer().isRunning())
 					return;
-				if (Game.getLoader().get(mapNum)[e.getX()*32/800][e.getY()*32/800].equals(new Point()))
+				if (LevelLoader.get(mapNum)[e.getX()*32/800][e.getY()*32/800].equals(new Point()))
 				{
 					TowerWindow.displayFrame(e);
 					repaint();
@@ -128,8 +128,8 @@ public class Board extends JPanel
 		Game.getWaveLBL().setText("Wave: "+getTimer().getWave()+"    ");
 		if (!getTimer().isRunning())
 			Game.getGoButton().setEnabled(true);
-		for (int i=0; i<Game.getLoader().get(getMapNum()).length; i++)//Draws the land
-			for (int j=0; j<Game.getLoader().get(getMapNum())[i].length; j++)
+		for (int i=0; i<LevelLoader.get(getMapNum()).length; i++)//Draws the land
+			for (int j=0; j<LevelLoader.get(getMapNum())[i].length; j++)
 				if (TowerWindow.getE()!=null &&
 				    TowerWindow.getE().getY()*32/800==j &&
 				    TowerWindow.getE().getX()*32/800==i)
@@ -138,8 +138,8 @@ public class Board extends JPanel
 					g.fillRect(i*25, j*25, 25, 25);
 				}
 				else
-					if (Game.getLoader().get(getMapNum())[i][j].getX()==0 &&
-					    Game.getLoader().get(getMapNum())[i][j].getY()==0)
+					if (LevelLoader.get(getMapNum())[i][j].getX()==0 &&
+					    LevelLoader.get(getMapNum())[i][j].getY()==0)
 						g.drawImage(IMAGE_GRASS, i*25, j*25, 25, 25, this);
 					else
 						g.drawImage(IMAGE_PATH, i*25, j*25, 25, 25, this);

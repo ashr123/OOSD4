@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@SuppressWarnings("ClassHasNoToStringMethod")
+@SuppressWarnings({"ClassHasNoToStringMethod", "UtilityClassCanBeEnum"})
 public class LevelLoader
 {
 	private static final char
@@ -18,7 +18,7 @@ public class LevelLoader
 	/**
 	 * Contains the initial board state of all the levels
 	 */
-	private final ArrayList<Point[][]> _levels=new ArrayList<>();
+	private static final ArrayList<Point[][]> _levels=new ArrayList<>();
 	
 	/**
 	 * Creates {@link Point} instance from {@code char} representation
@@ -47,10 +47,11 @@ public class LevelLoader
 	 * Loads all the levels to the internal levels buffer
 	 * @throws IOException if there is any error with the file
 	 */
-	void load() throws IOException
+	static void load() throws IOException
 	{
 		_levels.clear();
 		
+		@SuppressWarnings("IOResourceOpenedButNotSafelyClosed")
 		BufferedReader br=new BufferedReader(new FileReader("levels.txt"));
 		String line;
 		Point level[][]=null;
@@ -124,7 +125,7 @@ public class LevelLoader
 	 * @param index the level number
 	 * @return a deep copy of the initial state of level number {@code index}
 	 */
-	public Point[][] get(int index)
+	public static Point[][] get(int index)
 	{
 		return _levels.get(index);
 	}

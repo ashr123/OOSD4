@@ -180,8 +180,8 @@ public class Timer
 	private static Point getStartLocation()
 	{
 		Point zeroPoint=new Point();
-		for (int i=0; i<Game.getLoader().get(Board.getMapNum())[0].length; i++)
-			if (!Game.getLoader().get(Board.getMapNum())[0][i].equals(zeroPoint))
+		for (int i=0; i<LevelLoader.get(Board.getMapNum())[0].length; i++)
+			if (!LevelLoader.get(Board.getMapNum())[0][i].equals(zeroPoint))
 				return new Point(0, i);
 		return null;
 	}

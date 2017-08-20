@@ -25,14 +25,10 @@ import java.io.IOException;
 @SuppressWarnings({"MagicNumber", "UtilityClassCanBeEnum"})
 public final class Game
 {
-	private static final LevelLoader loader=new LevelLoader();
 	private static final ImageIcon
-			IMAGE_MAP_1=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level0.png")).getImage().getScaledInstance(200, 200,
-					                                                        Image.SCALE_SMOOTH)),
-			IMAGE_MAP_2=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level1.png")).getImage().getScaledInstance(200, 200,
-					                                                        Image.SCALE_SMOOTH)),
-			IMAGE_MAP_3=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level2.png")).getImage().getScaledInstance(200, 200,
-					                                                        Image.SCALE_SMOOTH));
+			IMAGE_MAP_1=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level0.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)),
+			IMAGE_MAP_2=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level1.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)),
+			IMAGE_MAP_3=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level2.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH));
 	private static final JFrame frame=new JFrame("Tower Defence");
 	private static final JPanel panel=new JPanel(new BorderLayout());
 	private static final JButton goButton=new JButton("Go!");
@@ -51,7 +47,7 @@ public final class Game
 	 */
 	private Game() throws IOException
 	{
-		loader.load();
+		LevelLoader.load();
 		final JLabel maps=new JLabel("Please choose a map:");
 		maps.setFont(new Font("Courier", Font.BOLD, 20));
 		final JButton
@@ -85,7 +81,8 @@ public final class Game
 	 * @throws LineUnavailableException if a clip object is not available due to resource restrictions
 	 * @throws UnsupportedAudioFileException if the {@code File} does not point to valid audio file data recognized by the system
 	 */
-	public static void main(String[] args) throws IOException, LineUnavailableException, UnsupportedAudioFileException
+	public static void main(String[] args) throws IOException, LineUnavailableException,
+	                                              UnsupportedAudioFileException
 	{
 		new Game();
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -94,11 +91,6 @@ public final class Game
 		frame.setVisible(true);
 		resetHP();
 		playBackgroundMusic();
-	}
-	
-	public static LevelLoader getLoader()
-	{
-		return loader;
 	}
 	
 	/**
@@ -171,8 +163,7 @@ public final class Game
 	 */
 	static void playerWon()
 	{
-		final JLabel wonMes=new JLabel("You Won!"+'\n');
-		after(wonMes);
+		after(new JLabel("You Won!"+'\n'));
 	}
 	
 	/**
@@ -180,8 +171,7 @@ public final class Game
 	 */
 	private static void playerLost()
 	{
-		final JLabel lostMes=new JLabel("You Lost!"+'\n');
-		after(lostMes);
+		after(new JLabel("You Lost!"+'\n'));
 	}
 	
 	/**
@@ -268,8 +258,7 @@ public final class Game
 		                                    {
 			                                    Board.getTimer().setFastForward(!Board.getTimer()
 			                                                                          .isFastForward());
-			                                    fastForwardButton.setText(Board.getTimer()
-			                                                                   .isFastForward() ?
+			                                    fastForwardButton.setText(Board.getTimer().isFastForward() ?
 			                                                              "Slow Down" : "Fast Forward");
 		                                    });
 	}

@@ -1,7 +1,7 @@
 package tickables.creeps;
 
 import manage.Board;
-import manage.Game;
+import manage.LevelLoader;
 import tickables.Tickable;
 import tickables.towers.Tower;
 
@@ -69,10 +69,9 @@ public abstract class Creep implements Tickable
 	 */
 	void moveCreep()
 	{
-		getLocation().translate((int)Game.getLoader().get(
+		getLocation().translate((int)LevelLoader.get(
 				Board.getMapNum())[(int)getLocation().getX()][(int)getLocation().getY()].getX(),
-		                        (int)Game.getLoader()
-		                                 .get(Board.getMapNum())
+		                        (int)LevelLoader.get(Board.getMapNum())
 				                             [(int)getLocation().getX()][(int)getLocation().getY()].getY());
 	}
 	

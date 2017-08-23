@@ -1,7 +1,6 @@
 package tickables.creeps;
 
 import manage.Board;
-import tickables.Tickable;
 import tickables.towers.Tower;
 
 import javax.swing.ImageIcon;
@@ -16,8 +15,9 @@ public class Knight extends Creep
 	/**
 	 * Stores this knight's image
 	 */
-	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("/media/creeps/abir-1.png"));
+	private static final ImageIcon[]
+			IMAGE_ICON={new ImageIcon(Knight.class.getResource("/media/creeps/abir-1.png")),
+			            new ImageIcon(Knight.class.getResource("/media/creeps/abir-2.png"))};
 	/**
 	 * States the severity of poisoning
 	 */
@@ -26,7 +26,7 @@ public class Knight extends Creep
 	 * States if this knight has been poisoned
 	 */
 	private boolean isPoisoned;
-	private int ticks=1;
+	private int ticks=1, picTick;
 	/**
 	 * Responsible of canceling the poison's effect
 	 */
@@ -64,7 +64,10 @@ public class Knight extends Creep
 	{
 		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%4==0)/*Moves every second*/ ||
 		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Moves every half a second*/)
+		{
+			picTick++;
 			moveCreep();
+		}
 	}
 	
 	@Override
@@ -76,7 +79,7 @@ public class Knight extends Creep
 	@Override
 	public ImageIcon getImageIcon()
 	{
-		return IMAGE_ICON;
+		return IMAGE_ICON[picTick%2==0 ? 0 : 1];
 	}
 	
 	/**

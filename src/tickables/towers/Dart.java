@@ -1,7 +1,6 @@
 package tickables.towers;
 
 import manage.Board;
-import tickables.Tickable;
 import tickables.creeps.Knight;
 import tickables.creeps.Mike;
 import tickables.creeps.Naji;
@@ -20,7 +19,7 @@ public class Dart extends Tower
 	 * Stores this dart's image
 	 */
 	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("/media/towers/Dart.png"));
+			new ImageIcon(Dart.class.getResource("/media/towers/Dart.png"));
 	/**
 	 * The radius of the affected area
 	 */

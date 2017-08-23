@@ -1,7 +1,6 @@
 package tickables.creeps;
 
 import manage.Board;
-import tickables.Tickable;
 import tickables.towers.Tower;
 
 import javax.swing.ImageIcon;
@@ -15,8 +14,10 @@ public class Mike extends Creep
 	/**
 	 * Stores this mike's image
 	 */
-	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("/media/creeps/mike-1.png"));
+	private static final ImageIcon[]
+			IMAGE_ICON={new ImageIcon(Mike.class.getResource("/media/creeps/mike-1.png")),
+			            new ImageIcon(Mike.class.getResource("/media/creeps/mike-2.png"))};
+	private int picTick;
 	
 	/**
 	 * Creates a new mike
@@ -33,7 +34,10 @@ public class Mike extends Creep
 	{
 		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%4==0)/*Every second*/ ||
 		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Every half a second*/)
+		{
+			picTick++;
 			moveCreep();
+		}
 	}
 	
 	@Override
@@ -45,6 +49,6 @@ public class Mike extends Creep
 	@Override
 	public ImageIcon getImageIcon()
 	{
-		return IMAGE_ICON;
+		return IMAGE_ICON[picTick%2==0 ? 0 : 1];
 	}
 }

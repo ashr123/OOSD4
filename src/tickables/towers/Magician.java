@@ -1,7 +1,6 @@
 package tickables.towers;
 
 import manage.Board;
-import tickables.Tickable;
 import tickables.creeps.Knight;
 import tickables.creeps.Mike;
 import tickables.creeps.Naji;
@@ -20,7 +19,7 @@ public class Magician extends Tower
 	 * Stores this magician's image
 	 */
 	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("/media/towers/Magician.png"));
+			new ImageIcon(Magician.class.getResource("/media/towers/Magician.png"));
 	/**
 	 * The radius of the affected area
 	 */

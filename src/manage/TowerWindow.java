@@ -133,7 +133,6 @@ final class TowerWindow extends JFrame
 		e=e1;
 		setLabels();
 		ourInstance.setVisible(true);
-		ourInstance.isShowing();
 	}
 	
 	static MouseEvent getE()

@@ -1,7 +1,6 @@
 package tickables.creeps;
 
 import manage.Board;
-import tickables.Tickable;
 import tickables.towers.Tower;
 
 import javax.swing.ImageIcon;
@@ -15,8 +14,12 @@ public class Skully extends Creep
 	/**
 	 * Stores this skully's image
 	 */
-	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("/media/creeps/guli-1.png"));
+	private static final ImageIcon[]
+			IMAGE_ICON={new ImageIcon(Skully.class.getResource("/media/creeps/guli-1.png")),
+			            new ImageIcon(Skully.class.getResource("/media/creeps/guli-2.png"))};
+//	private static final ImageIcon IMAGE_ICON=
+//			new ImageIcon(Tickable.class.getResource("/media/creeps/guli-1.png"));
+	private int picTick;
 	
 	/**
 	 * Creates a new skully
@@ -33,7 +36,10 @@ public class Skully extends Creep
 	{
 		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%4==0)/*Moves every second*/ ||
 		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Moves every half a second*/)
+		{
+			picTick++;
 			moveCreep();
+		}
 	}
 	
 	@Override
@@ -45,6 +51,6 @@ public class Skully extends Creep
 	@Override
 	public ImageIcon getImageIcon()
 	{
-		return IMAGE_ICON;
+		return IMAGE_ICON[picTick%2==0 ? 0 : 1];
 	}
 }

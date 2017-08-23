@@ -78,10 +78,11 @@ public class Timer
 			     numberOfSkullies!=Math.pow(2, getWave()-1)))
 			{
 				final Creeps[] enumConstants=Creeps.class.getEnumConstants();
+				@SuppressWarnings("UnsecureRandomNumberGeneration")
+				final Random random=new Random();
 				boolean isRegistered=false;
 				while (!isRegistered)
-					//noinspection UnsecureRandomNumberGeneration
-					switch (enumConstants[new Random().nextInt(enumConstants.length)])
+					switch (enumConstants[random.nextInt(enumConstants.length)])
 					{
 						case MIKE:
 							if (numberOfMikes==Math.pow(2, getWave()-1))
@@ -113,9 +114,7 @@ public class Timer
 					}
 			}
 			ticks++;
-			if (!isFastForward() && getTicks()%2==0)
-				time+=.5;
-			if (isFastForward())
+			if ((!isFastForward() && getTicks()%2==0) || isFastForward())
 				time+=.5;
 			if (deadCreeps+passedCreeps>=Math.pow(2, getWave()-1)*4)
 				increaseWave();
@@ -193,11 +192,12 @@ public class Timer
 	{
 		timer.stop();
 		/*ticks=*/numberOfKnights=numberOfMikes=numberOfNagis=numberOfSkullies=deadCreeps=passedCreeps=0;
-		if (++wave==6)
+		if (wave==5)
 		{
 			Game.playerWon();
 			return;
 		}
+		wave++;
 		ListIterator<Tickable> iterator=getTickables().listIterator();
 		while (iterator.hasNext())
 			if (iterator.next() instanceof Creep)

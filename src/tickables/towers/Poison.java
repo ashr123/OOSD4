@@ -1,7 +1,6 @@
 package tickables.towers;
 
 import manage.Board;
-import tickables.Tickable;
 import tickables.creeps.Knight;
 import tickables.creeps.Mike;
 import tickables.creeps.Naji;
@@ -20,7 +19,7 @@ public class Poison extends Tower
 	 * Stores this poison's image
 	 */
 	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Tickable.class.getResource("/media/towers/Poison.png"));
+			new ImageIcon(Poison.class.getResource("/media/towers/Poison.png"));
 	/**
 	 * The radius of the affected area
 	 */

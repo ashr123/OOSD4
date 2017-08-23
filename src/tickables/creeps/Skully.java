@@ -12,7 +12,7 @@ import java.awt.Point;
 public class Skully extends Creep
 {
 	/**
-	 * Stores this skully's image
+	 * Stores this skully's images
 	 */
 	private static final ImageIcon[]
 			IMAGE_ICON={new ImageIcon(Skully.class.getResource("/media/creeps/guli-1.png")),

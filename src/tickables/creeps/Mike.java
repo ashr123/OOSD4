@@ -12,7 +12,7 @@ import java.awt.Point;
 public class Mike extends Creep
 {
 	/**
-	 * Stores this mike's image
+	 * Stores this mike's images
 	 */
 	private static final ImageIcon[]
 			IMAGE_ICON={new ImageIcon(Mike.class.getResource("/media/creeps/mike-1.png")),

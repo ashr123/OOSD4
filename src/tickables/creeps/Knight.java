@@ -13,7 +13,7 @@ import java.awt.Point;
 public class Knight extends Creep
 {
 	/**
-	 * Stores this knight's image
+	 * Stores this knight's images
 	 */
 	private static final ImageIcon[]
 			IMAGE_ICON={new ImageIcon(Knight.class.getResource("/media/creeps/abir-1.png")),
@@ -26,13 +26,13 @@ public class Knight extends Creep
 	 * States if this knight has been poisoned
 	 */
 	private boolean isPoisoned;
-	private int ticks=1, picTick;
+	private int ticks, picTick;
 	/**
 	 * Responsible of canceling the poison's effect
 	 */
 	private final Timer cancelEffect=new Timer(2500, e ->
 	{
-		if ((!Board.getTimer().isFastForward() && ticks%2==0)/*Every 5 seconds*/ ||
+		if ((!Board.getTimer().isFastForward() && ticks%2==1)/*Every 5 seconds*/ ||
 		    (Board.getTimer().isFastForward())/*Every 2.5 seconds*/)
 			isPoisoned=false;
 		ticks++;
@@ -95,7 +95,7 @@ public class Knight extends Creep
 	 */
 	public void setPoisoned()
 	{
-		ticks=1;
+		ticks=0;
 		isPoisoned=true;
 		cancelEffect.restart();
 	}

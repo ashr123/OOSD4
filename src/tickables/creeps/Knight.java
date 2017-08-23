@@ -79,7 +79,7 @@ public class Knight extends Creep
 	@Override
 	public ImageIcon getImageIcon()
 	{
-		return IMAGE_ICON[picTick%2==0 ? 0 : 1];
+		return IMAGE_ICON[picTick%2];
 	}
 	
 	/**

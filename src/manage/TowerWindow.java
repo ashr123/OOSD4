@@ -1,9 +1,6 @@
 package manage;
 
-import tickables.towers.Dart;
-import tickables.towers.Lava;
-import tickables.towers.Magician;
-import tickables.towers.Poison;
+import tickables.towers.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,6 +30,9 @@ final class TowerWindow extends JFrame
 			                                                                Image.SCALE_SMOOTH))),
 			magicianButton=new JButton(new ImageIcon(new ImageIcon(TowerWindow.class.getResource(
 					"/media/towers/Magician.png")).getImage().getScaledInstance(100, 145,
+			                                                                    Image.SCALE_SMOOTH))),
+			samButton=new JButton(new ImageIcon(new ImageIcon(TowerWindow.class.getResource(
+					"/media/towers/Sam.png")).getImage().getScaledInstance(100, 205,
 			                                                                    Image.SCALE_SMOOTH)));
 	/**
 	 * Holds the only instance of {@code TowerWindow}
@@ -41,14 +41,14 @@ final class TowerWindow extends JFrame
 	/**
 	 * Holds the remaining number of towers left from this type
 	 */
-	private static int numOfDart, numOfLava, numOfPoison, numOfMagician;
+	private static int numOfDart, numOfLava, numOfPoison, numOfMagician, numOfSam;
 	private static MouseEvent e;
 	private static Board board;
 	
 	private TowerWindow()
 	{
 		super("Choose a Tower:");
-		setLayout(new GridLayout(2, 2));
+		setLayout(new GridLayout(2, 3));
 		setLabels();
 		dartButton.addActionListener(e1 ->
 		                             {
@@ -90,11 +90,22 @@ final class TowerWindow extends JFrame
 				                                 disposeTowerWindow();
 			                                 }
 		                                 });
+		samButton.addActionListener(e1 ->
+		                            {
+		                            	if (numOfMagician>0)
+		                            	{
+		                            		Board.getTimer().register(new Sam(
+		                            				new Point(e.getX()*32/800, e.getY()*32/800)));
+		                            		numOfSam--;
+		                            		disposeTowerWindow();
+		                            	}
+		                            });
 		
 		add(dartButton);
 		add(poisonButton);
 		add(lavaButton);
 		add(magicianButton);
+		add(samButton);
 		pack();
 		setResizable(false);
 		addWindowListener(new WindowAdapter()
@@ -121,11 +132,12 @@ final class TowerWindow extends JFrame
 		poisonButton.setText(numOfPoison+"");
 		lavaButton.setText(numOfLava+"");
 		magicianButton.setText(numOfMagician+"");
+		samButton.setText(numOfSam+"");
 	}
 	
 	static void reset(Board board)
 	{
-		numOfDart=numOfLava=numOfPoison=numOfMagician=3;
+		numOfDart=numOfLava=numOfPoison=numOfMagician=numOfSam=3;
 		TowerWindow.board=board;
 	}
 	

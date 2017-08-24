@@ -27,6 +27,7 @@ public class Knight extends Creep
 	 */
 	private boolean isPoisoned;
 	private int ticks, picTick;
+	private static final int SLOWDOWN_DURATION=6;
 	/**
 	 * Responsible of canceling the poison's effect
 	 */
@@ -47,7 +48,7 @@ public class Knight extends Creep
 	 */
 	public Knight(Point location)
 	{
-		super(location);
+		super(location, SLOWDOWN_DURATION);
 		cancelEffect.setRepeats(false);
 	}
 	
@@ -62,8 +63,8 @@ public class Knight extends Creep
 	@Override
 	public void tickHappened()
 	{
-		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%4==0)/*Moves every second*/ ||
-		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Moves every half a second*/)
+		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%(4*getSlowdownFactor())==0)/*Moves every second*/ ||
+		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%(2*getSlowdownFactor())==0)/*Moves every half a second*/)
 		{
 			picTick++;
 			moveCreep();

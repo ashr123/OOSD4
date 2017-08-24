@@ -18,6 +18,7 @@ public class Mike extends Creep
 			IMAGE_ICON={new ImageIcon(Mike.class.getResource("/media/creeps/mike-1.png")),
 			            new ImageIcon(Mike.class.getResource("/media/creeps/mike-2.png"))};
 	private int picTick;
+	private static final int SLOWDOWN_DURATION=3;
 	
 	/**
 	 * Creates a new mike
@@ -26,14 +27,14 @@ public class Mike extends Creep
 	 */
 	public Mike(Point location)
 	{
-		super(location);
+		super(location, SLOWDOWN_DURATION);
 	}
 	
 	@Override
 	public void tickHappened()
 	{
-		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%4==0)/*Every second*/ ||
-		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Every half a second*/)
+		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%(4*getSlowdownFactor())==0)/*Every second*/ ||
+		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%(2*getSlowdownFactor())==0)/*Every half a second*/)
 		{
 			picTick++;
 			moveCreep();

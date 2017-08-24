@@ -157,8 +157,15 @@ public class Board extends JPanel
 				           25, 25);
 				((Creep)t).setInjured(false);
 			}
-			g.drawImage(t.getImageIcon().getImage(), (int)t.getLocation().getX()*25,
-			            (int)t.getLocation().getY()*25, 25, 25, this);
+//			if (t instanceof Creep)
+//				g.drawImage(t.getImageIcon().getImage(), (int)t.getLocation().getX()*25,
+//				            (int)t.getLocation().getY()*25, 25, 25, this);
+//			else
+				g.drawImage(t.getImageIcon().getImage(), (int)t.getLocation().getX()*25,
+				            (int)t.getLocation().getY()*25-(t.getImageIcon().getIconHeight()*25/
+				                                            t.getImageIcon().getIconWidth()-25), 25,
+				            t.getImageIcon().getIconHeight()*25/t.getImageIcon().getIconWidth(),
+				            this);
 		}
 	}
 }

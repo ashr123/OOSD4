@@ -27,6 +27,7 @@ public class Naji extends Creep
 	 */
 	private boolean isPoisoned;
 	private int ticks, picTick;
+	private static final int SLOWDOWN_DURATION=3;
 	/**
 	 * Responsible of canceling the poison's effect
 	 */
@@ -47,7 +48,7 @@ public class Naji extends Creep
 	 */
 	public Naji(Point location)
 	{
-		super(location);
+		super(location, SLOWDOWN_DURATION);
 		cancelEffect.setRepeats(false);
 	}
 	
@@ -62,8 +63,8 @@ public class Naji extends Creep
 	@Override
 	public void tickHappened()
 	{
-		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Moves every half a second*/ ||
-		    (Board.getTimer().isFastForward())/*Moves every quarter of a second*/)
+		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%(2*getSlowdownFactor())==0)/*Moves every half a second*/ ||
+		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%getSlowdownFactor()==0)/*Moves every quarter of a second*/)
 		{
 			picTick++;
 			moveCreep();

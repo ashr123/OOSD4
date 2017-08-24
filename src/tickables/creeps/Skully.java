@@ -18,6 +18,7 @@ public class Skully extends Creep
 			IMAGE_ICON={new ImageIcon(Skully.class.getResource("/media/creeps/guli-1.png")),
 			            new ImageIcon(Skully.class.getResource("/media/creeps/guli-2.png"))};
 	private int picTick;
+	private static final int SLOWDOWN_DURATION=3;
 	
 	/**
 	 * Creates a new skully
@@ -26,14 +27,14 @@ public class Skully extends Creep
 	 */
 	public Skully(Point location)
 	{
-		super(location);
+		super(location, SLOWDOWN_DURATION);
 	}
 	
 	@Override
 	public void tickHappened()
 	{
-		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%4==0)/*Moves every second*/ ||
-		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Moves every half a second*/)
+		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%(4*getSlowdownFactor())==0)/*Moves every second*/ ||
+		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%(2*getSlowdownFactor())==0)/*Moves every half a second*/)
 		{
 			picTick++;
 			moveCreep();

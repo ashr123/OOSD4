@@ -22,17 +22,18 @@ import java.awt.event.WindowEvent;
 final class TowerWindow extends JFrame
 {
 	private static final JButton
-			dartButton=new JButton(new ImageIcon(new ImageIcon(Board.class.getResource(
-			"/media/towers/Dart.png")).getImage().getScaledInstance(100, 135,
-			                                                        Image.SCALE_SMOOTH))),
-			poisonButton=new JButton(new ImageIcon(new ImageIcon(Board.class.getResource(
+			dartButton=new JButton(new ImageIcon(new ImageIcon(TowerWindow.class.getResource(
+					"/media/towers/Dart.png")).getImage().getScaledInstance(100, 135,
+			                                                                Image.SCALE_SMOOTH))),
+			poisonButton=new JButton(new ImageIcon(new ImageIcon(TowerWindow.class.getResource(
 					"/media/towers/Poison.png")).getImage().getScaledInstance(100, 131,
 			                                                                  Image.SCALE_SMOOTH))),
-			lavaButton=new JButton(new ImageIcon(new ImageIcon(Board.class.getResource(
+			lavaButton=new JButton(new ImageIcon(new ImageIcon(TowerWindow.class.getResource(
 					"/media/towers/Lava.png")).getImage().getScaledInstance(100, 162,
 			                                                                Image.SCALE_SMOOTH))),
-			magicianButton=new JButton(new ImageIcon(new ImageIcon(Board.class.getResource(
-					"/media/towers/Magician.png")).getImage().getScaledInstance(100, 145, Image.SCALE_SMOOTH)));
+			magicianButton=new JButton(new ImageIcon(new ImageIcon(TowerWindow.class.getResource(
+					"/media/towers/Magician.png")).getImage().getScaledInstance(100, 145,
+			                                                                    Image.SCALE_SMOOTH)));
 	/**
 	 * Holds the only instance of {@code TowerWindow}
 	 */

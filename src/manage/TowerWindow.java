@@ -1,6 +1,10 @@
 package manage;
 
-import tickables.towers.*;
+import tickables.towers.Dart;
+import tickables.towers.Lava;
+import tickables.towers.Magician;
+import tickables.towers.Poison;
+import tickables.towers.Sam;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;

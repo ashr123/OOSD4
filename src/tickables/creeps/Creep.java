@@ -26,7 +26,11 @@ public abstract class Creep implements Tickable//Also represents the Visited
 	 * Indicates if this creep has been injured
 	 */
 	private boolean injured;
-	private int slowdownFactor=1, ticks;
+	/**
+	 * the rate of which the creeps will be slowed down
+	 */
+	private int slowdownFactor=1;
+	private int ticks;
 	
 	/**
 	 * Creates a new creep
@@ -111,6 +115,9 @@ public abstract class Creep implements Tickable//Also represents the Visited
 		this.injured=injured;
 	}
 	
+	/**
+	 * Slows this creep down for {@code slowdownDuration} seconds
+	 */
 	public void slowdown()
 	{
 		ticks=0;
@@ -118,6 +125,10 @@ public abstract class Creep implements Tickable//Also represents the Visited
 		slowdownTimer.restart();
 	}
 	
+	/**
+	 * @return the slowdown factor
+	 * @see Creep#slowdownFactor
+	 */
 	int getSlowdownFactor()
 	{
 		return slowdownFactor;

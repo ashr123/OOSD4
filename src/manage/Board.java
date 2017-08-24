@@ -4,13 +4,8 @@ import tickables.Tickable;
 import tickables.creeps.Creep;
 import tickables.towers.Tower;
 
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Point;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -130,23 +125,22 @@ public class Board extends JPanel
 			Game.getGoButton().setEnabled(true);
 		for (int i=0; i<LevelLoader.get(getMapNum()).length; i++)//Draws the land
 			for (int j=0; j<LevelLoader.get(getMapNum())[i].length; j++)
-				if (TowerWindow.getE()!=null &&
-				    TowerWindow.getE().getY()*32/800==j &&
-				    TowerWindow.getE().getX()*32/800==i)
-				{
-					g.setColor(new Color(32, 32, 32));
-					g.fillRect(i*25, j*25, 25, 25);
-				}
+				if (LevelLoader.get(getMapNum())[i][j].getX()==0 &&
+				    LevelLoader.get(getMapNum())[i][j].getY()==0)
+					g.drawImage(IMAGE_GRASS, i*25, j*25, 25, 25, this);
 				else
-					if (LevelLoader.get(getMapNum())[i][j].getX()==0 &&
-					    LevelLoader.get(getMapNum())[i][j].getY()==0)
-						g.drawImage(IMAGE_GRASS, i*25, j*25, 25, 25, this);
-					else
-						g.drawImage(IMAGE_PATH, i*25, j*25, 25, 25, this);
+					g.drawImage(IMAGE_PATH, i*25, j*25, 25, 25, this);
 		
 		for (Tickable t : getTimer().getTickables())//Draws all the clicked towers affected area
 			if (t instanceof Tower && ((Tower)t).isClicked())
 				markNeighbors((Tower)t, g);
+		
+		if (TowerWindow.getE()!=null)//Draws the selected square
+		{
+			g.setColor(new Color(32, 32, 32));
+			g.fillRect(TowerWindow.getE().getX()*32/800*25, TowerWindow.getE().getY()*32/800*25,
+			           25, 25);
+		}
 		
 		for (Tickable t : getTimer().getTickables())
 		{
@@ -161,11 +155,11 @@ public class Board extends JPanel
 //				g.drawImage(t.getImageIcon().getImage(), (int)t.getLocation().getX()*25,
 //				            (int)t.getLocation().getY()*25, 25, 25, this);
 //			else
-				g.drawImage(t.getImageIcon().getImage(), (int)t.getLocation().getX()*25,
-				            (int)t.getLocation().getY()*25-(t.getImageIcon().getIconHeight()*25/
-				                                            t.getImageIcon().getIconWidth()-25), 25,
-				            t.getImageIcon().getIconHeight()*25/t.getImageIcon().getIconWidth(),
-				            this);
+			g.drawImage(t.getImageIcon().getImage(), (int)t.getLocation().getX()*25,
+			            (int)t.getLocation().getY()*25-(t.getImageIcon().getIconHeight()*25/
+			                                            t.getImageIcon().getIconWidth()-25), 25,
+			            t.getImageIcon().getIconHeight()*25/t.getImageIcon().getIconWidth(),
+			            this);//Draws all the tickables
 		}
 	}
 }

@@ -47,7 +47,6 @@ final class TowerWindow extends JFrame
 	 */
 	private static int numOfDart, numOfLava, numOfPoison, numOfMagician, numOfSam;
 	private static MouseEvent e;
-	private static Board board;
 	
 	private TowerWindow()
 	{
@@ -58,7 +57,7 @@ final class TowerWindow extends JFrame
 		                             {
 			                             if (numOfDart>0)
 			                             {
-				                             Board.getTimer().register(new Dart(
+				                             Game.getBoard().getTimer().register(new Dart(
 				                             		new Point(e.getX()*32/800, e.getY()*32/800)));
 				                             numOfDart--;
 				                             disposeTowerWindow();
@@ -68,7 +67,7 @@ final class TowerWindow extends JFrame
 		                               {
 			                               if (numOfPoison>0)
 			                               {
-				                               Board.getTimer().register(new Poison(
+				                               Game.getBoard().getTimer().register(new Poison(
 				                               		new Point(e.getX()*32/800, e.getY()*32/800)));
 				                               numOfPoison--;
 				                               disposeTowerWindow();
@@ -78,7 +77,7 @@ final class TowerWindow extends JFrame
 		                             {
 			                             if (numOfLava>0)
 			                             {
-				                             Board.getTimer().register(new Lava(
+				                             Game.getBoard().getTimer().register(new Lava(
 				                             		new Point(e.getX()*32/800, e.getY()*32/800)));
 				                             numOfLava--;
 				                             disposeTowerWindow();
@@ -88,7 +87,7 @@ final class TowerWindow extends JFrame
 		                                 {
 			                                 if (numOfMagician>0)
 			                                 {
-				                                 Board.getTimer().register(new Magician(
+				                                 Game.getBoard().getTimer().register(new Magician(
 				                                 		new Point(e.getX()*32/800, e.getY()*32/800)));
 				                                 numOfMagician--;
 				                                 disposeTowerWindow();
@@ -98,7 +97,7 @@ final class TowerWindow extends JFrame
 		                            {
 		                            	if (numOfMagician>0)
 		                            	{
-		                            		Board.getTimer().register(new Sam(
+				                            Game.getBoard().getTimer().register(new Sam(
 		                            				new Point(e.getX()*32/800, e.getY()*32/800)));
 		                            		numOfSam--;
 		                            		disposeTowerWindow();
@@ -117,7 +116,7 @@ final class TowerWindow extends JFrame
 			public void windowClosing(WindowEvent e1)
 			{
 				e=null;
-				board.repaint();
+				Game.getBoard().repaint();
 			}
 		});
 		setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -126,7 +125,7 @@ final class TowerWindow extends JFrame
 	static void disposeTowerWindow()
 	{
 		e=null;
-		board.repaint();
+		Game.getBoard().repaint();
 		ourInstance.dispose();
 	}
 	
@@ -139,10 +138,9 @@ final class TowerWindow extends JFrame
 		samButton.setText(numOfSam+"");
 	}
 	
-	static void reset(Board board)
+	static void reset()
 	{
 		numOfDart=numOfLava=numOfPoison=numOfMagician=numOfSam=3;
-		TowerWindow.board=board;
 	}
 	
 	static void displayFrame(MouseEvent e1)

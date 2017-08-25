@@ -1,6 +1,6 @@
 package tickables.towers;
 
-import manage.Board;
+import manage.Game;
 import tickables.Tickable;
 import tickables.creeps.Creep;
 import tickables.creeps.Knight;
@@ -77,7 +77,7 @@ public abstract class Tower implements Tickable//Also represents the Visitor
 	 */
 	void hitCreep(int range, boolean isCashan)
 	{
-		Iterator<Tickable> listIterator=Board.getTimer().getTickables().descendingIterator();
+		Iterator<Tickable> listIterator=Game.getBoard().getTimer().getTickables().descendingIterator();
 		while (listIterator.hasNext())
 		{
 			Tickable tickable=listIterator.next();

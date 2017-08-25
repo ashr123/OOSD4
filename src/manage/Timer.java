@@ -25,7 +25,7 @@ public class Timer
 	/**
 	 * The starting point of the new creeps that to be created
 	 */
-	private final Point startingPoint=getStartLocation();
+	private final Point startingPoint;
 	/**
 	 * Creates and moves the creeps and hits them with the towers
 	 */
@@ -42,10 +42,11 @@ public class Timer
 	
 	/**
 	 * Creates a new timer
-	 * @param board only for repainting
 	 */
-	Timer(Board board)
+	@SuppressWarnings("ConstantConditions")
+	Timer(int mapNum)
 	{
+		startingPoint=getStartLocation(mapNum);
 		timer=new javax.swing.Timer(250, e ->
 		{
 			ListIterator<Tickable> iterator=getTickables().listIterator();
@@ -118,7 +119,7 @@ public class Timer
 				time+=.5;
 			if (deadCreeps+passedCreeps>=Math.pow(2, getWave()-1)*4)
 				increaseWave();
-			board.repaint();
+			Game.getBoard().repaint();
 		});
 	}
 	
@@ -170,17 +171,18 @@ public class Timer
 	void start()
 	{
 		TowerWindow.disposeTowerWindow();
+		Game.getGoButton().setEnabled(false);
 		timer.start();
 	}
 	
 	/**
 	 * @return the starting point of the creeps to be created
 	 */
-	private static Point getStartLocation()
+	private static Point getStartLocation(int mapNum)
 	{
 		Point zeroPoint=new Point();
-		for (int i=0; i<LevelLoader.get(Board.getMapNum())[0].length; i++)
-			if (!LevelLoader.get(Board.getMapNum())[0][i].equals(zeroPoint))
+		for (int i=0; i<LevelLoader.get(mapNum)[0].length; i++)
+			if (!LevelLoader.get(mapNum)[0][i].equals(zeroPoint))
 				return new Point(0, i);
 		return null;
 	}
@@ -190,9 +192,9 @@ public class Timer
 	 */
 	private void increaseWave()
 	{
-		timer.stop();
+		stop();
 		/*ticks=*/numberOfKnights=numberOfMikes=numberOfNagis=numberOfSkullies=deadCreeps=passedCreeps=0;
-		if (wave==5)
+		if (wave==1)
 		{
 			Game.playerWon();
 			return;
@@ -213,14 +215,6 @@ public class Timer
 	}
 	
 	/**
-	 * @return {@code true} if this timer is active, {@code false} otherwise
-	 */
-	boolean isRunning()
-	{
-		return timer.isRunning();
-	}
-	
-	/**
 	 * @return the total time that has passed since the 1st wave
 	 */
 	double getTime()
@@ -234,6 +228,7 @@ public class Timer
 	void stop()
 	{
 		timer.stop();
+		Game.getGoButton().setEnabled(true);
 	}
 	
 	/**

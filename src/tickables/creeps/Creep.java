@@ -1,6 +1,6 @@
 package tickables.creeps;
 
-import manage.Board;
+import manage.Game;
 import manage.LevelLoader;
 import tickables.Tickable;
 import tickables.towers.Tower;
@@ -42,14 +42,14 @@ public abstract class Creep implements Tickable//Also represents the Visited
 		this.location=location;
 		slowdownTimer=new Timer(slowdownDuration*1000/2, e ->
 		{
-			if ((!Board.getTimer().isFastForward() && ticks%2==1)/*Every 2*slowdownDuration seconds*/ ||
-			    (Board.getTimer().isFastForward())/*Every slowdownDuration seconds*/)
+			if ((!Game.getBoard().getTimer().isFastForward() && ticks%2==1)/*Every 2*slowdownDuration seconds*/ ||
+			    (Game.getBoard().getTimer().isFastForward())/*Every slowdownDuration seconds*/)
 			{
 				slowdownFactor=1;
 				return;
 			}
 			ticks++;
-//			if (!Board.getTimer().isFastForward())
+//			if (!Game.getBoard().getTimer().isFastForward())
 			((Timer)e.getSource()).restart();
 		});
 		
@@ -91,8 +91,8 @@ public abstract class Creep implements Tickable//Also represents the Visited
 	void moveCreep()
 	{
 		getLocation().translate((int)LevelLoader.get(
-				Board.getMapNum())[(int)getLocation().getX()][(int)getLocation().getY()].getX(),
-		                        (int)LevelLoader.get(Board.getMapNum())
+				Game.getMapNum())[(int)getLocation().getX()][(int)getLocation().getY()].getX(),
+		                        (int)LevelLoader.get(Game.getMapNum())
 				                             [(int)getLocation().getX()][(int)getLocation().getY()].getY());
 	}
 	

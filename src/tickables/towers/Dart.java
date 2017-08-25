@@ -1,6 +1,6 @@
 package tickables.towers;
 
-import manage.Board;
+import manage.Game;
 import tickables.creeps.Knight;
 import tickables.creeps.Mike;
 import tickables.creeps.Naji;
@@ -42,8 +42,8 @@ public class Dart extends Tower
 	@Override
 	public void tickHappened()
 	{
-		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%2==0)/*Every half a second*/ ||
-		    (Board.getTimer().isFastForward())/*Every quarter of a second*/)
+		if ((!Game.getBoard().getTimer().isFastForward() && Game.getBoard().getTimer().getTicks()%2==0)/*Every half a second*/ ||
+		    (Game.getBoard().getTimer().isFastForward())/*Every quarter of a second*/)
 			hitCreep(RADIUS, false);
 	}
 	

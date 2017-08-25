@@ -25,19 +25,19 @@ public class Board extends JPanel
 					            .getImage(),
 			IMAGE_PATH=new ImageIcon(Board.class.getResource("/media/environment/path.png"))
 					           .getImage();
-	private static int mapNum;
-	private static Timer timer;
+	private final Timer timer;
+	private final int mapNum;
 	
 	/**
 	 * Builds a new board
 	 * @param mapNum the number of the map to be loaded
 	 */
-	public Board(int mapNum)
+	Board(int mapNum)
 	{
 		setPreferredSize(new Dimension(800, 800));
-		TowerWindow.reset(this);
-		Board.mapNum=mapNum;
-		timer=new Timer(this);
+		TowerWindow.reset();
+		this.mapNum=mapNum;
+		timer=new Timer(mapNum);
 		addMouseListener(new MouseListener()
 		{
 			/**
@@ -54,9 +54,9 @@ public class Board extends JPanel
 						repaint();
 						return;
 					}
-				if (getTimer().isRunning())
+				if (!Game.getGoButton().isEnabled())
 					return;
-				if (LevelLoader.get(mapNum)[e.getX()*32/800][e.getY()*32/800].equals(new Point()))
+				if (LevelLoader.get(Game.getMapNum())[e.getX()*32/800][e.getY()*32/800].equals(new Point()))
 				{
 					TowerWindow.displayFrame(e);
 					repaint();
@@ -90,17 +90,9 @@ public class Board extends JPanel
 	}
 	
 	/**
-	 * @return the number of current map
-	 */
-	public static int getMapNum()
-	{
-		return mapNum;
-	}
-	
-	/**
 	 * @return returns the board's timer
 	 */
-	public static Timer getTimer()
+	public Timer getTimer()
 	{
 		return timer;
 	}
@@ -126,12 +118,10 @@ public class Board extends JPanel
 		Game.getHPLBL().setText("HP: "+Game.getHP()+"    ");
 		Game.getTimeLBL().setText("Time: "+getTimer().getTime()+"    ");
 		Game.getWaveLBL().setText("Wave: "+getTimer().getWave()+"    ");
-		if (!getTimer().isRunning())
-			Game.getGoButton().setEnabled(true);
-		for (int i=0; i<LevelLoader.get(getMapNum()).length; i++)//Draws the land
-			for (int j=0; j<LevelLoader.get(getMapNum())[i].length; j++)
-				if (LevelLoader.get(getMapNum())[i][j].getX()==0 &&
-				    LevelLoader.get(getMapNum())[i][j].getY()==0)
+		for (int i=0; i<LevelLoader.get(Game.getMapNum()).length; i++)//Draws the land
+			for (int j=0; j<LevelLoader.get(Game.getMapNum())[i].length; j++)
+				if (LevelLoader.get(mapNum)[i][j].getX()==0 &&
+				    LevelLoader.get(mapNum)[i][j].getY()==0)
 					g.drawImage(IMAGE_GRASS, i*25, j*25, 25, 25, this);
 				else
 					g.drawImage(IMAGE_PATH, i*25, j*25, 25, 25, this);

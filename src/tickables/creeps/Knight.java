@@ -1,6 +1,6 @@
 package tickables.creeps;
 
-import manage.Board;
+import manage.Game;
 import tickables.towers.Tower;
 
 import javax.swing.ImageIcon;
@@ -33,8 +33,8 @@ public class Knight extends Creep
 	 */
 	private final Timer cancelEffect=new Timer(2500, e ->
 	{
-		if ((!Board.getTimer().isFastForward() && ticks%2==1)/*Every 5 seconds*/ ||
-		    (Board.getTimer().isFastForward())/*Every 2.5 seconds*/)
+		if ((!Game.getBoard().getTimer().isFastForward() && ticks%2==1)/*Every 5 seconds*/ ||
+		    (Game.getBoard().getTimer().isFastForward())/*Every 2.5 seconds*/)
 			isPoisoned=false;
 		ticks++;
 		if (isPoisoned())
@@ -63,8 +63,8 @@ public class Knight extends Creep
 	@Override
 	public void tickHappened()
 	{
-		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%(4*getSlowdownFactor())==0)/*Moves every second*/ ||
-		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%(2*getSlowdownFactor())==0)/*Moves every half a second*/)
+		if ((!Game.getBoard().getTimer().isFastForward() && Game.getBoard().getTimer().getTicks()%(4*getSlowdownFactor())==0)/*Moves every second*/ ||
+		    (Game.getBoard().getTimer().isFastForward() && Game.getBoard().getTimer().getTicks()%(2*getSlowdownFactor())==0)/*Moves every half a second*/)
 		{
 			picTick++;
 			moveCreep();

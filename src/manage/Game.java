@@ -17,6 +17,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
@@ -25,21 +26,19 @@ import java.io.IOException;
 @SuppressWarnings({"MagicNumber", "UtilityClassCanBeEnum"})
 public final class Game
 {
-	private static final ImageIcon
-			IMAGE_MAP_1=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level0.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)),
-			IMAGE_MAP_2=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level1.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH)),
-			IMAGE_MAP_3=new ImageIcon(new ImageIcon(Game.class.getResource("/media/toolbar/level2.png")).getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH));
+	/**
+	 * Represents the health-points of the player
+	 */
+	private static int HP;
 	private static final JFrame frame=new JFrame("Tower Defence");
 	private static final JPanel panel=new JPanel(new BorderLayout());
 	private static final JButton goButton=new JButton("Go!");
-	/**
-	 * Represents the helth-points of the player
-	 */
-	private static int HP;
 	private static final JLabel
 			WaveLBL=new JLabel("Wave: 1    "),
 			TimeLBL=new JLabel("Time: 0    "),
 			HPLBL=new JLabel("HP: "+HP+"    ");
+	private static final Board[] board=new Board[3];
+	private static int mapNum;
 	
 	/**
 	 * Builds the main frame: the maps selection frame
@@ -47,13 +46,12 @@ public final class Game
 	 */
 	private Game() throws IOException
 	{
-		LevelLoader.load();
 		final JLabel maps=new JLabel("Please choose a map:");
 		maps.setFont(new Font("Courier", Font.BOLD, 20));
 		final JButton
-				map0=new JButton(IMAGE_MAP_1),
-				map1=new JButton(IMAGE_MAP_2),
-				map2=new JButton(IMAGE_MAP_3);
+				map0=new JButton(captureComponent(board[0])),
+				map1=new JButton(captureComponent(board[1])),
+				map2=new JButton(captureComponent(board[2]));
 		panel.add(maps, BorderLayout.NORTH);
 		panel.add(map0, BorderLayout.WEST);
 		panel.add(map1, BorderLayout.CENTER);
@@ -67,11 +65,26 @@ public final class Game
 	
 	private static void createMap(int mapNum)
 	{
+		Game.mapNum=mapNum;
 		final JPanel gamePanel=new JPanel(new BorderLayout());
 		createToolBar(gamePanel);
-		gamePanel.add(new Board(mapNum));
+		gamePanel.add(board[mapNum]);
 		frame.setContentPane(gamePanel);
 		frame.pack();
+	}
+	
+	private static ImageIcon captureComponent(Component component)
+	{
+		BufferedImage captureImage=new BufferedImage(800, 800, BufferedImage
+				                                                       .TYPE_INT_ARGB);
+		component.paint(captureImage.getGraphics());
+		return new ImageIcon(captureImage.getScaledInstance(750/3, 750/3,
+		                                                    Image.SCALE_SMOOTH));
+	}
+	
+	public static Board getBoard()
+	{
+		return board[mapNum];
 	}
 	
 	/**
@@ -84,6 +97,9 @@ public final class Game
 	public static void main(String[] args) throws IOException, LineUnavailableException,
 	                                              UnsupportedAudioFileException
 	{
+		LevelLoader.load();
+		for (int i=0; i<3; i++)
+			board[i]=new Board(i);
 		new Game();
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setResizable(false);
@@ -113,9 +129,12 @@ public final class Game
 	 */
 	static void decreaseHP()
 	{
-		HPLBL.setText("HP: "+(--HP)+"    ");
+		getHPLBL().setText("HP: "+(--HP)+"    ");
 		if (getHP()==0)
+		{
+			getBoard().getTimer().stop();
 			playerLost();
+		}
 	}
 	
 	/**
@@ -180,14 +199,13 @@ public final class Game
 	 */
 	private static void after(JLabel afterLabel)
 	{
-		Board.getTimer().stop();
 		final JPanel afterPanel=new JPanel();
 		afterPanel.setLayout(new BoxLayout(afterPanel, BoxLayout.PAGE_AXIS));
 		final JLabel
 				hpLeft=new JLabel("HP:  "+getHP()),
-				passedCreeps=new JLabel("Passed creeps:  "+Board.getTimer().getTotalPassedCreeps()),
-				deadCreeps=new JLabel("Dead creeps:  "+Board.getTimer().getTotalDeadCreeps()),
-				time=new JLabel("Time elapsed:  "+Board.getTimer().getTime()+" seconds");
+				passedCreeps=new JLabel("Passed creeps:  "+getBoard().getTimer().getTotalPassedCreeps()),
+				deadCreeps=new JLabel("Dead creeps:  "+getBoard().getTimer().getTotalDeadCreeps()),
+				time=new JLabel("Time elapsed:  "+getBoard().getTimer().getTime()+" seconds");
 		final JButton tryAgainButton=new JButton("Choose a different map");
 		
 		final Font
@@ -248,18 +266,18 @@ public final class Game
 		toolBar.add(new JLabel("     "));
 		toolBar.add(goButton);
 		gamePanel.add(toolBar, BorderLayout.NORTH);
-		goButton.addActionListener(e ->
-		                           {
-			                           Board.getTimer().start();
-			                           goButton.setEnabled(false);
-		                           });
-		
+		goButton.addActionListener(e -> getBoard().getTimer().start());
 		fastForwardButton.addActionListener(e ->
 		                                    {
-			                                    Board.getTimer().setFastForward(!Board.getTimer()
-			                                                                          .isFastForward());
-			                                    fastForwardButton.setText(Board.getTimer().isFastForward() ?
-			                                                              "Slow Down" : "Fast Forward");
+			                                    getBoard().getTimer().setFastForward(!getBoard().getTimer()
+			                                                                                    .isFastForward());
+			                                    fastForwardButton.setText(getBoard().getTimer().isFastForward()
+			                                                              ? "Slow Down" : "Fast Forward");
 		                                    });
+	}
+	
+	public static int getMapNum()
+	{
+		return mapNum;
 	}
 }

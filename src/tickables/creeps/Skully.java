@@ -1,6 +1,6 @@
 package tickables.creeps;
 
-import manage.Board;
+import manage.Game;
 import tickables.towers.Tower;
 
 import javax.swing.ImageIcon;
@@ -33,8 +33,8 @@ public class Skully extends Creep
 	@Override
 	public void tickHappened()
 	{
-		if ((!Board.getTimer().isFastForward() && Board.getTimer().getTicks()%(4*getSlowdownFactor())==0)/*Moves every second*/ ||
-		    (Board.getTimer().isFastForward() && Board.getTimer().getTicks()%(2*getSlowdownFactor())==0)/*Moves every half a second*/)
+		if ((!Game.getBoard().getTimer().isFastForward() && Game.getBoard().getTimer().getTicks()%(4*getSlowdownFactor())==0)/*Moves every second*/ ||
+		    (Game.getBoard().getTimer().isFastForward() && Game.getBoard().getTimer().getTicks()%(2*getSlowdownFactor())==0)/*Moves every half a second*/)
 		{
 			picTick++;
 			moveCreep();

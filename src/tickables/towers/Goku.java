@@ -25,6 +25,10 @@ public class Goku extends Tower
 	 */
 	private static final int RADIUS=2;
 	/**
+	 * The color of the affected area
+	 */
+	private static final Color RADIUS_COLOR=Color.decode("#42f46e");
+	/**
 	 * Counts the number of hits this tower did
 	 */
 	private int visitsCounter;
@@ -32,10 +36,6 @@ public class Goku extends Tower
 	 * Represent the "hit" or the "strength" parameter of this tower
 	 */
 	private int H=1;
-	/**
-	 * The color of the affected area
-	 */
-	private static final Color RADIUS_COLOR=Color.decode("#42f46e");
 	
 	/**
 	 * Creates a new goku

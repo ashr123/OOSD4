@@ -10,6 +10,9 @@ import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Point;
 
+/**
+ * Represents a {@code Goku}
+ */
 public class Goku extends Tower
 {
 	/**
@@ -21,7 +24,14 @@ public class Goku extends Tower
 	 * The radius of the affected area
 	 */
 	private static final int RADIUS=2;
-	private int visitsCounter, H=1;
+	/**
+	 * Counts the number of hits this tower did
+	 */
+	private int visitsCounter;
+	/**
+	 * Represent the "hit" or the "strength" parameter of this tower
+	 */
+	private int H=1;
 	/**
 	 * The color of the affected area
 	 */
@@ -97,10 +107,12 @@ public class Goku extends Tower
 			hitCreep(RADIUS, false);
 	}
 	
+	/**
+	 * Increase {@link Goku#visitsCounter} by 1 and after every 10 hits multiplies {@link Goku#H} by 2
+	 */
 	private void increaseHIfNeeded()
 	{
-		visitsCounter=(++visitsCounter)%10;
-		if (visitsCounter==0)
+		if ((++visitsCounter)%10==0)
 			H*=2;
 	}
 }

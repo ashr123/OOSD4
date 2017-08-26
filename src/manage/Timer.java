@@ -194,7 +194,7 @@ public class Timer
 	{
 		stop();
 		/*ticks=*/numberOfKnights=numberOfMikes=numberOfNagis=numberOfSkullies=deadCreeps=passedCreeps=0;
-		if (wave==1)
+		if (wave==5)
 		{
 			Game.playerWon();
 			return;

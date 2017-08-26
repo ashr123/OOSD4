@@ -1,6 +1,7 @@
 package manage;
 
 import tickables.towers.Dart;
+import tickables.towers.Goku;
 import tickables.towers.Lava;
 import tickables.towers.Magician;
 import tickables.towers.Poison;
@@ -37,7 +38,10 @@ final class TowerWindow extends JFrame
 			                                                                    Image.SCALE_SMOOTH))),
 			samButton=new JButton(new ImageIcon(new ImageIcon(TowerWindow.class.getResource(
 					"/media/towers/Sam.png")).getImage().getScaledInstance(100, 205,
-			                                                                    Image.SCALE_SMOOTH)));
+			                                                                    Image.SCALE_SMOOTH))),
+			gokuButton=new JButton(new ImageIcon(new ImageIcon(TowerWindow.class.getResource(
+					"/media/towers/Goku.png")).getImage().getScaledInstance(100, 222,
+			                                                                Image.SCALE_SMOOTH)));
 	/**
 	 * Holds the only instance of {@code TowerWindow}
 	 */
@@ -45,14 +49,13 @@ final class TowerWindow extends JFrame
 	/**
 	 * Holds the remaining number of towers left from this type
 	 */
-	private static int numOfDart, numOfLava, numOfPoison, numOfMagician, numOfSam;
+	private static int numOfDart, numOfLava, numOfPoison, numOfMagician, numOfSam, numOfGoku;
 	private static MouseEvent e;
 	
 	private TowerWindow()
 	{
 		super("Choose a Tower:");
 		setLayout(new GridLayout(2, 3));
-		setLabels();
 		dartButton.addActionListener(e1 ->
 		                             {
 			                             if (numOfDart>0)
@@ -95,7 +98,7 @@ final class TowerWindow extends JFrame
 		                                 });
 		samButton.addActionListener(e1 ->
 		                            {
-		                            	if (numOfMagician>0)
+		                            	if (numOfSam>0)
 		                            	{
 				                            Game.getBoard().getTimer().register(new Sam(
 		                            				new Point(e.getX()*32/800, e.getY()*32/800)));
@@ -103,13 +106,23 @@ final class TowerWindow extends JFrame
 		                            		disposeTowerWindow();
 		                            	}
 		                            });
+		gokuButton.addActionListener(e1 ->
+		                            {
+			                            if (numOfGoku>0)
+			                            {
+				                            Game.getBoard().getTimer().register(new Goku(
+				                            		new Point(e.getX()*32/800, e.getY()*32/800)));
+				                            numOfGoku--;
+				                            disposeTowerWindow();
+			                            }
+		                            });
 		
 		add(dartButton);
 		add(poisonButton);
 		add(lavaButton);
 		add(magicianButton);
 		add(samButton);
-		pack();
+		add(gokuButton);
 		setResizable(false);
 		addWindowListener(new WindowAdapter()
 		{
@@ -129,24 +142,21 @@ final class TowerWindow extends JFrame
 		ourInstance.dispose();
 	}
 	
-	private static void setLabels()
-	{
-		dartButton.setText(numOfDart+"");
-		poisonButton.setText(numOfPoison+"");
-		lavaButton.setText(numOfLava+"");
-		magicianButton.setText(numOfMagician+"");
-		samButton.setText(numOfSam+"");
-	}
-	
 	static void reset()
 	{
-		numOfDart=numOfLava=numOfPoison=numOfMagician=numOfSam=3;
+		numOfDart=numOfLava=numOfPoison=numOfMagician=numOfSam=numOfGoku=3;
 	}
 	
 	static void displayFrame(MouseEvent e1)
 	{
 		e=e1;
-		setLabels();
+		dartButton.setText(numOfDart+"");
+		poisonButton.setText(numOfPoison+"");
+		lavaButton.setText(numOfLava+"");
+		magicianButton.setText(numOfMagician+"");
+		samButton.setText(numOfSam+"");
+		gokuButton.setText(numOfGoku+"");
+		ourInstance.pack();
 		ourInstance.setVisible(true);
 	}
 	

@@ -22,12 +22,12 @@ public class Knight extends Creep
 	 * States the severity of poisoning
 	 */
 	private static final double POISON_DEGREE=2;
+	private static final int SLOWDOWN_DURATION=6;//Seconds
 	/**
 	 * States if this knight has been poisoned
 	 */
 	private boolean isPoisoned;
-	private int ticks, picTick;
-	private static final int SLOWDOWN_DURATION=6;
+	private int ticks;
 	/**
 	 * Responsible of canceling the poison's effect
 	 */
@@ -63,12 +63,11 @@ public class Knight extends Creep
 	@Override
 	public void tickHappened()
 	{
-		if ((!Game.getBoard().getTimer().isFastForward() && Game.getBoard().getTimer().getTicks()%(4*getSlowdownFactor())==0)/*Moves every second*/ ||
-		    (Game.getBoard().getTimer().isFastForward() && Game.getBoard().getTimer().getTicks()%(2*getSlowdownFactor())==0)/*Moves every half a second*/)
-		{
-			picTick++;
+		if ((!Game.getBoard().getTimer().isFastForward() &&
+		     Game.getBoard().getTimer().getTicks()%(4*getSlowdownFactor())==0)/*Moves every second*/ ||
+		    (Game.getBoard().getTimer().isFastForward() &&
+		     Game.getBoard().getTimer().getTicks()%(2*getSlowdownFactor())==0)/*Moves every half a second*/)
 			moveCreep();
-		}
 	}
 	
 	@Override
@@ -80,7 +79,7 @@ public class Knight extends Creep
 	@Override
 	public ImageIcon getImageIcon()
 	{
-		return IMAGE_ICON[picTick%2];
+		return IMAGE_ICON[getPicTick()%IMAGE_ICON.length];
 	}
 	
 	/**

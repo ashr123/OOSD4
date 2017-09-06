@@ -24,9 +24,9 @@ public class LevelLoader
 	 * Creates {@link Point} instance from {@code char} representation
 	 * @return the {@link Point} object
 	 */
-	private static Point parsePoint(char Point)
+	private static Point parsePoint(char point)
 	{
-		switch (Point)
+		switch (point)
 		{
 			case CHAR_GRASS:
 				return new Point();
@@ -63,7 +63,7 @@ public class LevelLoader
 			// end of level
 			if (line.trim().isEmpty())
 			{
-				if (null!=level)
+				if (level!=null)
 				{
 					_levels.add(level);
 					level=null;
@@ -88,7 +88,7 @@ public class LevelLoader
 				continue;
 			
 			// start of level definition
-			if (null==level && h>0 && w>0)
+			if (level==null && h>0 && w>0)
 			{
 				level=new Point[w][h];
 				row=0;
@@ -97,9 +97,9 @@ public class LevelLoader
 			// regular board line
 			for (int col=0; col<line.length(); col++)
 			{
-				Point Point=parsePoint(line.charAt(col));
-				if (null!=Point && level!=null)
-					level[col][row]=Point;
+				Point point=parsePoint(line.charAt(col));
+				if (point!=null && level!=null)
+					level[col][row]=point;
 				else
 				{
 					br.close();
@@ -108,7 +108,7 @@ public class LevelLoader
 			}
 			row++;
 		}
-		if (null!=level)
+		if (level!=null)
 			_levels.add(level);
 		br.close();
 	}

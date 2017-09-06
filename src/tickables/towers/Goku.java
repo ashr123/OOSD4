@@ -19,7 +19,7 @@ public class Goku extends Tower
 	 * Stores this Goku's image
 	 */
 	private static final ImageIcon IMAGE_ICON=
-			new ImageIcon(Sam.class.getResource("/media/towers/Goku.png"));
+			new ImageIcon(Goku.class.getResource("/media/towers/Goku.png"));
 	/**
 	 * The radius of the affected area
 	 */
@@ -112,7 +112,7 @@ public class Goku extends Tower
 	 */
 	private void increaseHIfNeeded()
 	{
-		if ((++visitsCounter)%10==0)
+		if (++visitsCounter%10==0)
 			H*=2;
 	}
 }

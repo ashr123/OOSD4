@@ -30,7 +30,7 @@ public abstract class Creep implements Tickable//Also represents the Visited
 	 * the rate of which the creeps will be slowed down
 	 */
 	private int slowdownFactor=1;
-	private int ticks;
+	private int ticks, picTick;
 	
 	/**
 	 * Creates a new creep
@@ -94,6 +94,7 @@ public abstract class Creep implements Tickable//Also represents the Visited
 				Game.getMapNum())[(int)getLocation().getX()][(int)getLocation().getY()].getX(),
 		                        (int)LevelLoader.get(Game.getMapNum())
 				                             [(int)getLocation().getX()][(int)getLocation().getY()].getY());
+		picTick++;
 	}
 	
 	/**
@@ -127,10 +128,14 @@ public abstract class Creep implements Tickable//Also represents the Visited
 	
 	/**
 	 * @return the slowdown factor
-	 * @see Creep#slowdownFactor
 	 */
 	int getSlowdownFactor()
 	{
 		return slowdownFactor;
+	}
+	
+	int getPicTick()
+	{
+		return picTick;
 	}
 }

@@ -18,6 +18,8 @@ import java.util.Random;
 @SuppressWarnings("ClassHasNoToStringMethod")
 public class Timer
 {
+	@SuppressWarnings("UnsecureRandomNumberGeneration")
+	private static final Random random=new Random();
 	/**
 	 * Holds all the towers and the creeps that participate in the current wave
 	 */
@@ -38,7 +40,7 @@ public class Timer
 	/**
 	 * Counting the time since the 1st wave
 	 */
-	private double time;
+	private double time, numOfCreeps=Math.pow(2, getWave()-1);
 	
 	/**
 	 * Creates a new timer
@@ -69,45 +71,45 @@ public class Timer
 					totalPassedCreeps++;
 					iterator.remove();
 					Game.decreaseHP();
+					if (Game.getHP()==20)
+						return;
 				}
 			}
 			if (((!isFastForward() && getTicks()%4==0)/*Every second*/ ||
 			     (isFastForward() && getTicks()%2==0)/*Every half a second*/) &&
-			    (numberOfMikes!=Math.pow(2, getWave()-1) ||
-			     numberOfNagis!=Math.pow(2, getWave()-1) ||
-			     numberOfKnights!=Math.pow(2, getWave()-1) ||
-			     numberOfSkullies!=Math.pow(2, getWave()-1)))
+			    (numberOfMikes!=numOfCreeps ||
+			     numberOfNagis!=numOfCreeps ||
+			     numberOfKnights!=numOfCreeps ||
+			     numberOfSkullies!=numOfCreeps))
 			{
 				final Creeps[] enumConstants=Creeps.class.getEnumConstants();
-				@SuppressWarnings("UnsecureRandomNumberGeneration")
-				final Random random=new Random();
 				boolean isRegistered=false;
 				while (!isRegistered)
 					switch (enumConstants[random.nextInt(enumConstants.length)])
 					{
 						case MIKE:
-							if (numberOfMikes==Math.pow(2, getWave()-1))
+							if (numberOfMikes==numOfCreeps)
 								break;
 							register(new Mike(new Point(startingPoint)));
 							numberOfMikes++;
 							isRegistered=true;
 							break;
 						case NAGI:
-							if (numberOfNagis==Math.pow(2, getWave()-1))
+							if (numberOfNagis==numOfCreeps)
 								break;
 							register(new Naji(new Point(startingPoint)));
 							numberOfNagis++;
 							isRegistered=true;
 							break;
 						case KNIGHT:
-							if (numberOfKnights==Math.pow(2, getWave()-1))
+							if (numberOfKnights==numOfCreeps)
 								break;
 							register(new Knight(new Point(startingPoint)));
 							numberOfKnights++;
 							isRegistered=true;
 							break;
 						case SKULLY:
-							if (numberOfSkullies==Math.pow(2, getWave()-1))
+							if (numberOfSkullies==numOfCreeps)
 								break;
 							register(new Skully(new Point(startingPoint)));
 							numberOfSkullies++;
@@ -117,10 +119,22 @@ public class Timer
 			ticks++;
 			if ((!isFastForward() && getTicks()%2==0) || isFastForward())
 				time+=.5;
-			if (deadCreeps+passedCreeps>=Math.pow(2, getWave()-1)*4)
+			if (deadCreeps+passedCreeps==numOfCreeps*4)
 				increaseWave();
 			Game.getBoard().repaint();
 		});
+	}
+	
+	/**
+	 * @return the starting point of the creeps to be created
+	 */
+	private static Point getStartLocation(int mapNum)
+	{
+		Point zeroPoint=new Point();
+		for (int i=0; i<LevelLoader.get(mapNum)[0].length; i++)
+			if (!LevelLoader.get(mapNum)[0][i].equals(zeroPoint))
+				return new Point(0, i);
+		return null;
 	}
 	
 	/**
@@ -176,34 +190,29 @@ public class Timer
 	}
 	
 	/**
-	 * @return the starting point of the creeps to be created
-	 */
-	private static Point getStartLocation(int mapNum)
-	{
-		Point zeroPoint=new Point();
-		for (int i=0; i<LevelLoader.get(mapNum)[0].length; i++)
-			if (!LevelLoader.get(mapNum)[0][i].equals(zeroPoint))
-				return new Point(0, i);
-		return null;
-	}
-	
-	/**
 	 * Increases the current wave
 	 */
 	private void increaseWave()
 	{
-		stop();
-		/*ticks=*/numberOfKnights=numberOfMikes=numberOfNagis=numberOfSkullies=deadCreeps=passedCreeps=0;
 		if (wave==5)
-		{
 			Game.playerWon();
-			return;
+		else
+		{
+			stop();
+//			ticks=0;
+			wave++;
+			resetCreeps();
+//			ListIterator<Tickable> iterator=getTickables().listIterator();
+//			while (iterator.hasNext())
+//				if (iterator.next() instanceof Creep)
+//					iterator.remove();
 		}
-		wave++;
-		ListIterator<Tickable> iterator=getTickables().listIterator();
-		while (iterator.hasNext())
-			if (iterator.next() instanceof Creep)
-				iterator.remove();
+	}
+	
+	private void resetCreeps()
+	{
+		numberOfKnights=numberOfMikes=numberOfNagis=numberOfSkullies=deadCreeps=passedCreeps=0;
+		numOfCreeps=Math.pow(2, getWave()-1);
 	}
 	
 	/**
@@ -245,6 +254,20 @@ public class Timer
 	int getTotalPassedCreeps()
 	{
 		return totalPassedCreeps;
+	}
+	
+	/**
+	 * Resets the timer
+	 */
+	void reset()
+	{
+		wave=1;
+		time=0;
+		ticks=totalDeadCreeps=totalPassedCreeps=0;
+		fastForward=false;
+		resetCreeps();
+		getTickables().clear();
+		
 	}
 	
 	private enum Creeps

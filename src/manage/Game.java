@@ -32,13 +32,16 @@ public final class Game
 	private static int HP;
 	private static final JFrame frame=new JFrame("Tower Defence");
 	private static final JPanel panel=new JPanel(new BorderLayout());
-	private static final JButton goButton=new JButton("Go!");
+	private static final JButton
+			goButton=new JButton("Go!"),
+			fastForwardButton=new JButton("Fast Forward");
 	private static final JLabel
 			WaveLBL=new JLabel("Wave: 1    "),
 			TimeLBL=new JLabel("Time: 0    "),
 			HPLBL=new JLabel("HP: "+HP+"    ");
 	private static final Board[] board=new Board[3];
 	private static int mapNum;
+	private static final JToolBar toolBar=new JToolBar();
 	
 	/**
 	 * Builds the main frame: the maps selection frame
@@ -46,6 +49,7 @@ public final class Game
 	 */
 	private Game() throws IOException
 	{
+		createToolBar();
 		final JLabel maps=new JLabel("Please choose a map:");
 		maps.setFont(new Font("Courier", Font.BOLD, 20));
 		final JButton
@@ -67,7 +71,8 @@ public final class Game
 	{
 		Game.mapNum=mapNum;
 		final JPanel gamePanel=new JPanel(new BorderLayout());
-		createToolBar(gamePanel);
+		fastForwardButton.setText("Fast Forward");
+		gamePanel.add(toolBar, BorderLayout.NORTH);
 		gamePanel.add(board[mapNum]);
 		frame.setContentPane(gamePanel);
 		frame.pack();
@@ -131,10 +136,7 @@ public final class Game
 	{
 		getHPLBL().setText("HP: "+(--HP)+"    ");
 		if (getHP()==0)
-		{
-			getBoard().getTimer().stop();
 			playerLost();
-		}
 	}
 	
 	/**
@@ -199,6 +201,7 @@ public final class Game
 	 */
 	private static void after(JLabel afterLabel)
 	{
+		getBoard().getTimer().stop();
 		final JPanel afterPanel=new JPanel();
 		afterPanel.setLayout(new BoxLayout(afterPanel, BoxLayout.PAGE_AXIS));
 		final JLabel
@@ -240,6 +243,7 @@ public final class Game
 		                                 });
 		frame.setVisible(true);
 		resetHP();
+		getBoard().getTimer().reset();
 	}
 	
 	/**
@@ -252,27 +256,22 @@ public final class Game
 	
 	/**
 	 * Creates the toolbar for the new game
-	 * @param gamePanel the toolbar will be inserted to this panel
 	 */
-	private static void createToolBar(JPanel gamePanel)
+	private static void createToolBar()
 	{
-		final JToolBar toolBar=new JToolBar();
 		toolBar.setFloatable(false);
-		final JButton fastForwardButton=new JButton("Fast Forward");
 		toolBar.add(HPLBL);
 		toolBar.add(WaveLBL);
 		toolBar.add(TimeLBL);
 		toolBar.add(fastForwardButton);
 		toolBar.add(new JLabel("     "));
 		toolBar.add(goButton);
-		gamePanel.add(toolBar, BorderLayout.NORTH);
 		goButton.addActionListener(e -> getBoard().getTimer().start());
 		fastForwardButton.addActionListener(e ->
 		                                    {
 			                                    getBoard().getTimer().setFastForward(!getBoard().getTimer()
 			                                                                                    .isFastForward());
-			                                    fastForwardButton.setText(getBoard().getTimer().isFastForward()
-			                                                              ? "Slow Down" : "Fast Forward");
+			                                    ((JButton)e.getSource()).setText(getBoard().getTimer().isFastForward() ? "Slow Down" : "Fast Forward");
 		                                    });
 	}
 	

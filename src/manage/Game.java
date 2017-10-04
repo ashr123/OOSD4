@@ -22,6 +22,8 @@ import java.io.IOException;
 
 /**
  * Represents the main class of this game
+ * @author Roy Ash
+ * @author Sa'ar Yazdi
  */
 @SuppressWarnings({"MagicNumber", "UtilityClassCanBeEnum"})
 public final class Game
@@ -46,6 +48,7 @@ public final class Game
 	/**
 	 * Builds the main frame: the maps selection frame
 	 * @throws IOException if there is any error with the file
+	 * @author Sa'ar Yazdi
 	 */
 	private Game() throws IOException
 	{
@@ -78,6 +81,12 @@ public final class Game
 		frame.pack();
 	}
 	
+	/**
+	 * Creates a (scaled) {@code ImageIcon} of any {@link Component}
+	 * @param component the {@link Component} to create a (scaled) {@code ImageIcon} from
+	 * @return a (scaled) {@code ImageIcon} of any {@link Component}
+	 * @author Roy Ash
+	 */
 	private static ImageIcon captureComponent(Component component)
 	{
 		BufferedImage captureImage=new BufferedImage(800, 800, BufferedImage

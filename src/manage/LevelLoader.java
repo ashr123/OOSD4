@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @SuppressWarnings({"ClassHasNoToStringMethod", "UtilityClassCanBeEnum"})
-public class LevelLoader
+public final class LevelLoader
 {
 	private static final char
 			CHAR_RIGHT='>',
@@ -19,6 +19,13 @@ public class LevelLoader
 	 * Contains the initial board state of all the levels
 	 */
 	private static final ArrayList<Point[][]> _levels=new ArrayList<>();
+	
+	/**
+	 * Private no-args constructor for ensuring against instantiation.
+	 */
+	private LevelLoader()
+	{
+	}
 	
 	/**
 	 * Creates {@link Point} instance from {@code char} representation
@@ -112,7 +119,7 @@ public class LevelLoader
 			_levels.add(level);
 		br.close();
 	}
-	
+
 //	/**
 //	 * @return the number of levels available
 //	 */
@@ -122,11 +129,24 @@ public class LevelLoader
 //	}
 	
 	/**
-	 * @param index the level number
-	 * @return a deep copy of the initial state of level number {@code index}
+	 * @param index the map number
+	 * @return map number {@code index}
 	 */
 	public static Point[][] get(int index)
 	{
 		return _levels.get(index);
 	}
+	
+//	/**
+//	 * @param index the map number
+//	 * @return a deep copy of the {@code index}'s map
+//	 */
+//	public static Point[][] getDeep(int index)
+//	{
+//		Point[][] newArr=new Point[_levels.get(index).length][_levels.get(index)[0].length];
+//		for (int i=0; i<_levels.get(index).length; i++)
+//			for (int j=0; j<_levels.get(index)[i].length; j++)
+//				newArr[i][j]=new Point(_levels.get(index)[i][j]);
+//		return newArr;
+//	}
 }

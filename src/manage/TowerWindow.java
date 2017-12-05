@@ -14,9 +14,7 @@ import javax.swing.WindowConstants;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 
 /**
  * Represents a Singleton-window of towers to choose from

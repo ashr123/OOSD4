@@ -42,8 +42,7 @@ public abstract class Creep implements Tickable//Also represents the Visited
 		this.location=location;
 		slowdownTimer=new Timer(slowdownDuration*1000/2, e ->
 		{
-			if ((!Game.getBoard().getTimer().isFastForward() && ticks%2==1)/*Every 2*slowdownDuration seconds*/ ||
-			    (Game.getBoard().getTimer().isFastForward())/*Every slowdownDuration seconds*/)
+			if ((!Game.getBoard().getTimer().isFastForward() && ticks%2==1)/*Every 2*slowdownDuration seconds*/ || (Game.getBoard().getTimer().isFastForward())/*Every slowdownDuration seconds*/)
 			{
 				slowdownFactor=1;
 				return;

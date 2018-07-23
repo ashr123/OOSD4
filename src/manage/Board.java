@@ -41,7 +41,8 @@ public class Board extends JPanel
 		addMouseListener(new MouseListener()
 		{
 			/**
-			 * Builds a new frame to choose a tower from only if its between waves and the user didn't clicked on the path
+			 * Builds a new frame to choose a tower from only if its between waves and the user didn't
+			 * clicked on the path
 			 */
 			@Override
 			public void mouseClicked(MouseEvent e)

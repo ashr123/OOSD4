@@ -4,19 +4,8 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JToolBar;
-import javax.swing.WindowConstants;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.Image;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
@@ -69,7 +58,7 @@ public final class Game
 		map1.addActionListener(e -> createMap(1));
 		map2.addActionListener(e -> createMap(2));
 	}
-	
+
 	private static void createMap(int mapNum)
 	{
 		Game.mapNum=mapNum;
@@ -122,7 +111,7 @@ public final class Game
 		resetHP();
 		playBackgroundMusic();
 	}
-	
+
 	/**
 	 * Plays the background music
 	 * @throws LineUnavailableException if a clip object is not available due to resource restrictions

@@ -14,7 +14,9 @@ import javax.swing.WindowConstants;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Point;
-import java.awt.event.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 /**
  * Represents a Singleton-window of towers to choose from
@@ -124,6 +126,7 @@ final class TowerWindow extends JFrame
 		setResizable(false);
 		addWindowListener(new WindowAdapter()
 		{
+			@Override
 			public void windowClosing(WindowEvent e1)
 			{
 				e=null;
